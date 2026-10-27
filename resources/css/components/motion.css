@@ -1,0 +1,47 @@
+/* =========================================================================
+   Motion: reveals, triangle portal transitions, quality tiers
+   ========================================================================= */
+
+/* Triangle portal: cross-document view transitions (MPA). Under 700 ms, never blocks input. */
+@view-transition { navigation: auto; }
+@media (prefers-reduced-motion: reduce) {
+    @view-transition { navigation: none; }
+}
+
+::view-transition-old(root) { animation: 420ms cubic-bezier(.7, 0, .2, 1) both portal-out; }
+::view-transition-new(root) { animation: 640ms cubic-bezier(.7, 0, .2, 1) both portal-in; }
+::view-transition-group(lf-nav) { animation: none; }
+@keyframes portal-out { to { opacity: .4; transform: translateY(-2%) scale(.985); } }
+@keyframes portal-in {
+    from { clip-path: polygon(50% 100%, 50% 100%, 50% 100%); }
+    to { clip-path: polygon(50% -160%, -110% 190%, 210% 190%); }
+}
+
+@layer components {
+    .nav { view-transition-name: lf-nav; }
+
+    /* Reveals only hide content once motion.js has initialised (html.motion-ready),
+       so everything stays readable if JavaScript fails. */
+    .motion-ready [data-reveal]:not(.is-in) { opacity: 0; transform: translateY(1.75rem); }
+    [data-reveal].is-in { opacity: 1; transform: none; transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out); transition-delay: var(--reveal-delay, 0ms); }
+
+    .split-line { display: block; overflow: clip; padding-bottom: .08em; margin-bottom: -.08em; }
+
+    /* Essential tier: calm, static, fully readable. */
+    [data-quality='essential'] *, [data-quality='essential'] *::before, [data-quality='essential'] *::after {
+        animation-duration: 1ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 1ms !important;
+        scroll-behavior: auto !important;
+    }
+    [data-quality='essential'] .hero__canvas, [data-quality='essential'] .scene--oil .scene__canvas { display: none; }
+    [data-quality='essential'] .scene__route, [data-quality='essential'] .scene__lane, [data-quality='essential'] .scene__ring { stroke-dashoffset: 0; }
+    [data-quality='essential'] .timeline__draw { --draw: 1 !important; }
+    [data-quality='essential'] .route__progress { stroke-dashoffset: 0; }
+    [data-quality='essential'] body::after { display: none; }
+
+    @media (prefers-reduced-motion: reduce) {
+        html { scroll-behavior: auto; }
+        .net__flow, .hero__scroll-road span, .scene--tanker .scene__wheel, .scene--tanker .scene__dashes, .scene--tanker .scene__far, .is-drawn .scene__traveller { animation: none; }
+    }
+}

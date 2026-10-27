@@ -1,0 +1,241 @@
+/* =========================================================================
+   Dawn hero, page heroes and scene artwork
+   ========================================================================= */
+@layer components {
+    .hero {
+        position: relative;
+        min-height: max(40rem, 100svh);
+        display: grid;
+        grid-template-rows: 1fr auto;
+        align-items: end;
+        overflow: hidden;
+        background: #0b1230;
+        color: var(--paper);
+        isolation: isolate;
+    }
+    .hero__stage { position: absolute; inset: 0; z-index: -1; }
+    .hero__stage .scene { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .hero__canvas {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        opacity: 0;
+        transition: opacity 1.2s var(--ease-out);
+    }
+    .hero.is-3d .hero__canvas { opacity: 1; }
+    .hero.is-3d .scene--dawn { visibility: hidden; transition: visibility 0s 1.2s; }
+    .hero__grade {
+        position: absolute;
+        inset: 0;
+        background:
+            linear-gradient(90deg, rgb(7 9 24 / .78) 0%, rgb(7 9 24 / .35) 42%, transparent 70%),
+            linear-gradient(0deg, rgb(10 8 6 / .85) 0%, transparent 38%),
+            radial-gradient(120% 90% at 50% 40%, transparent 55%, rgb(0 0 0 / .45) 100%);
+        pointer-events: none;
+    }
+
+    /* Portrait screens: reframe the poster so the tanker stays in shot (it sits right of centre). */
+    @media (max-aspect-ratio: 4 / 5) {
+        .hero__stage .scene--dawn { width: 200%; left: -148%; }
+        .hero__grade { background: linear-gradient(0deg, rgb(10 8 6 / .92) 0%, rgb(10 8 6 / .55) 48%, rgb(7 9 24 / .2) 75%), linear-gradient(90deg, rgb(7 9 24 / .55), transparent 80%); }
+    }
+
+    .hero__intro {
+        position: absolute;
+        inset: 0;
+        z-index: 2;
+        display: grid;
+        place-items: center;
+        pointer-events: none;
+    }
+    .hero__intro-mark { width: clamp(6rem, 14vw, 11rem); color: var(--paper); opacity: 0; }
+
+    .hero__content { position: relative; z-index: 1; padding-top: calc(var(--nav-h) + 3rem); padding-bottom: 2.5rem; }
+    .hero__eyebrow { color: rgb(246 241 234 / .82); letter-spacing: .26em; }
+    .hero__title {
+        margin: 0;
+        font: 600 clamp(2.9rem, .4rem + 6.4vw, 7.25rem)/.88 var(--font-display);
+        letter-spacing: -.005em;
+        text-transform: uppercase;
+    }
+    .hero__line { display: block; overflow: hidden; padding-bottom: .05em; }
+    .hero__line > span { display: block; }
+    .hero__line--light { font-size: .74em; font-weight: 300; letter-spacing: .01em; color: #ffe1c2; }
+    .hero__lede {
+        max-width: 34rem;
+        margin: 1.75rem 0 0;
+        font-size: var(--fs-lead);
+        line-height: 1.5;
+        color: rgb(246 241 234 / .86);
+    }
+    .hero__actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2.25rem; }
+
+    .hero__foot {
+        position: relative;
+        z-index: 1;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding-bottom: 1.75rem;
+        font: 500 .8rem/1 var(--font-display);
+        letter-spacing: .28em;
+        text-transform: uppercase;
+        color: rgb(246 241 234 / .65);
+    }
+    .hero__scroll { display: inline-flex; align-items: center; gap: .9rem; }
+    .hero__scroll-road {
+        position: relative;
+        width: 1px; height: 2.75rem;
+        background: rgb(246 241 234 / .25);
+        overflow: hidden;
+    }
+    .hero__scroll-road span {
+        position: absolute;
+        left: 0; top: -40%;
+        width: 1px; height: 40%;
+        background: var(--ignite-tint-2);
+        animation: road-dash 2.2s var(--ease-road) infinite;
+    }
+    @keyframes road-dash { to { top: 110%; } }
+
+    /* Intro choreography is driven by JS; these are the resting fallbacks. */
+    .js [data-hero] [data-hero-reveal], .js [data-hero] [data-hero-line] > span { will-change: transform, opacity; }
+
+    /* --- Page heroes --- */
+    .page-hero {
+        position: relative;
+        min-height: clamp(34rem, 82svh, 52rem);
+        display: flex;
+        align-items: flex-end;
+        overflow: hidden;
+        isolation: isolate;
+        background: var(--ink);
+        color: var(--paper);
+    }
+    .page-hero--compact { min-height: clamp(28rem, 62svh, 40rem); }
+    .page-hero--light { background: var(--paper); color: var(--ink); --fg: var(--ink); --fg-muted: #4a433c; --accent-text: var(--accent-ink-light); }
+    .page-hero__scene { position: absolute; inset: 0; z-index: -2; }
+    .page-hero__scene > .scene, .page-hero__scene > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .page-hero__shade {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background:
+            linear-gradient(90deg, rgb(10 9 8 / .82) 0%, rgb(10 9 8 / .45) 45%, rgb(10 9 8 / .05) 75%),
+            linear-gradient(0deg, rgb(10 9 8 / .7) 0%, transparent 45%);
+    }
+    .page-hero--light .page-hero__shade {
+        background: linear-gradient(90deg, rgb(246 241 234 / .92) 0%, rgb(246 241 234 / .55) 45%, transparent 75%);
+    }
+    .page-hero__content { padding-top: calc(var(--nav-h) + 4rem); padding-bottom: clamp(3rem, 7vw, 6rem); }
+    .page-hero .eyebrow { color: rgb(246 241 234 / .82); }
+    .page-hero--light .eyebrow { color: #4a433c; }
+    .page-hero__title {
+        margin: 0;
+        max-width: 16ch;
+        font: 400 clamp(3rem, 1.2rem + 6.6vw, 7.5rem)/.92 var(--font-display);
+        letter-spacing: -.005em;
+    }
+    .page-hero__statement {
+        margin: 1.25rem 0 0;
+        max-width: 26ch;
+        font: 300 clamp(1.6rem, 1rem + 2.2vw, 2.75rem)/1.1 var(--font-display);
+        color: #ffd3b0;
+    }
+    [data-palette='transport'] .page-hero__statement { color: #c9c9ff; }
+    [data-palette='gold'] .page-hero__statement { color: #f1d690; }
+    .page-hero__lede { max-width: 36rem; margin: 1.5rem 0 0; font-size: var(--fs-lead); line-height: 1.55; color: rgb(246 241 234 / .84); }
+    .page-hero--light .page-hero__lede { color: #3b352f; }
+    .page-hero__actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-top: 2rem; }
+    .page-hero__ghost { right: -1vw; bottom: -.12em; color: var(--paper); opacity: .07; }
+    .page-hero__caption {
+        position: absolute;
+        right: var(--gutter);
+        bottom: 1.5rem;
+        max-width: 22rem;
+        margin: 0;
+        padding-left: 1rem;
+        border-left: 1px solid rgb(246 241 234 / .4);
+        font-size: .95rem;
+        line-height: 1.45;
+        color: rgb(246 241 234 / .8);
+    }
+    .page-hero__caption b { display: block; font: 500 .85rem/1.3 var(--font-display); letter-spacing: .2em; text-transform: uppercase; color: var(--paper); }
+    @media (max-width: 860px) { .page-hero__caption { display: none; } }
+
+    /* --- Scenes --- */
+    .scene { display: block; width: 100%; height: 100%; }
+    .scene--oil, .scene--topo, .scene--crossroads { position: relative; overflow: hidden; background: #0b0805; }
+    .scene--topo, .scene--crossroads { background: #0d0b0a; }
+    .scene--oil .scene__fallback, .scene--oil .scene__canvas,
+    .scene--topo > svg, .scene--crossroads > svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+    .scene--oil .scene__canvas { opacity: 0; transition: opacity 1s var(--ease-out); }
+    .scene--oil.is-live .scene__canvas { opacity: 1; }
+    .scene--oil.is-live .scene__fallback { opacity: 0; transition: opacity 1s 300ms; }
+
+    .scene__relief {
+        position: absolute;
+        inset: -5%;
+        background: var(--gold);
+        -webkit-mask: var(--relief) center / cover no-repeat;
+        mask: var(--relief) center / cover no-repeat;
+        opacity: .55;
+    }
+    .scene--crossroads .scene__relief { background: var(--stone); opacity: .35; }
+
+    .scene__route { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .is-drawn .scene__route, .no-js .scene__route { stroke-dashoffset: 0; transition: stroke-dashoffset 2.4s var(--ease-road); }
+    .scene__lane, .scene__ring { stroke-dasharray: 1; stroke-dashoffset: 1; }
+    .is-drawn .scene__lane, .is-drawn .scene__ring, .no-js .scene__lane { stroke-dashoffset: 0; transition: stroke-dashoffset 2s var(--ease-road) calc(var(--i, 0) * 140ms + 300ms); }
+
+    .scene__traveller { offset-path: path('M-60 780C220 720 300 560 540 540s300 160 520 70 240-330 600-380'); offset-rotate: 0deg; offset-distance: 0%; }
+    .is-drawn .scene__traveller { animation: travel 14s linear infinite; }
+    @keyframes travel { to { offset-distance: 100%; } }
+
+    /* Station: lamps switch on when lit */
+    .scene--station .scene__lit { opacity: 0; transition: opacity 1.4s var(--ease-out) .5s; }
+    .scene--station .scene__lamp { opacity: .15; transition: opacity .25s; }
+    .scene--station .scene__screen { opacity: .1; transition: opacity .6s; }
+    .scene--station .scene__fascia { filter: brightness(.55); transition: filter 1s var(--ease-out) .2s; }
+    .scene--station.is-lit .scene__lit { opacity: 1; }
+    .scene--station.is-lit .scene__fascia { filter: none; }
+    .scene--station.is-lit .scene__screen { opacity: .9; transition-delay: 1.1s; }
+    .scene--station.is-lit .scene__lamp { opacity: 1; animation: lamp-on .9s steps(1) both; }
+    .scene--station.is-lit .scene__lamp:nth-child(2) { animation-delay: .12s; }
+    .scene--station.is-lit .scene__lamp:nth-child(3) { animation-delay: .24s; }
+    .scene--station.is-lit .scene__lamp:nth-child(4) { animation-delay: .36s; }
+    .scene--station.is-lit .scene__lamp:nth-child(5) { animation-delay: .48s; }
+    .scene--station.is-lit .scene__lamp:nth-child(6) { animation-delay: .6s; }
+    @keyframes lamp-on { 0% { opacity: .15; } 20% { opacity: 1; } 32% { opacity: .3; } 44%, 100% { opacity: 1; } }
+    .scene__car { transition: transform 2.4s var(--ease-road) .6s; transform: translateX(-120px); }
+    .is-lit .scene__car { transform: translateX(80px); }
+
+    /* Tanker: wheels and road move */
+    .scene--tanker .scene__wheel { animation: spin .8s linear infinite; transform-box: fill-box; transform-origin: center; }
+    .scene--tanker .scene__dashes { animation: dashes .9s linear infinite; }
+    .scene--tanker .scene__far { animation: drift 30s linear infinite alternate; }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes dashes { to { transform: translateX(-200px); } }
+    @keyframes drift { to { transform: translateX(-40px); } }
+
+    /* Coffee: beans resolve into the map */
+    .scene--coffee .coffee__beans { transform-origin: 800px 450px; transition: transform 1.6s var(--ease-road), opacity 1.2s var(--ease-out); }
+    .scene--coffee .coffee__outline { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 2.2s var(--ease-road) .5s; }
+    .scene--coffee .coffee__fill { opacity: 0; transition: opacity 1.2s 1.6s; }
+    .scene--coffee .coffee__arrow { stroke-dasharray: 1; stroke-dashoffset: 1; transition: stroke-dashoffset 1.4s var(--ease-out); }
+    .scene--coffee .coffee__arrow:nth-child(n) { transition-delay: calc(1.8s + var(--n, 0) * 90ms); }
+    .scene--coffee .coffee__label { font: 500 22px var(--font-display); letter-spacing: .3em; opacity: 0; transition: opacity 1s 2.6s; }
+    .scene--coffee.is-map .coffee__beans { transform: scale(.35); opacity: 0; }
+    .scene--coffee.is-map .coffee__outline, .scene--coffee.is-map .coffee__arrow { stroke-dashoffset: 0; }
+    .scene--coffee.is-map .coffee__fill, .scene--coffee.is-map .coffee__label { opacity: 1; }
+
+    .scene--road-end .scene__km-label, .scene--road-end .scene__km-value { font-family: var(--font-display); font-weight: 600; letter-spacing: .08em; }
+
+    /* In page heroes the subject moves right of the headline. */
+    .page-hero .coffee__world { transform: translateX(240px); }
+    .page-hero .scene--tanker .scene__truck { transform: translateX(260px); }
+    @media (max-width: 760px) {
+        .page-hero .coffee__world, .page-hero .scene--tanker .scene__truck { transform: none; }
+    }
+}

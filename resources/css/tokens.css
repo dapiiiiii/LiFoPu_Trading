@@ -1,0 +1,100 @@
+/* =========================================================================
+   Brand tokens — LiFoPu Brand Guideline 2025
+   Trading palette: Ignite Orange #D84500 (primary), Gold Flame #C69822 (secondary)
+   Transport palette: Deep Route Navy #000080 (primary), Pulse Orange #FF5C00 (secondary)
+   Primary typeface Agency FB → web substitute Saira Extra Condensed
+   Secondary typeface Calibri → metric-compatible Carlito
+   ========================================================================= */
+
+@theme {
+    --color-ignite: #d84500;
+    --color-gold: #c69822;
+    --color-navy: #000080;
+    --color-pulse: #ff5c00;
+    --color-ink: #0d0c0b;
+    --color-paper: #f6f1ea;
+    --font-display: 'Saira Extra Condensed', 'Agency FB', 'Arial Narrow', sans-serif;
+    --font-sans: 'Carlito', 'Calibri', 'Segoe UI', system-ui, sans-serif;
+    --font-ethiopic: 'Noto Sans Ethiopic', 'Nyala', sans-serif;
+}
+
+:root {
+    /* Core palette */
+    --ignite: #d84500;
+    --ignite-shade-1: #bf3d00; /* first shade on the guideline tint scale; white text passes AA */
+    --ignite-shade-2: #a83600;
+    --ignite-tint-2: #ff7a3d;
+    --gold: #c69822;
+    --gold-ink: #7a5c0f;
+    --gold-tint: #e2b54a;
+    --navy: #000080;
+    --navy-tint: #8a8aff;
+    --pulse: #ff5c00;
+
+    /* Neutrals (derived from the black/white logo variants and profile layouts) */
+    --ink: #0d0c0b;
+    --asphalt: #171513;
+    --graphite: #2a2622;
+    --stone: #8a837b;
+    --mist: #d9d3cb;
+    --paper: #f6f1ea;
+    --white: #ffffff;
+    --focus: #ff7a3d;
+
+    /* Default (dark) text roles; [data-sky] stages override these. */
+    --fg: var(--paper);
+    --fg-muted: rgb(246 241 234 / .74);
+    --rule: rgb(246 241 234 / .18);
+    --accent-text: var(--accent-ink-dark);
+
+    /* Palette roles (Trading by default) */
+    --accent: var(--ignite);
+    --accent-2: var(--gold);
+    --accent-ink-light: #a83a00;
+    --accent-ink-dark: var(--ignite-tint-2);
+    --btn-accent: var(--ignite-shade-1);
+    --btn-accent-hover: var(--ignite-shade-2);
+    --btn-accent-fg: #ffffff;
+
+    /* Type scale */
+    --fs-body: 1.0625rem;
+    --fs-lead: clamp(1.15rem, 1rem + .6vw, 1.4rem);
+    --fs-eyebrow: .85rem;
+    --fs-h2: clamp(2.5rem, 1.4rem + 4.6vw, 5.25rem);
+    --fs-h3: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
+    --fs-statement: clamp(1.75rem, 1.1rem + 2.4vw, 3.25rem);
+    --fs-display: clamp(3.1rem, 1rem + 8.4vw, 9.5rem);
+    --fs-ghost: clamp(4rem, 2rem + 11vw, 14rem);
+
+    /* Layout */
+    --max: 88rem;
+    --gutter: clamp(1rem, 4vw, 3.5rem);
+    --section-y: clamp(5.5rem, 4rem + 7vw, 11rem);
+    --blend: clamp(4rem, 8vw, 8rem);
+    --nav-h: 4.75rem;
+
+    /* Motion tokens (mirrored in resources/js/lib/motion.js) */
+    --ease-out: cubic-bezier(.16, 1, .3, 1);
+    --ease-road: cubic-bezier(.22, .61, .12, 1);
+    --ease-portal: cubic-bezier(.7, 0, .2, 1);
+    --dur-ui: 180ms;
+    --dur-move: 600ms;
+    --dur-scene: 1100ms;
+}
+
+[data-palette='gold'] {
+    --accent: var(--gold);
+    --accent-2: var(--ignite);
+    --accent-ink-light: var(--gold-ink);
+    --accent-ink-dark: var(--gold-tint);
+}
+
+[data-palette='transport'] {
+    --accent: var(--pulse);
+    --accent-2: var(--navy);
+    --accent-ink-light: var(--navy);
+    --accent-ink-dark: #ff8a4a;
+    --btn-accent: var(--navy);
+    --btn-accent-hover: #00005a;
+    --btn-accent-fg: #ffffff;
+}
