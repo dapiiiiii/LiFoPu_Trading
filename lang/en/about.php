@@ -49,7 +49,7 @@ return [
 
     'values' => [
         'eyebrow' => 'Core values',
-        'title' => 'Five commitments.',
+        'title' => 'Our core values.',
     ],
 
     'structure' => [
