@@ -54,4 +54,10 @@ return [
 
     'services' => ['fuel-retail', 'lubricants', 'fuel-transportation', 'coffee-export'],
 
+    // Services run by a sister company on its own website. Links open there in a new tab,
+    // and the old /services/<slug> address redirects.
+    'external_services' => [
+        'coffee-export' => 'https://lelatrading.com/', // Lela Trading
+    ],
+
 ];

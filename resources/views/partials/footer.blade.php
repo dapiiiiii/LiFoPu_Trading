@@ -1,3 +1,4 @@
+@use('App\Support\ServiceLink')
 @php
     $contact = config('lifopu.contact');
     $services = trans('services.items');
@@ -6,7 +7,7 @@
     <div class="footer__road" aria-hidden="true"><span></span></div>
     <div class="footer__inner container">
         <div class="footer__brand">
-            <a href="{{ route('home') }}" class="footer__logo" aria-label="{{ config('lifopu.company.name') }} — {{ __('common.nav.home') }}">
+            <a href="{{ route('home') }}" class="footer__logo" aria-label="{{ config('lifopu.company.name') }}: {{ __('common.nav.home') }}">
                 <x-logo variant="stacked" title="" />
             </a>
             <p class="footer__tagline">{{ config('lifopu.company.tagline') }}</p>
@@ -28,7 +29,7 @@
             <h2 id="footer-services" class="footer__heading">{{ __('common.footer.services') }}</h2>
             <ul>
                 @foreach ($services as $slug => $service)
-                    <li><a href="{{ route('services.show', $slug) }}">{{ $service['title'] }}</a></li>
+                    <li><a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }}>{{ $service['title'] }}{{ ServiceLink::marker($slug) }}</a></li>
                 @endforeach
             </ul>
         </nav>

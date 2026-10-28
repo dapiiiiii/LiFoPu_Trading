@@ -25,7 +25,7 @@
     </label>
     @if ($options)
         <select class="field__control" id="{{ $id }}" name="{{ $inputName }}" @required($required) @if ($describedBy) aria-describedby="{{ $describedBy }}" @endif @if ($error) aria-invalid="true" @endif>
-            <option value="">—</option>
+            <option value="">{{ __('common.select') }}</option>
             @foreach ($options as $optionValue => $optionLabel)
                 <option value="{{ $optionValue }}" @selected($current === $optionValue)>{{ $optionLabel }}</option>
             @endforeach

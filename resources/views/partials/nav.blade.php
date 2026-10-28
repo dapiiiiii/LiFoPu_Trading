@@ -1,3 +1,4 @@
+@use('App\Support\ServiceLink')
 @php
     $links = [
         ['route' => 'about', 'label' => __('common.nav.about')],
@@ -11,7 +12,7 @@
 @endphp
 <header class="nav" data-nav>
     <div class="nav__bar">
-        <a href="{{ route('home') }}" class="nav__brand" aria-label="{{ config('lifopu.company.name') }} — {{ __('common.nav.home') }}">
+        <a href="{{ route('home') }}" class="nav__brand" aria-label="{{ config('lifopu.company.name') }}: {{ __('common.nav.home') }}">
             <x-logo variant="horizontal" title="" class="nav__logo" data-nav-logo />
         </a>
 
@@ -29,9 +30,9 @@
                                 <ul class="nav__services">
                                     @foreach ($services as $slug => $service)
                                         <li>
-                                            <a href="{{ route('services.show', $slug) }}" class="nav__service" data-palette="{{ $service['palette'] }}" @if (request()->is("services/$slug")) aria-current="page" @endif>
+                                            <a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }} class="nav__service" data-palette="{{ $service['palette'] }}" @if (request()->is("services/$slug")) aria-current="page" @endif>
                                                 <span class="nav__km">KM {{ $service['km'] }}</span>
-                                                <span class="nav__service-title">{{ $service['title'] }}</span>
+                                                <span class="nav__service-title">{{ $service['title'] }}{{ ServiceLink::marker($slug) }}</span>
                                             </a>
                                         </li>
                                     @endforeach
@@ -71,7 +72,7 @@
             </ol>
             <ul class="nav__overlay-services">
                 @foreach ($services as $slug => $service)
-                    <li><a href="{{ route('services.show', $slug) }}"><span class="nav__km">KM {{ $service['km'] }}</span> {{ $service['title'] }}</a></li>
+                    <li><a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }}><span class="nav__km">KM {{ $service['km'] }}</span> {{ $service['title'] }}{{ ServiceLink::marker($slug) }}</a></li>
                 @endforeach
             </ul>
             <div class="nav__overlay-foot">

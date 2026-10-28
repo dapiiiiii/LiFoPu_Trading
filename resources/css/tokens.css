@@ -1,5 +1,5 @@
 /* =========================================================================
-   Brand tokens — LiFoPu Brand Guideline 2025
+   Brand tokens: LiFoPu Brand Guideline 2025
    Trading palette: Ignite Orange #D84500 (primary), Gold Flame #C69822 (secondary)
    Transport palette: Deep Route Navy #000080 (primary), Pulse Orange #FF5C00 (secondary)
    Primary typeface Agency FB → web substitute Saira Extra Condensed
@@ -62,7 +62,6 @@
     --fs-eyebrow: .85rem;
     --fs-h2: clamp(2.5rem, 1.4rem + 4.6vw, 5.25rem);
     --fs-h3: clamp(1.75rem, 1.2rem + 1.8vw, 2.75rem);
-    --fs-statement: clamp(1.75rem, 1.1rem + 2.4vw, 3.25rem);
     --fs-display: clamp(3.1rem, 1rem + 8.4vw, 9.5rem);
     --fs-ghost: clamp(4rem, 2rem + 11vw, 14rem);
 

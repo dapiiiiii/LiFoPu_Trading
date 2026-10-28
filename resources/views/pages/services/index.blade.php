@@ -1,3 +1,4 @@
+@use('App\Support\ServiceLink')
 <x-layout :title="__('services.meta_title')" :description="__('services.meta_description')" page="services">
 
     <x-page-hero :eyebrow="__('services.index.eyebrow')" :title="__('services.index.title')" :lede="__('services.index.lede')" scene="lanes" ghost="Four lanes" />
@@ -7,10 +8,10 @@
             <ol class="service-rows">
                 @foreach (trans('services.items') as $slug => $item)
                     <li class="service-row" data-palette="{{ $item['palette'] }}" data-reveal>
-                        <a href="{{ route('services.show', $slug) }}" class="service-row__link">
+                        <a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }} class="service-row__link">
                             <span class="service-row__km">KM {{ $item['km'] }}</span>
                             <span class="service-row__body">
-                                <span class="service-row__title">{{ $item['title'] }}</span>
+                                <span class="service-row__title">{{ $item['title'] }}{{ ServiceLink::marker($slug) }}</span>
                                 <span class="service-row__summary">{{ $item['summary'] }}</span>
                             </span>
                             <span class="service-row__visual" aria-hidden="true">

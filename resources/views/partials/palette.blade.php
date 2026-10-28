@@ -11,8 +11,9 @@
         ],
         'services' => collect(trans('services.items'))->map(fn ($item, $slug) => [
             'label' => $item['title'],
-            'href' => route('services.show', $slug),
-            'keywords' => $slug.' km '.$item['km'],
+            'href' => \App\Support\ServiceLink::href($slug),
+            'external' => (bool) \App\Support\ServiceLink::external($slug),
+            'keywords' => $slug.' km '.$item['km'].(\App\Support\ServiceLink::external($slug) ? ' lela trading' : ''),
         ])->values()->all(),
         'actions' => [
             ['label' => __('common.palette.toggle_effects'), 'action' => 'effects', 'keywords' => 'motion animation quality accessibility'],
@@ -20,7 +21,7 @@
         ],
     ];
 @endphp
-<dialog class="palette" data-palette aria-labelledby="palette-title">
+<dialog class="palette" data-command-palette aria-labelledby="palette-title">
     <div class="palette__panel">
         <h2 id="palette-title" class="sr-only">{{ __('common.palette.open') }}</h2>
         <div class="palette__search">
@@ -35,10 +36,11 @@
                     @foreach ($items as $i => $item)
                         <div class="palette__option" role="option" id="palette-{{ $group }}-{{ $i }}" aria-selected="false" data-palette-option
                              @isset($item['href']) data-href="{{ $item['href'] }}" @endisset
+                             @if ($item['external'] ?? false) data-external @endif
                              @isset($item['action']) data-action="{{ $item['action'] }}" @endisset
                              data-keywords="{{ strtolower($item['label'].' '.$item['keywords']) }}">
                             <span>{{ $item['label'] }}</span>
-                            <span class="palette__go" aria-hidden="true">↵</span>
+                            <span class="palette__go" aria-hidden="true">{{ ($item['external'] ?? false) ? '↗' : '↵' }}</span>
                         </div>
                     @endforeach
                 </div>

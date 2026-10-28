@@ -1,4 +1,4 @@
-﻿/* =========================================================================
+/* =========================================================================
    Base
    ========================================================================= */
 @layer base {
@@ -81,6 +81,17 @@
 
     .lf-sprite { position: absolute; width: 0; height: 0; overflow: hidden; }
 
+    /* ↗ after links that leave for a sister company's website. */
+    .ext-mark {
+        display: inline-block;
+        margin-left: .3em;
+        font-size: .8em;
+        line-height: 1;
+        color: var(--accent-text);
+        transition: transform var(--dur-ui) var(--ease-out);
+    }
+    a:hover .ext-mark, a:focus-visible .ext-mark { transform: translate(.12em, -.12em); }
+
     .container {
         width: 100%;
         max-width: var(--max);
@@ -102,7 +113,7 @@
         background: linear-gradient(180deg, var(--sky-prev, var(--sky-top)) 0, var(--sky-top) var(--blend), var(--sky-bottom) 100%);
     }
     .section::before {
-        /* Scroll-driven light: moves with --p (0 â†’ 1) through each section. */
+        /* Scroll-driven light: moves with --p (0 to 1) through each section. */
         content: '';
         position: absolute;
         inset: 0;
@@ -161,13 +172,6 @@
         color: var(--fg-muted);
     }
     .lead { margin: 0; font-size: var(--fs-lead); line-height: 1.55; color: var(--fg-muted); max-width: 38rem; }
-    .statement {
-        margin: 0;
-        font: 300 var(--fs-statement)/1.18 var(--font-display);
-        letter-spacing: .005em;
-        max-width: 54rem;
-    }
-    .statement--light { color: var(--paper); }
     .prose { max-width: 42rem; }
     .prose p { margin: 0 0 1.25em; color: var(--fg-muted); }
     .prose--lead p { font-size: var(--fs-lead); line-height: 1.6; }
@@ -280,26 +284,8 @@
     .segmented [aria-checked='true'] { background: var(--fg); color: var(--sky-top, var(--paper)); }
 
     .lf-pattern { position: absolute; inset: 0; width: 100%; height: 100%; color: currentColor; pointer-events: none; }
-    /* Symbols drawn with <use> take the surrounding text colour. */
-    .lf-pattern, .value__glyph, .mv__label svg, .station-card__icon, .matrix__yes, .choice__icon svg { fill: currentColor; }
-
-    .checklist { display: grid; gap: .9rem; margin: 0; padding: 0; list-style: none; }
-    .checklist li {
-        display: flex;
-        gap: 1rem;
-        align-items: baseline;
-        padding-bottom: .9rem;
-        border-bottom: 1px solid var(--rule);
-        font: 400 1.5rem/1.2 var(--font-display);
-    }
-    .checklist li::before {
-        content: '';
-        flex: none;
-        width: .7rem; height: .6rem;
-        background: var(--accent);
-        clip-path: polygon(50% 0, 0 100%, 100% 100%);
-        transform: rotate(90deg) translateX(-.1rem);
-    }
+    /* Symbols drawn with <use> take the surrounding text colour (line icons, .thumb, keep fill="none"). */
+    .lf-pattern, .panel__glyph, .panel__watermark, .station-card__icon, .matrix__yes, .choice__icon svg:not(.thumb) { fill: currentColor; }
 
     .chips { display: flex; flex-wrap: wrap; gap: .6rem; margin: 0; padding: 0; list-style: none; }
     .chips li {

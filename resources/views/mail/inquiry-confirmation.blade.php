@@ -10,5 +10,6 @@
 {{ $inquiry->message }}
 </x-mail::panel>
 
-{{ config('lifopu.company.name') }} — {{ config('lifopu.company.tagline') }}
+{{ config('lifopu.company.name') }}<br>
+{{ config('lifopu.company.tagline') }}
 </x-mail::message>

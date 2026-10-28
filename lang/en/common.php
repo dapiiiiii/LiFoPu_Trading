@@ -4,6 +4,7 @@ return [
 
     'skip' => 'Skip to content',
     'select' => 'Select an option',
+    'opens_new_tab' => 'opens :site in a new tab',
     'meta_description' => 'LiFoPu Trading: fuel retail, lubricants distribution, bulk fuel transportation and coffee export trading in Ethiopia since 2013. Live For Purpose.',
 
     'nav' => [
@@ -69,6 +70,14 @@ return [
 
     'spine' => [
         'label' => 'Page progress',
+    ],
+
+    'org' => [
+        'level' => 'Level',
+        'legend' => 'Reading the chart',
+        'levels' => ['General Manager', 'Functions', 'Posts', 'Roles under a post'],
+        'functions' => 'Functions, each reporting directly to the General Manager',
+        'hint' => 'Hover or tap a function to trace its road back to the top.',
     ],
 
     'footer' => [

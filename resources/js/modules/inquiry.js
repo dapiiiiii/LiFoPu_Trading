@@ -75,7 +75,7 @@ export function initInquiry() {
             p.toggleAttribute('data-active', i === current);
             p.toggleAttribute('data-done', i < current);
         });
-        status.textContent = msg.msgProgress.replace(':current', current + 1).replace(':total', steps.length) + ' — ' + steps[current].querySelector('legend').textContent;
+        status.textContent = msg.msgProgress.replace(':current', current + 1).replace(':total', steps.length) + ': ' + steps[current].querySelector('legend').textContent;
         if (focus) {
             const legend = steps[current].querySelector('legend');
             legend.setAttribute('tabindex', '-1');

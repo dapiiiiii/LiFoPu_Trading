@@ -1,4 +1,4 @@
-﻿{{-- Roasted bean macro that resolves into the outline of Ethiopia and outward arrows toward international markets.
+{{-- Roasted bean macro that resolves into the outline of Ethiopia and outward arrows toward international markets.
      Map outline: Natural Earth 1:50m (public domain). No destinations are implied. --}}
 <svg class="scene scene--coffee" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" aria-hidden="true" focusable="false" data-coffee>
     <defs>
