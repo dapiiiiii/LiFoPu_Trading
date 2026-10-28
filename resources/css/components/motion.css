@@ -42,6 +42,6 @@
 
     @media (prefers-reduced-motion: reduce) {
         html { scroll-behavior: auto; }
-        .net__flow, .hero__scroll-road span, .scene--tanker .scene__wheel, .scene--tanker .scene__dashes, .scene--tanker .scene__far, .is-drawn .scene__traveller { animation: none; }
+        .net__flow, .org__flow, .org__ra-lane, .org__trunk::after, .hero__scroll-road span, .scene--tanker .scene__wheel, .scene--tanker .scene__dashes, .scene--tanker .scene__far, .is-drawn .scene__traveller { animation: none; }
     }
 }

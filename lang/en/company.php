@@ -99,30 +99,33 @@ return [
         ],
     ],
 
-    // P.5: functions only, no names.
+    // P.5: functions only, no names. Four levels, as the profile chart draws them:
+    // General Manager > function heads > posts > the roles under a post.
     'org' => [
         'head' => 'General Manager',
         'units' => [
-            ['name' => 'Operations', 'lead' => 'Operations Manager', 'teams' => [
-                ['name' => 'Retail', 'roles' => ['Station supervisors', 'Court supervisors', 'Cashiers', 'Pump attendants', 'Storekeepers']],
-                ['name' => 'Transport', 'roles' => ['Transport manager', 'Logistics supervisor']],
-                ['name' => 'Technical', 'roles' => ['Technical supervisor', 'Technicians']],
+            ['name' => 'Operations', 'lead' => 'Operations Manager', 'posts' => [
+                ['title' => 'Retail manager', 'roles' => ['Station supervisors', 'Court supervisors', 'Cashiers', 'Pump attendants', 'Storekeepers']],
+                ['title' => 'Transport manager', 'roles' => ['Logistics supervisor']],
+                ['title' => 'Technical supervisor', 'roles' => ['Technicians']],
             ]],
-            ['name' => 'Lubricants', 'lead' => 'Lubricants Manager', 'teams' => [
-                ['name' => 'Sales', 'roles' => ['Sales representatives']],
-                ['name' => 'Stores', 'roles' => ['Store keepers']],
+            ['name' => 'Lubricants', 'lead' => 'Lubricants Manager', 'posts' => [
+                ['title' => 'Sales representatives', 'roles' => []],
+                ['title' => 'Store keepers', 'roles' => []],
             ]],
-            ['name' => 'Resources', 'lead' => 'Resources Manager', 'teams' => [
-                ['name' => 'People', 'roles' => ['Human resources']],
-                ['name' => 'Systems', 'roles' => ['IT systems']],
-                ['name' => 'Property', 'roles' => ['Real estate']],
+            ['name' => 'Resources', 'lead' => 'Resources Manager', 'posts' => [
+                ['title' => 'Human resource head', 'roles' => []],
+                ['title' => 'IT systems supervisor', 'roles' => []],
+                ['title' => 'Real estate head', 'roles' => []],
             ]],
-            ['name' => 'Finance', 'lead' => 'Finance Manager', 'teams' => [
-                ['name' => 'Accounting', 'roles' => ['Chief accountant', 'Cashiers']],
-                ['name' => 'Ledgers', 'roles' => ['Accounts receivable', 'Accounts payable']],
+            ['name' => 'Finance', 'lead' => 'Finance Manager', 'posts' => [
+                ['title' => 'Chief accountant', 'roles' => []],
+                ['title' => 'Cashiers', 'roles' => []],
+                ['title' => 'Accounts receivable clerk', 'roles' => []],
+                ['title' => 'Accounts payable clerk', 'roles' => []],
             ]],
-            ['name' => 'Legal', 'lead' => 'Legal Department', 'teams' => []],
-            ['name' => 'Internal Audit', 'lead' => 'Internal Auditor', 'teams' => []],
+            ['name' => 'Legal', 'lead' => 'Legal Department', 'posts' => []],
+            ['name' => 'Internal Audit', 'lead' => 'Internal Auditor', 'posts' => []],
         ],
     ],
 

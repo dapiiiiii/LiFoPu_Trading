@@ -17,7 +17,7 @@ return [
 
     'glance' => [
         'eyebrow' => 'Company at a glance',
-        'title' => 'From one transport company in 2013 to an integrated fuel, lubricants, transport and trading operation.',
+        'title' => 'From one transport company to an integrated energy operation.',
         'body' => 'LiFoPu began on the road. Today it runs four modern fuel service stations, is an authorized sub-distributor of Caltex lubricants, moves petroleum products with its own bulk tanker operation and trades Ethiopian coffee through its sister company, Lela Trading.',
         'ghost' => 'Live For Purpose',
     ],

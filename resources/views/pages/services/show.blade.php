@@ -1,10 +1,11 @@
+@use('App\Support\ServiceLink')
 @php
     $labels = trans('services.labels');
     $nextItem = trans("services.items.$next");
     $segments = trans('markets.segments');
     $interestHref = route('contact', ['interest' => $item['inquiry']]);
 @endphp
-<x-layout :title="$item['title'].' — '.config('lifopu.company.name')" :description="$item['meta_description']" page="service" :palette="$item['palette']">
+<x-layout :title="$item['title'].' | '.config('lifopu.company.name')" :description="$item['meta_description']" page="service" :palette="$item['palette']">
 
     <x-page-hero :eyebrow="__('common.nav.services')" :km="$item['km']" :title="$item['title']" :statement="$item['hero_title']" :lede="$item['lede']" :scene="$item['scene']" :caption="$slug === 'fuel-transportation' ? null : $item['moment']" class="page-hero--service page-hero--{{ $item['scene'] }}" data-moment="{{ $item['scene'] }}">
         <div class="page-hero__actions">
@@ -15,13 +16,14 @@
     {{-- What we do (profile wording) + facts --}}
     <section class="section svc-summary" data-sky="morning" data-spine-label="{{ $labels['at_a_glance'] }}" aria-labelledby="summary-title">
         <div class="container svc-summary__grid">
-            <div>
+            <div class="panel panel--quote" data-reveal>
+                <svg class="panel__watermark" viewBox="0 0 661.1 572.4" aria-hidden="true"><use href="#lf-mark" /></svg>
                 <p class="eyebrow" id="summary-title">{{ $labels['at_a_glance'] }}</p>
-                <p class="statement" data-split>{{ $item['summary'] }}</p>
+                <p>{{ $item['summary'] }}</p>
             </div>
-            <dl class="facts">
+            <dl class="fact-stack">
                 @foreach ($item['facts'] as $fact)
-                    <div class="facts__row" data-reveal>
+                    <div class="panel panel--fact" data-reveal>
                         <dt>{{ $fact['label'] }}</dt>
                         <dd>{{ $fact['value'] }}</dd>
                     </div>
@@ -33,12 +35,12 @@
     {{-- Chapters --}}
     <section class="section chapters" data-sky="noon" data-spine-label="{{ $item['sections'][0]['title'] }}" aria-label="{{ $item['title'] }}">
         <div class="container">
-            <div class="chapters__grid">
+            <div class="panel-grid panel-grid--3">
                 @foreach ($item['sections'] as $i => $chapter)
-                    <article class="chapter" data-reveal>
+                    <article class="panel" data-reveal>
                         <span class="chapter__num" aria-hidden="true">0{{ $i + 1 }}</span>
-                        <h2 class="chapter__title">{{ $chapter['title'] }}</h2>
-                        <p class="chapter__text">{{ $chapter['text'] }}</p>
+                        <h2 class="panel__title">{{ $chapter['title'] }}</h2>
+                        <p class="panel__text">{{ $chapter['text'] }}</p>
                     </article>
                 @endforeach
             </div>
@@ -62,15 +64,6 @@
                     <ul class="chips">
                         @foreach ($item['channels'] as $channel)
                             <li data-reveal>{{ $channel }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @elseif ($slug === 'coffee-export')
-                <div class="chips-block">
-                    <h3 class="h4">{{ $labels['grades'] }}</h3>
-                    <ul class="chips chips--gold">
-                        @foreach ($item['grades'] as $grade)
-                            <li data-reveal>{{ $grade }}</li>
                         @endforeach
                     </ul>
                 </div>
@@ -119,9 +112,9 @@
     @include('partials.sections.cta', ['href' => $interestHref, 'label' => $labels['inquire']])
 
     <nav class="next-stop" data-palette="{{ $nextItem['palette'] }}" aria-label="{{ $labels['next'] }}">
-        <a href="{{ route('services.show', $next) }}" class="next-stop__link container">
+        <a href="{{ ServiceLink::href($next) }}" {{ ServiceLink::attributes($next) }} class="next-stop__link container">
             <span class="next-stop__label">{{ $labels['next'] }} · KM {{ $nextItem['km'] }}</span>
-            <span class="next-stop__title">{{ $nextItem['title'] }} <span aria-hidden="true">→</span></span>
+            <span class="next-stop__title">{{ $nextItem['title'] }}@if (ServiceLink::external($next)){{ ServiceLink::marker($next) }}@else <span aria-hidden="true">→</span>@endif</span>
         </a>
     </nav>
 

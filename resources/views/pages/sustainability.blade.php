@@ -4,13 +4,18 @@
 
     <section class="section pillars" data-sky="morning" data-spine-label="{{ __('sustainability.eyebrow') }}" aria-label="{{ __('sustainability.eyebrow') }}">
         <div class="container">
-            <ol class="pillar-list">
+            @php $glyphs = ['safety' => 'diamond', 'environment' => 'pairs', 'continuity' => 'star', 'local' => 'mark']; @endphp
+            <ol class="panel-grid panel-grid--2">
                 @foreach (__('sustainability.pillars') as $pillar)
-                    <li class="pillar" id="{{ $pillar['id'] }}" data-reveal>
-                        <span class="pillar__num" aria-hidden="true">0{{ $loop->iteration }}</span>
-                        <h2 class="pillar__value">{{ $pillar['value'] }}</h2>
-                        <p class="pillar__text">— {{ $pillar['text'] }}</p>
-                        <p class="pillar__detail">{{ $pillar['detail'] }}</p>
+                    @php $glyph = $glyphs[$pillar['id']] ?? 'star'; @endphp
+                    <li class="panel pillar" id="{{ $pillar['id'] }}" data-reveal>
+                        <div class="panel__top">
+                            <svg class="panel__glyph" viewBox="{{ $glyph === 'mark' ? '0 0 661.1 572.4' : '0 0 1400 1400' }}" aria-hidden="true"><use href="#{{ $glyph === 'mark' ? 'lf-mark' : 'lf-motif-'.$glyph }}" /></svg>
+                            <span class="panel__num" aria-hidden="true">0{{ $loop->iteration }}</span>
+                        </div>
+                        <h2 class="panel__title">{{ $pillar['value'] }}</h2>
+                        <p class="pillar__text">{{ \Illuminate\Support\Str::ucfirst($pillar['text']) }}</p>
+                        <p class="panel__text">{{ $pillar['detail'] }}</p>
                     </li>
                 @endforeach
             </ol>

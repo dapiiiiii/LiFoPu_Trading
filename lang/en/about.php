@@ -26,6 +26,9 @@ return [
 
     'mission_label' => 'Mission',
     'vision_label' => 'Vision',
+    // Phrases emphasised inside the exact mission and vision wording.
+    'mission_highlight' => 'an industry leader in the petroleum distribution industry',
+    'vision_highlight' => 'a leading and trusted force in petroleum distribution and transportation',
 
     'mark' => [
         'eyebrow' => 'The mark',
@@ -40,6 +43,7 @@ return [
 
     'advantage' => [
         'eyebrow' => 'Competitive advantage',
+        'title' => 'What sets LiFoPu apart.',
         'strengths_title' => 'Where our strength comes from',
     ],
 
@@ -58,9 +62,16 @@ return [
         'eyebrow' => 'Leadership',
     ],
 
+    // Company Profile 2026, p.10 "Future Plans": the exact paragraph, one sentence per box.
     'future' => [
         'eyebrow' => 'Future plans',
-        'text' => 'As we look to the future, we are committed to transforming our service stations to meet the evolving needs of our customers. By integrating electric vehicle charging capabilities alongside traditional fuel services, we aim to support both conventional vehicles and the rapidly growing electric mobility market. At the same time, through strategic partnerships with trusted lubricant suppliers, we ensure a reliable supply of high-quality, affordable products delivering seamless service, convenience, and value to every customer we serve.',
+        'title' => 'Where the road goes next.',
+        'lede' => 'Three commitments for the years ahead. Each one is a plan, not a service running today.',
+        'plans' => [
+            ['icon' => 'station', 'title' => 'Modern service stations', 'text' => 'As we look to the future, we are committed to transforming our service stations to meet the evolving needs of our customers.'],
+            ['icon' => 'ev', 'title' => 'EV charging alongside fuel', 'text' => 'By integrating electric vehicle charging capabilities alongside traditional fuel services, we aim to support both conventional vehicles and the rapidly growing electric mobility market.'],
+            ['icon' => 'oil', 'title' => 'Trusted lubricant partnerships', 'text' => 'At the same time, through strategic partnerships with trusted lubricant suppliers, we ensure a reliable supply of high-quality, affordable products delivering seamless service, convenience, and value to every customer we serve.'],
+        ],
     ],
 
 ];

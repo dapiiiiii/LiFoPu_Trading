@@ -1,0 +1,122 @@
+/* =========================================================================
+   Boxes (panels)
+   Brand typography rule: the display face (Agency FB, web: Saira Extra Condensed)
+   only for short headings; anything longer than a line uses the text face
+   (Calibri, web: Carlito) so it stays easy to read.
+   ========================================================================= */
+@layer components {
+    .panel-grid { display: grid; gap: clamp(.75rem, 1.4vw, 1.25rem); margin: 0; padding: 0; list-style: none; }
+    .panel-grid--2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .panel-grid--3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+    @media (max-width: 960px) { .panel-grid--3 { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 680px) { .panel-grid--2, .panel-grid--3 { grid-template-columns: 1fr; } }
+
+    .panel {
+        --panel-bg: #fffdf9;
+        --panel-bd: rgb(20 17 15 / .12);
+        --panel-bd-hover: rgb(20 17 15 / .24);
+        --panel-shadow: 0 18px 40px -30px rgb(20 17 15 / .4);
+        --corner: 1.5rem;
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        gap: .9rem;
+        min-width: 0;
+        padding: clamp(1.5rem, 2.4vw, 2.25rem);
+        background: var(--panel-bg);
+        border: 1px solid var(--panel-bd);
+        box-shadow: var(--panel-shadow);
+        transition: transform var(--dur-move) var(--ease-out), box-shadow var(--dur-move) var(--ease-out), border-color var(--dur-move) var(--ease-out);
+    }
+    /* Corner triangle cut from the LiFoPu mark: the signature of every box. */
+    .panel::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        right: -1px;
+        width: var(--corner);
+        height: var(--corner);
+        background: var(--accent);
+        clip-path: polygon(0 0, 100% 0, 100% 100%);
+        transition: width var(--dur-move) var(--ease-out), height var(--dur-move) var(--ease-out);
+    }
+    /* A road line draws along the bottom edge on hover or keyboard focus. */
+    .panel::after {
+        content: '';
+        position: absolute;
+        left: -1px;
+        right: -1px;
+        bottom: -1px;
+        height: 3px;
+        background: var(--accent);
+        transform: scaleX(0);
+        transform-origin: left;
+        transition: transform var(--dur-move) var(--ease-out);
+    }
+    .panel:hover, .panel:focus-within { transform: translateY(-3px); border-color: var(--panel-bd-hover); box-shadow: 0 30px 60px -32px rgb(20 17 15 / .5); }
+    .panel:hover::before, .panel:focus-within::before { width: calc(var(--corner) * 1.45); height: calc(var(--corner) * 1.45); }
+    .panel:hover::after, .panel:focus-within::after { transform: none; }
+
+    /* On dark skies the box becomes a quiet glass plate. */
+    :is([data-sky='dawn'], [data-sky='dusk'], [data-sky='bluehour'], [data-sky='night'], [data-sky='sunrise']) .panel {
+        --panel-bg: rgb(246 241 234 / .045);
+        --panel-bd: rgb(246 241 234 / .14);
+        --panel-bd-hover: rgb(246 241 234 / .32);
+        --panel-shadow: none;
+    }
+    :is([data-sky='dawn'], [data-sky='dusk'], [data-sky='bluehour'], [data-sky='night'], [data-sky='sunrise']) .panel:hover { box-shadow: 0 30px 60px -32px rgb(0 0 0 / .7); }
+
+    .panel__top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; padding-right: calc(var(--corner) * .6); }
+    .panel__num { font: 500 .85rem/1 var(--font-display); letter-spacing: .24em; color: var(--accent-text); }
+    .panel__glyph { flex: none; width: 2.5rem; height: 2.5rem; color: var(--accent); transition: transform 1.2s var(--ease-out); }
+    .panel:hover .panel__glyph { transform: rotate(90deg); }
+    .panel__icon { flex: none; display: block; width: 3rem; height: 3rem; color: var(--accent); }
+    .panel__icon .thumb { width: 100%; height: 100%; }
+    .panel__title { margin: 0; font: 400 clamp(1.45rem, 1.15rem + .8vw, 1.95rem)/1.08 var(--font-display); letter-spacing: .01em; color: var(--fg); }
+    .panel__text { margin: 0; max-width: 62ch; font: 400 1.075rem/1.65 var(--font-sans); color: var(--fg-muted); }
+    .panel__foot { margin-top: auto; padding-top: .5rem; }
+
+    /* Large reading box for a single important paragraph. */
+    .panel--quote {
+        --corner: 2rem;
+        justify-content: center;
+        gap: 1.25rem;
+        overflow: hidden;
+        padding: clamp(2rem, 3.6vw, 3.25rem);
+        border-left: 3px solid var(--accent);
+    }
+    .panel--quote > p:not(.eyebrow) { margin: 0; max-width: 58ch; font: 400 clamp(1.15rem, 1rem + .55vw, 1.45rem)/1.6 var(--font-sans); color: var(--fg); }
+    .panel--quote .eyebrow { margin: 0; }
+    .panel--quote:hover, .panel--mv:hover { transform: none; }
+    .panel__watermark { position: absolute; right: -2.5rem; bottom: -3rem; width: 12rem; color: var(--accent); opacity: .07; pointer-events: none; }
+
+    /* Mission and vision on the navy sky. */
+    .panel--mv { --corner: 2rem; gap: 1.5rem; padding: clamp(2rem, 3.6vw, 3rem); }
+    .panel--mv blockquote { margin: 0; }
+    .panel--mv p { margin: 0; font: 400 clamp(1.1rem, 1rem + .4vw, 1.35rem)/1.65 var(--font-sans); color: rgb(246 241 234 / .86); }
+    .panel--mv strong, .panel--quote strong {
+        font-weight: 700;
+        color: var(--fg);
+        background: linear-gradient(transparent 62%, rgb(216 69 0 / .32) 62%);
+    }
+
+    /* Small square tiles (strengths). */
+    .panel--tile { --corner: 1.1rem; justify-content: space-between; min-height: 9.5rem; padding: 1.25rem 1.25rem 1.4rem; }
+    .panel--tile .panel__title { font-size: 1.5rem; }
+
+    /* Function cards in the organization chart: narrow, so tighter padding; also fade when another is in focus. */
+    .panel--org {
+        --corner: 1rem;
+        flex: 1;
+        gap: 1rem;
+        padding: 1.4rem 1.1rem 1.5rem;
+        transition: transform var(--dur-move) var(--ease-out), box-shadow var(--dur-move) var(--ease-out), border-color var(--dur-move) var(--ease-out), opacity var(--dur-move) var(--ease-out);
+    }
+    .panel--org .panel__glyph { width: 1.6rem; height: 1.6rem; }
+
+    /* Fact rows (service pages). */
+    .fact-stack { display: grid; gap: .75rem; margin: 0; align-content: stretch; }
+    .panel--fact { --corner: .9rem; flex-direction: row; align-items: center; justify-content: space-between; gap: 1rem; padding: 1.2rem 1.5rem; }
+    .panel--fact dt { font: 500 .85rem/1.4 var(--font-display); letter-spacing: .22em; text-transform: uppercase; color: var(--fg-muted); }
+    .panel--fact dd { margin: 0; font: 400 1.6rem/1.1 var(--font-display); text-align: right; color: var(--fg); }
+}

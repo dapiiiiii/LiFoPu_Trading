@@ -1,4 +1,4 @@
-<x-layout title="Page not found — LiFoPu Trading" page="error">
+<x-layout title="Page not found | LiFoPu Trading" page="error">
 
     <section class="page-hero page-hero--dark page-hero--error" data-sky="dawn" aria-labelledby="page-title">
         <div class="page-hero__scene" aria-hidden="true">

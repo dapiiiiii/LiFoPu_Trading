@@ -1,4 +1,4 @@
-{{-- Aerial highland relief with a winding road, after the guideline's aerial road imagery (p.3–5). --}}
+{{-- Aerial highland relief with a winding road, after the guideline's aerial road imagery (p.3 to 5). --}}
 <div class="scene scene--topo" aria-hidden="true">
     <div class="scene__relief" style="--relief: url('{{ asset('images/topo-escarpment.svg') }}')"></div>
     <svg viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice" focusable="false">

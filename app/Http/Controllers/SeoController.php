@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Support\ServiceLink;
 use Illuminate\Http\Response;
 
 class SeoController extends Controller
@@ -10,7 +11,7 @@ class SeoController extends Controller
     {
         $urls = collect(['home', 'about', 'services', 'markets', 'sustainability', 'contact', 'privacy'])
             ->map(fn (string $name) => route($name))
-            ->merge(collect(config('lifopu.services'))->map(fn (string $slug) => route('services.show', $slug)));
+            ->merge(collect(ServiceLink::internal())->map(fn (string $slug) => route('services.show', $slug)));
 
         return response()
             ->view('seo.sitemap', ['urls' => $urls, 'updated' => now()->toDateString()])

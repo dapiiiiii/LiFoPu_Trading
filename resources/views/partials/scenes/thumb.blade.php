@@ -21,6 +21,13 @@
             <circle cx="26" cy="88" r="7" /><circle cx="44" cy="88" r="7" /><circle cx="92" cy="88" r="7" />
             <path d="M54 51s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" />
             @break
+        @case('ev')
+            <rect x="22" y="20" width="44" height="80" rx="6" />
+            <path d="M22 44h44M16 100h56" />
+            <path d="m48 54-9 15h10l-6 14 14-19H46l5-10Z" />
+            <path d="M66 40h10a8 8 0 0 1 8 8v30a6 6 0 0 0 12 0V52" />
+            <path d="M90 34v10M102 34v10M86 44h20v6a10 10 0 0 1-20 0Z" />
+            @break
         @case('coffee')
             <ellipse cx="46" cy="54" rx="20" ry="29" transform="rotate(-28 46 54)" />
             <path d="M58 30c-10 10 2 24-10 48" />

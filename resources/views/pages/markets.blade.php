@@ -1,3 +1,4 @@
+@use('App\Support\ServiceLink')
 @php
     $segments = trans('markets.segments');
     $services = trans('services.items');
@@ -8,15 +9,15 @@
 
     <section class="section segments" data-sky="morning" data-spine-label="{{ __('markets.eyebrow') }}" aria-label="{{ __('markets.eyebrow') }}">
         <div class="container">
-            <ol class="segment-list">
+            <ol class="panel-grid panel-grid--2">
                 @foreach ($segments as $key => $segment)
-                    <li class="segment" id="{{ $key }}" data-reveal>
-                        <span class="segment__num" aria-hidden="true">0{{ $loop->iteration }}</span>
-                        <h2 class="segment__title">{{ $segment['title'] }}</h2>
-                        <p class="segment__text">{{ $segment['text'] }}</p>
+                    <li class="panel segment" id="{{ $key }}" data-reveal>
+                        <span class="panel__num" aria-hidden="true">0{{ $loop->iteration }}</span>
+                        <h2 class="panel__title">{{ $segment['title'] }}</h2>
+                        <p class="panel__text">{{ $segment['text'] }}</p>
                         <ul class="segment__services">
                             @foreach ($segment['services'] as $slug)
-                                <li><a href="{{ route('services.show', $slug) }}" data-palette="{{ $services[$slug]['palette'] }}">{{ $services[$slug]['title'] }}</a></li>
+                                <li><a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }} data-palette="{{ $services[$slug]['palette'] }}">{{ $services[$slug]['title'] }}{{ ServiceLink::marker($slug) }}</a></li>
                             @endforeach
                         </ul>
                     </li>
@@ -48,7 +49,7 @@
                                         @if (in_array($slug, $segment['services'], true))
                                             <svg class="matrix__yes" viewBox="0 0 661.1 572.4" role="img" aria-label="Yes"><use href="#lf-mark" /></svg>
                                         @else
-                                            <span class="matrix__no" aria-label="No">—</span>
+                                            <span class="matrix__no"><span class="sr-only">No</span></span>
                                         @endif
                                     </td>
                                 @endforeach

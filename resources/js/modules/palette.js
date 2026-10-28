@@ -3,9 +3,10 @@ import { setQuality, isEssential } from '../lib/quality.js';
 import { toggleSound } from './sound.js';
 
 export function initPalette({ lenis }) {
-    const dialog = document.querySelector('[data-palette]');
-    if (!dialog) return;
-    const input = dialog.querySelector('[data-palette-input]');
+    // Not [data-palette]: that attribute sets colour themes on <body> and service links.
+    const dialog = document.querySelector('[data-command-palette]');
+    const input = dialog?.querySelector('[data-palette-input]');
+    if (!dialog || !input) return;
     const options = [...dialog.querySelectorAll('[data-palette-option]')];
     const groups = [...dialog.querySelectorAll('.palette__group')];
     const empty = dialog.querySelector('[data-palette-empty]');
@@ -37,7 +38,7 @@ export function initPalette({ lenis }) {
             return match;
         });
         groups.forEach((g) => { g.hidden = !g.querySelector('[data-palette-option]:not([hidden])'); });
-        empty.hidden = visible.length > 0;
+        if (empty) empty.hidden = visible.length > 0;
         highlight(0);
     };
 
@@ -55,7 +56,13 @@ export function initPalette({ lenis }) {
     const run = (el) => {
         if (!el) return;
         if (el.dataset.href) {
-            window.location.href = el.dataset.href;
+            // Sister-company websites open in a new tab, like their links elsewhere on the site.
+            if (el.hasAttribute('data-external')) {
+                close();
+                window.open(el.dataset.href, '_blank', 'noopener');
+            } else {
+                window.location.href = el.dataset.href;
+            }
             return;
         }
         close();

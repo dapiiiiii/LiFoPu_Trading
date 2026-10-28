@@ -1,3 +1,4 @@
+@use('App\Support\ServiceLink')
 <x-layout :title="__('home.meta_title')" page="home">
 
     {{-- A. Dawn hero: "The Road Awakens" --}}
@@ -83,7 +84,7 @@
                 @endforeach
                 <div class="roadside__caption">
                     @foreach ($services as $slug => $item)
-                        <span data-caption="{{ $slug }}" @if ($loop->first) data-active @endif>KM {{ $item['km'] }} — {{ $item['title'] }}</span>
+                        <span data-caption="{{ $slug }}" @if ($loop->first) data-active @endif>KM {{ $item['km'] }} · {{ $item['title'] }}</span>
                     @endforeach
                 </div>
             </div>
@@ -99,8 +100,9 @@
                         <span class="stop__km">{{ __('home.roadside.km') }} {{ $item['km'] }}</span>
                         <h3 class="stop__title">{{ $item['title'] }}</h3>
                         <p class="stop__text">{{ $item['summary'] }}</p>
-                        <a href="{{ route('services.show', $slug) }}" class="stop__link" data-stop-link>
-                            {{ __('common.actions.explore') }}<span class="sr-only"> {{ $item['title'] }}</span> <span aria-hidden="true">→</span>
+                        <a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }} class="stop__link" data-stop-link>
+                            {{ __('common.actions.explore') }}<span class="sr-only"> {{ $item['title'] }}</span>
+                            @if (ServiceLink::external($slug)){{ ServiceLink::marker($slug) }}@else<span aria-hidden="true">→</span>@endif
                         </a>
                     </li>
                 @endforeach

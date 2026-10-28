@@ -1,4 +1,4 @@
-// The brand pattern drifts gently with the pointer — footer and final CTA only.
+// The brand pattern drifts gently with the pointer, in the footer and final CTA only.
 import { isEssential } from '../lib/quality.js';
 import { prefersReducedMotion } from '../lib/motion.js';
 

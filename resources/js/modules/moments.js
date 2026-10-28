@@ -1,5 +1,5 @@
 // Material moments and scroll-linked stories: canopy lights, bean-to-market map, tanker route,
-// road timeline, network focus, the mark story and the at-a-glance counters.
+// road timeline, network focus, the org chart, the mark story and the at-a-glance counters.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { isEssential } from '../lib/quality.js';
@@ -9,6 +9,7 @@ export function initMoments() {
     scenes();
     timeline();
     network();
+    org();
     markStory();
     route();
     counters();
@@ -96,6 +97,37 @@ function network() {
             node.addEventListener('pointerleave', () => focus(null));
             node.addEventListener('blur', () => focus(null));
         });
+    });
+}
+
+function org() {
+    document.querySelectorAll('[data-org]').forEach((root) => {
+        const cards = [...root.querySelectorAll('[data-org-unit]')];
+        // Light one function's road from the roundabout down to its card.
+        const focus = (index) => {
+            if (index === null) delete root.dataset.focus;
+            else root.dataset.focus = index;
+            root.querySelectorAll('[data-org-route]').forEach((el) => el.toggleAttribute('data-active', el.dataset.orgRoute === index));
+            cards.forEach((card) => card.toggleAttribute('data-active', card.dataset.orgUnit === index));
+        };
+        cards.forEach((card) => {
+            card.addEventListener('pointerenter', (e) => e.pointerType === 'mouse' && focus(card.dataset.orgUnit));
+            // Leaving with the mouse falls back to whichever card holds keyboard focus.
+            card.addEventListener('pointerleave', (e) => e.pointerType === 'mouse' && focus(cards.includes(document.activeElement) ? document.activeElement.dataset.orgUnit : null));
+            card.addEventListener('focus', () => focus(card.dataset.orgUnit));
+            card.addEventListener('blur', () => focus(null));
+        });
+
+        if (isEssential()) return;
+        // Roads and cards draw in as they reach the viewport.
+        const io = new IntersectionObserver((entries) => {
+            entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                entry.target.classList.add('is-drawn');
+                io.unobserve(entry.target);
+            });
+        }, { rootMargin: '0px 0px -10% 0px', threshold: 0.15 });
+        root.querySelectorAll('[data-org-draw]').forEach((el) => io.observe(el));
     });
 }
 

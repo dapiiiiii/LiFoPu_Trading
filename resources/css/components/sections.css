@@ -209,62 +209,199 @@
     /* --- Values --- */
     .values { overflow: hidden; }
     .values__pattern { color: #4c4cff; opacity: .08; }
-    .values__list { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 0; margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
-    .value { grid-column: span 2; position: relative; padding: 2rem 2rem 2.5rem 0; border-bottom: 1px solid var(--rule); }
+    /* Three boxes, then two wider ones. */
+    .values__list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
+    .value { grid-column: span 2; }
     .value:nth-child(n + 4) { grid-column: span 3; }
-    .value:not(:nth-child(3n + 1)):not(:nth-child(4)) { padding-left: 2rem; border-left: 1px solid var(--rule); }
-    .value:nth-child(5) { padding-left: 2rem; border-left: 1px solid var(--rule); }
-    .value__glyph { width: 3.5rem; height: 3.5rem; color: var(--navy-tint); transition: transform 1.2s var(--ease-out), color var(--dur-move); }
-    .value:hover .value__glyph { transform: rotate(90deg); color: var(--ignite-tint-2); }
-    .value__num { position: absolute; top: 2rem; right: 1.5rem; font: 300 1rem/1 var(--font-display); letter-spacing: .2em; color: var(--fg-muted); }
-    .value__name { margin: 1.75rem 0 .75rem; font: 400 clamp(1.6rem, 1.1rem + 1.2vw, 2.25rem)/1.05 var(--font-display); }
-    .value__text { margin: 0; color: var(--fg-muted); max-width: 26rem; }
+    .value .value__glyph { width: 3rem; height: 3rem; color: var(--navy-tint); }
+    .value:hover .value__glyph { color: var(--ignite-tint-2); }
     @media (max-width: 900px) {
-        .values__list { grid-template-columns: 1fr 1fr; }
-        .value, .value:nth-child(n + 4) { grid-column: span 1; padding-left: 0 !important; border-left: 0 !important; padding-right: 1.5rem; }
-        .value:nth-child(even) { padding-left: 1.5rem !important; border-left: 1px solid var(--rule) !important; }
+        .values__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+        .value, .value:nth-child(n + 4) { grid-column: span 1; }
+        .value:last-child { grid-column: 1 / -1; }
     }
     @media (max-width: 560px) {
         .values__list { grid-template-columns: 1fr; }
-        .value:nth-child(even) { padding-left: 0 !important; border-left: 0 !important; }
     }
 
-    /* --- Organization --- */
-    .org { position: relative; }
-    .org__head {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 1rem;
-        width: max-content;
-        margin: 0 auto;
-        padding: 1rem 1.75rem;
-        border: 1px solid var(--accent);
-        font: 400 1.5rem/1 var(--font-display);
-        letter-spacing: .14em;
-        text-transform: uppercase;
+    /* --- Organization: the General Manager as a roundabout, one road out to each function --- */
+    /* --ra is the roundabout size; the road width follows it so the exit and the roads match. */
+    .org { --ra: 9rem; --road: #1b1815; --road-w: calc(var(--ra) * .097); position: relative; }
+
+    .org__crown { display: grid; grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: end; }
+    .org__hub { display: flex; flex-direction: column; align-items: center; gap: 1.25rem; }
+    .org__head { display: grid; justify-items: center; gap: .55rem; margin: 0; font: 400 clamp(1.5rem, 1.1rem + 1vw, 2.1rem)/1 var(--font-display); letter-spacing: .16em; text-transform: uppercase; text-align: center; }
+    .org__level, .org__level-num { font: 500 .75rem/1 var(--font-display); letter-spacing: .3em; text-transform: uppercase; color: var(--accent-text); }
+
+    .org__ra { position: relative; display: block; width: var(--ra); }
+    .org__ra::before {
+        content: '';
+        position: absolute;
+        inset: -40%;
+        border-radius: 50%;
+        background: radial-gradient(circle, rgb(255 92 0 / .24), transparent 62%);
+        opacity: .55;
+        transition: opacity var(--dur-move) var(--ease-out);
+        pointer-events: none;
     }
-    .org__mark { width: 1.75rem; color: var(--accent); }
-    .org__trunk { width: 1px; height: 3rem; margin: 0 auto; background: var(--rule); }
-    .org__units {
+    .org[data-focus] .org__ra::before { opacity: 1; }
+    .org__roundabout { position: relative; display: block; width: 100%; height: auto; overflow: visible; }
+    .org__ra-bezel { fill: none; stroke: rgb(246 241 234 / .3); stroke-width: 5; stroke-dasharray: 1 9; }
+    .org__ra-exit { fill: var(--road); }
+    .org__ra-road { fill: none; stroke: var(--road); stroke-width: 19.4; }
+    /* Traffic goes round anticlockwise, as on Ethiopia's right-hand roads. */
+    .org__ra-lane { fill: none; stroke: rgb(246 241 234 / .45); stroke-width: 1.5; stroke-dasharray: 5 9; transform-box: fill-box; transform-origin: center; animation: org-spin 40s linear infinite; transition: stroke var(--dur-move); }
+    .org[data-focus] .org__ra-lane { stroke: var(--accent); }
+    .org__ra-island { fill: #0f0d0c; stroke: var(--accent); stroke-width: 1.5; }
+    .org__ra-mark { fill: var(--accent); }
+    @keyframes org-spin { to { transform: rotate(-360deg); } }
+
+    .org__legend, .org__summary { padding-bottom: .75rem; }
+    .org__legend-title { margin: 0 0 1rem; font: 500 .8rem/1 var(--font-display); letter-spacing: .28em; text-transform: uppercase; color: var(--fg-muted); }
+    .org__levels { display: grid; gap: .75rem; margin: 0; padding: 0; list-style: none; }
+    .org__levels li { display: grid; grid-template-columns: 1.4rem 2rem minmax(0, 1fr); align-items: center; font: 400 1.1rem/1.2 var(--font-display); letter-spacing: .05em; }
+    /* One glyph per level, used on the chart itself: roundabout, junction, post, role. */
+    .org__glyph { justify-self: center; display: block; }
+    .org__glyph--1 { width: 1.15rem; height: 1.15rem; border-radius: 50%; background: radial-gradient(circle, var(--accent) 0 32%, transparent 34% 56%, rgb(246 241 234 / .4) 58%); }
+    .org__glyph--2, .org__junction { width: .8rem; height: .8rem; border: 2px solid var(--accent); background: var(--sky-bottom, var(--ink)); transform: rotate(45deg); }
+    .org__glyph--3 { width: .5rem; height: .5rem; border: 1.5px solid var(--fg); transform: rotate(45deg); }
+    .org__glyph--4 { width: .32rem; height: .32rem; border-radius: 50%; background: var(--fg-muted); }
+
+    .org__summary { justify-self: end; max-width: 19rem; text-align: right; }
+    .org__count { display: grid; gap: .6rem; margin: 0; font: 400 1.1rem/1.3 var(--font-display); letter-spacing: .05em; color: var(--fg-muted); }
+    .org__count-num { font: 300 clamp(3.5rem, 2.4rem + 3vw, 5.75rem)/.8 var(--font-display); letter-spacing: .02em; color: transparent; -webkit-text-stroke: 1px var(--accent-text); }
+    .org__hint { margin: 1rem 0 0; font-size: .92rem; line-height: 1.45; color: var(--fg-muted); }
+
+    /* Roads: a trunk out of the roundabout, then one curve per function. */
+    .org__trunk { position: relative; display: block; width: var(--road-w); height: 2.25rem; margin: 0 auto; background: var(--road); transform-origin: top; transition: transform 500ms var(--ease-out); }
+    .org__trunk::after {
+        content: '';
+        position: absolute;
+        left: 50%; top: 0; bottom: 0;
+        width: 2px;
+        background: repeating-linear-gradient(180deg, rgb(246 241 234 / .45) 0 4px, transparent 4px 22px);
+        transform: translateX(-50%);
+        animation: org-trunk 1.6s linear infinite;
+    }
+    .org[data-focus] .org__trunk::after { background-image: repeating-linear-gradient(180deg, var(--accent) 0 4px, transparent 4px 22px); }
+    @keyframes org-trunk { to { background-position: 0 22px; } }
+    .org__fan { display: block; width: 100%; height: clamp(5rem, 2rem + 5vw, 8rem); overflow: visible; transition: clip-path 1.1s var(--ease-out) 350ms; }
+    .org__fan path { fill: none; vector-effect: non-scaling-stroke; }
+    .org__asphalt { stroke: var(--road); stroke-width: var(--road-w); }
+    .org__halo { stroke: var(--accent); stroke-width: calc(var(--road-w) + 8px); opacity: 0; transition: opacity var(--dur-move) var(--ease-out); }
+    .org__halo[data-active] { opacity: .22; }
+    .org__flow { stroke: rgb(246 241 234 / .4); stroke-width: 2px; stroke-dasharray: 4 18; stroke-linecap: round; animation: flow 1.6s linear infinite; transition: stroke var(--dur-move), opacity var(--dur-move); }
+    .org__flow[data-active] { stroke: var(--accent); stroke-width: 3px; }
+    .org[data-focus] .org__flow:not([data-active]) { opacity: .12; }
+
+    /* Function cards: equal height, the road arrives at the junction on the top edge. */
+    .org__units { --gap: clamp(.25rem, .5vw, .5rem); display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); margin: 0; padding: 0; list-style: none; }
+    .org__unit {
+        --stagger: calc(var(--i) * 90ms);
         position: relative;
-        display: grid;
-        grid-template-columns: repeat(6, minmax(0, 1fr));
-        gap: 1px;
-        margin: 0;
-        padding: 0;
-        list-style: none;
-        border-top: 1px solid var(--rule);
-        background: var(--rule);
+        display: flex;
+        padding-inline: var(--gap);
+        transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out);
+        transition-delay: var(--stagger);
     }
-    .org__unit { padding: 1.5rem 1.25rem 1.75rem; background: var(--sky-bottom, var(--ink)); }
-    .org__unit-name { margin: 0; font: 400 1.6rem/1 var(--font-display); }
-    .org__lead { margin: .4rem 0 1.25rem; font: 500 .8rem/1.3 var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--accent-text); }
-    .org__teams { display: grid; gap: .9rem; margin: 0; padding: 0; list-style: none; }
-    .org__team { display: block; font: 500 1rem/1.2 var(--font-display); letter-spacing: .1em; text-transform: uppercase; }
-    .org__roles { display: block; margin-top: .2rem; font-size: .92rem; line-height: 1.45; color: var(--fg-muted); }
-    @media (max-width: 1100px) { .org__units { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
-    @media (max-width: 640px) { .org__units { grid-template-columns: 1fr; } .org__head { width: auto; } }
+    .org__junction { position: absolute; top: -1px; left: 50%; z-index: 1; transform: translate(-50%, -50%) rotate(45deg); transition: background var(--dur-move), box-shadow var(--dur-move); }
+    .org__card[data-active] .org__junction { background: var(--accent); box-shadow: 0 0 0 6px rgb(216 69 0 / .18), 0 0 26px rgb(255 92 0 / .65); }
+    .org[data-focus] .org__card:not([data-active]) { opacity: .42; }
+    .org__unit-name { margin: 0; font: 400 clamp(1.5rem, 1.1rem + .7vw, 1.95rem)/1 var(--font-display); }
+    .org__lead { margin: .5rem 0 0; font: 500 .78rem/1.3 var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--accent-text); }
+
+    /* Posts hang off a lane down the card; roles branch off each post. */
+    .org__posts { display: grid; margin: .25rem 0 0; padding: 1.1rem 0 0; list-style: none; border-top: 1px solid var(--rule); }
+    .org__post {
+        position: relative;
+        padding: 0 0 1.1rem 1.2rem;
+        transition: opacity 700ms var(--ease-out), transform 700ms var(--ease-out);
+        transition-delay: calc(var(--stagger) + 350ms + var(--j) * 80ms);
+    }
+    .org__post:last-child { padding-bottom: 0; }
+    .org__post::before {
+        content: '';
+        position: absolute;
+        left: calc(.225rem - .5px); top: .55rem; bottom: -.55rem;
+        width: 1px;
+        background: var(--rule);
+        transform-origin: top;
+        transition: transform 600ms var(--ease-out) calc(var(--stagger) + 500ms + var(--j) * 80ms), background-color var(--dur-move) calc(var(--j) * 90ms);
+    }
+    .org__post:last-child::before { display: none; }
+    .org__post::after {
+        content: '';
+        position: absolute;
+        left: 0; top: .32rem;
+        width: .45rem; height: .45rem;
+        border: 1.5px solid var(--fg);
+        background: var(--sky-bottom, var(--ink));
+        transform: rotate(45deg);
+        transition: background-color var(--dur-ui), border-color var(--dur-move) calc(var(--j) * 90ms);
+    }
+    .org__card[data-active] .org__post::before { background-color: var(--accent); }
+    .org__card[data-active] .org__post::after { border-color: var(--accent); }
+    .org__post:hover::after { background-color: var(--accent); }
+    .org__post-title { display: block; font: 500 1.02rem/1.15 var(--font-display); letter-spacing: .08em; text-transform: uppercase; }
+    .org__roles { display: grid; gap: .35rem; margin: .6rem 0 0; padding: .1rem 0 .1rem .75rem; list-style: none; border-left: 1px dashed rgb(246 241 234 / .22); }
+    .org__roles li { position: relative; padding-left: .75rem; font-size: .92rem; line-height: 1.3; color: var(--fg-muted); }
+    .org__roles li::before { content: ''; position: absolute; left: 0; top: .5em; width: .32rem; height: .32rem; border-radius: 50%; background: var(--fg-muted); }
+
+    /* Functions without posts below them carry the mark instead. */
+    .org__solo { position: absolute; inset: 0; overflow: hidden; pointer-events: none; }
+    .org__solo .panel__watermark { right: -2rem; bottom: -2.25rem; width: 10rem; opacity: .08; transition: opacity var(--dur-move); }
+    .org__card[data-active] .org__solo .panel__watermark { opacity: .16; }
+
+    /* Draw in once on scroll (org() in moments.js); without JS everything is already in place. */
+    .org__crown :is(.org__head, .org__ra, .org__legend, .org__summary) { transition: opacity 900ms var(--ease-out), transform 900ms var(--ease-out); }
+    .org__crown .org__legend { transition-delay: 150ms; }
+    .org__crown .org__summary { transition-delay: 300ms; }
+    .motion-ready .org__crown:not(.is-drawn) :is(.org__head, .org__ra, .org__legend, .org__summary) { opacity: 0; transform: translateY(1.25rem); }
+    .motion-ready .org__crown:not(.is-drawn) .org__ra { transform: scale(.85) rotate(-25deg); }
+    .motion-ready .org__roads:not(.is-drawn) .org__trunk { transform: scaleY(0); }
+    .motion-ready .org__roads:not(.is-drawn) .org__fan { clip-path: inset(0 0 100% 0); }
+    .motion-ready .org__unit:not(.is-drawn) { opacity: 0; transform: translateY(1.75rem); }
+    .motion-ready .org__unit:not(.is-drawn) .org__post { opacity: 0; transform: translateX(-.6rem); }
+    .motion-ready .org__unit:not(.is-drawn) .org__post::before { transform: scaleY(0); }
+
+    /* Below desktop the chart becomes one road down the left edge, with a slip road into each card. */
+    @media (max-width: 1180px) {
+        .org { --ra: 5.5rem; --lane: calc(var(--ra) / 2); }
+        .org__crown { position: relative; grid-template-columns: var(--ra) minmax(0, 1fr); column-gap: 1.25rem; row-gap: 2rem; align-items: center; }
+        .org__crown::before { content: ''; position: absolute; left: calc(var(--lane) - var(--road-w) / 2); top: calc(var(--ra) * .75); bottom: 0; width: var(--road-w); background: var(--road); }
+        .org__hub { display: contents; }
+        .org__ra { grid-column: 1; grid-row: 1; }
+        .org__head { grid-column: 2; grid-row: 1; justify-items: start; text-align: left; }
+        .org__legend { grid-column: 2; grid-row: 2; }
+        .org__summary { grid-column: 2; grid-row: 3; justify-self: start; text-align: left; }
+        .org__legend, .org__summary { padding-bottom: 0; }
+        .org__trunk { height: 2rem; margin: 0 0 0 calc(var(--lane) - var(--road-w) / 2); }
+        .org__fan { display: none; }
+
+        .org__units { grid-template-columns: 1fr; gap: 1.25rem; padding-left: calc(var(--ra) + 1.25rem); }
+        .org__unit { --stagger: 0ms; padding-inline: 0; }
+        .org__unit::before, .org__unit::after { content: ''; position: absolute; background: var(--road); }
+        /* Main road segment, ending at the last card's junction. */
+        .org__unit::before { left: calc(-1.25rem - var(--lane) - var(--road-w) / 2); top: -1.25rem; bottom: 0; width: var(--road-w); }
+        .org__unit:last-child::before { bottom: auto; height: 3.25rem; }
+        /* Slip road. */
+        .org__unit::after { left: calc(-1.25rem - var(--lane)); top: calc(2rem - var(--road-w) / 2); width: calc(1.25rem + var(--lane)); height: var(--road-w); transition: background var(--dur-move); }
+        .org__unit:has([data-active])::after { background: var(--accent); }
+        .org__junction { top: 2rem; left: -1px; }
+    }
+    @media (min-width: 641px) and (max-width: 1180px) {
+        .org .panel--org { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); gap: 1rem 2.5rem; align-items: start; }
+        .org .panel--org .panel__top { grid-column: 1 / -1; }
+        .org__posts { margin: 0; padding: 0; border-top: 0; }
+    }
+    @media (max-width: 640px) {
+        .org { --ra: 4.25rem; }
+        .org__crown { column-gap: 1rem; }
+        .org__units { gap: 1rem; padding-left: calc(var(--ra) + 1rem); }
+        .org__unit::before { left: calc(-1rem - var(--lane) - var(--road-w) / 2); top: -1rem; }
+        .org__unit:last-child::before { height: 3rem; }
+        .org__unit::after { left: calc(-1rem - var(--lane)); width: calc(1rem + var(--lane)); }
+    }
 
     /* --- Future horizon --- */
     .future, .about-future, .svc-next { overflow: hidden; }
