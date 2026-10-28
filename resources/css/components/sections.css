@@ -202,7 +202,9 @@
     .network[data-focus] .net__lane:not([data-lane-active]), .network[data-focus] .net__node:not([data-lane-active]) { opacity: .25; transition: opacity var(--dur-move); }
     .network__text { margin-top: 1.5rem; color: var(--fg-muted); }
     .network__text summary { cursor: pointer; font: 500 .9rem/1.4 var(--font-display); letter-spacing: .2em; text-transform: uppercase; color: var(--fg); }
-    .network__text ol { margin: 1rem 0 0; padding-left: 1.25rem; display: grid; gap: .5rem; max-width: 52rem; }
+    .network__text ol { margin: 1rem 0 0; padding-left: 1.25rem; display: grid; gap: .5rem; max-width: 52rem; list-style: none; }
+    .network__text li { display: flex; align-items: baseline; gap: .75rem; }
+    .network__bullet { flex: none; width: .85em; height: auto; color: var(--ignite-tint-2); transform: rotate(90deg); }
 
     /* --- Values --- */
     .values { overflow: hidden; }
@@ -288,9 +290,15 @@
     .horizon-col--planned .horizon-col__line { border-top-style: dashed; border-color: var(--gold-tint); }
     .horizon-col--confirmed .horizon-col__line { border-top: 3px dotted rgb(246 241 234 / .5); }
     .horizon-col ul { display: grid; gap: 1rem; margin: 0; padding: 0; list-style: none; }
-    .horizon-col li { padding-bottom: 1rem; border-bottom: 1px solid var(--rule); font: 300 1.45rem/1.2 var(--font-display); }
+    .horizon-col li { display: flex; align-items: baseline; gap: .75rem; padding-bottom: 1rem; border-bottom: 1px solid var(--rule); font: 300 1.45rem/1.2 var(--font-display); }
+    .horizon-col__bullet { flex: none; width: .8em; height: auto; color: var(--ignite-tint-2); transform: translateY(.05em) rotate(90deg); }
+    .horizon-col--planned .horizon-col__bullet { color: var(--gold-tint); }
     .horizon-col p { margin: 0; color: var(--fg-muted); }
-    @media (max-width: 900px) { .future__grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) {
+        .future__grid { grid-template-columns: 1fr; }
+        /* Stacked columns make the section tall, so pin the glow inside the bottom padding instead of a % of height. */
+        .future__horizon span { bottom: calc(var(--section-y) * .45); }
+    }
 
     /* --- Final CTA --- */
     .cta {

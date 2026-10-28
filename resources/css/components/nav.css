@@ -172,13 +172,16 @@
         gap: 1rem;
         padding: .55rem 0;
         border-bottom: 1px solid rgb(246 241 234 / .1);
-        font: 300 clamp(2.1rem, 9vw, 3.4rem)/1.05 var(--font-display);
+        font: 300 clamp(1.8rem, 7.5vw, 2.8rem)/1.05 var(--font-display);
         text-decoration: none;
+        transition: color var(--dur-ui) var(--ease-out), padding-left var(--dur-move) var(--ease-out), border-color var(--dur-ui);
     }
-    .nav__big a span { font-size: .8rem; letter-spacing: .2em; color: var(--ignite-tint-2); }
+    .nav__big a span { font-size: .75rem; letter-spacing: .2em; color: var(--ignite-tint-2); }
     .nav__big a[aria-current='page'] { color: var(--ignite-tint-2); }
+    .nav__big a:hover, .nav__big a:focus-visible { color: var(--ignite-tint-2); padding-left: .75rem; border-bottom-color: var(--ignite-tint-2); }
     .nav__overlay-services { display: grid; gap: .5rem; margin: 0; padding: 0; list-style: none; }
-    .nav__overlay-services a { font: 400 1.2rem/1.3 var(--font-display); text-decoration: none; color: rgb(246 241 234 / .8); }
+    .nav__overlay-services a { font: 400 1.05rem/1.3 var(--font-display); text-decoration: none; color: rgb(246 241 234 / .8); transition: color var(--dur-ui) var(--ease-out); }
+    .nav__overlay-services a:hover, .nav__overlay-services a:focus-visible { color: var(--paper); }
     .nav__overlay-foot { display: grid; gap: .5rem; font-size: 1rem; }
     .nav__overlay-foot a { color: rgb(246 241 234 / .8); }
 

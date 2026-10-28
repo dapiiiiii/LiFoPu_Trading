@@ -78,7 +78,7 @@
                     <summary>{{ __('common.actions.read_diagram') }}</summary>
                     <ol>
                         @foreach (trans('home.network.text') as $line)
-                            <li>{{ $line }}</li>
+                            <li><x-logo variant="mark" title="" class="network__bullet" /><span>{{ $line }}</span></li>
                         @endforeach
                     </ol>
                 </details>

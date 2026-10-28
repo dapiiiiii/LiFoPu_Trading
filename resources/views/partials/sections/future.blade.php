@@ -11,7 +11,7 @@
                 <h3 class="horizon-col__title"><span class="horizon-col__line" aria-hidden="true"></span>{{ __('common.status.operating') }}</h3>
                 <ul>
                     @foreach (__('home.future.operating') as $item)
-                        <li>{{ $item }}</li>
+                        <li><x-logo variant="mark" title="" class="horizon-col__bullet" />{{ $item }}</li>
                     @endforeach
                 </ul>
             </div>
@@ -19,7 +19,7 @@
                 <h3 class="horizon-col__title"><span class="horizon-col__line" aria-hidden="true"></span>{{ __('common.status.planned') }}</h3>
                 <ul>
                     @foreach (__('home.future.planned') as $item)
-                        <li>{{ $item }}</li>
+                        <li><x-logo variant="mark" title="" class="horizon-col__bullet" />{{ $item }}</li>
                     @endforeach
                 </ul>
             </div>
