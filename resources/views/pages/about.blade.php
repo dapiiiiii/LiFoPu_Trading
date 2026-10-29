@@ -107,8 +107,6 @@
         </div>
     </section>
 
-    @include('partials.sections.values', ['title' => __('about.values.title')])
-
     {{-- Organizational structure --}}
     <section class="section structure" data-sky="night" data-spine-label="{{ __('about.structure.eyebrow') }}" aria-labelledby="structure-title">
         <div class="container">

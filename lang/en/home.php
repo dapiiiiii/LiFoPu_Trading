@@ -66,6 +66,7 @@ return [
     'values' => [
         'eyebrow' => 'Core values',
         'title' => 'What we hold to, every kilometre.',
+        'hint' => 'Hover or tap a value to turn it to the top of the ring.',
     ],
 
     'people' => [

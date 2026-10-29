@@ -1,5 +1,5 @@
 // Material moments and scroll-linked stories: canopy lights, bean-to-market map, tanker route,
-// road timeline, network focus, the org chart, the mark story and the at-a-glance counters.
+// road timeline, network focus, the org chart, the mark story, the values dial and the at-a-glance counters.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { isEssential } from '../lib/quality.js';
@@ -11,6 +11,7 @@ export function initMoments() {
     network();
     org();
     markStory();
+    values();
     route();
     counters();
 }
@@ -146,6 +147,63 @@ function markStory() {
         li.addEventListener('pointerleave', () => set(null));
         li.addEventListener('blur', () => set(null));
     });
+}
+
+function values() {
+    const root = document.querySelector('[data-values]');
+    if (!root) return;
+    const rows = [...root.querySelectorAll('[data-value]')];
+    const nodes = [...root.querySelectorAll('[data-value-node]')];
+    const chords = [...root.querySelectorAll('[data-value-chord]')];
+    const stage = root.querySelector('.values__stage');
+    const num = root.querySelector('[data-values-num]');
+    const needle = root.querySelector('.values__needle');
+    const still = isEssential() || prefersReducedMotion();
+    let active = 0;
+    let turn = 0;
+
+    const render = () => {
+        root.style.setProperty('--turn', `${turn}deg`);
+        rows.forEach((row, i) => row.toggleAttribute('data-active', i === active));
+        nodes.forEach((node, i) => node.toggleAttribute('data-active', i === active));
+        chords.forEach((line) => line.toggleAttribute('data-lit', line.dataset.valueChord.split(' ').includes(String(active))));
+        num.textContent = String(active + 1).padStart(2, '0');
+    };
+    // The ring turns the short way round, so the chosen value always arrives under the pointer.
+    const set = (index) => {
+        if (index === active) return;
+        let diff = index - active;
+        if (diff > rows.length / 2) diff -= rows.length;
+        if (diff < -rows.length / 2) diff += rows.length;
+        turn -= diff * (360 / rows.length);
+        active = index;
+        render();
+        if (still) return;
+        num.animate([{ opacity: 0, transform: 'translateY(30%)' }, { opacity: 1, transform: 'none' }], { duration: 600, easing: 'cubic-bezier(.16, 1, .3, 1)' });
+        needle.animate([{ strokeDashoffset: 1 }, { strokeDashoffset: 0 }], { duration: 700, delay: 600, easing: 'cubic-bezier(.16, 1, .3, 1)', fill: 'backwards' });
+    };
+
+    rows.forEach((row, i) => {
+        row.addEventListener('pointerenter', (e) => e.pointerType === 'mouse' && set(i));
+        row.addEventListener('focus', () => set(i));
+        row.addEventListener('click', () => set(i));
+    });
+    nodes.forEach((node, i) => node.addEventListener('click', () => set(i)));
+
+    root.dataset.valuesReady = '';
+    render();
+
+    if (still) {
+        stage.classList.add('is-lit');
+        return;
+    }
+    // The star draws and the ring rolls into place when the dial comes into view.
+    const io = new IntersectionObserver(([entry]) => {
+        if (!entry.isIntersecting) return;
+        stage.classList.add('is-lit');
+        io.disconnect();
+    }, { threshold: 0.35 });
+    io.observe(stage);
 }
 
 function route() {

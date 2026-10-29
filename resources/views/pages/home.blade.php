@@ -111,28 +111,11 @@
         </div>
     </section>
 
-    {{-- F. Road timeline --}}
-    @include('partials.sections.timeline')
-
     {{-- E. Operational network --}}
     @include('partials.sections.network')
 
     {{-- Core values --}}
     @include('partials.sections.values')
-
-    {{-- People & organizational capability --}}
-    <section class="section people" data-sky="night" data-spine-label="{{ __('home.people.eyebrow') }}" aria-labelledby="people-title">
-        <div class="container">
-            <header class="section-head section-head--split">
-                <div>
-                    <p class="eyebrow">{{ __('home.people.eyebrow') }}</p>
-                    <h2 id="people-title" class="h2" data-split>{{ __('home.people.title') }}</h2>
-                </div>
-                <p class="lead">{{ __('home.people.lede') }}</p>
-            </header>
-            @include('partials.sections.org')
-        </div>
-    </section>
 
     {{-- Future horizon --}}
     @include('partials.sections.future')

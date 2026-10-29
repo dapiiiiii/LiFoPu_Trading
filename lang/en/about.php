@@ -47,11 +47,6 @@ return [
         'strengths_title' => 'Where our strength comes from',
     ],
 
-    'values' => [
-        'eyebrow' => 'Core values',
-        'title' => 'Our core values.',
-    ],
-
     'structure' => [
         'eyebrow' => 'Organizational structure',
         'title' => 'Clear lines of responsibility.',

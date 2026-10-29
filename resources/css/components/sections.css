@@ -209,19 +209,109 @@
     /* --- Values --- */
     .values { overflow: hidden; }
     .values__pattern { color: #4c4cff; opacity: .08; }
-    /* Three boxes, then two wider ones. */
-    .values__list { grid-template-columns: repeat(6, minmax(0, 1fr)); }
-    .value { grid-column: span 2; }
-    .value:nth-child(n + 4) { grid-column: span 3; }
-    .value .value__glyph { width: 3rem; height: 3rem; color: var(--navy-tint); }
-    .value:hover .value__glyph { color: var(--ignite-tint-2); }
+    .values__layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; }
+
+    /* The list: every value is readable at once; the chosen one is lit. */
+    .values__list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
+    .value {
+        position: relative;
+        isolation: isolate;
+        display: grid;
+        grid-template-columns: 3.25rem minmax(0, 1fr);
+        gap: .4rem 1.25rem;
+        padding: 1.35rem 1rem 1.35rem 1.5rem;
+        border-bottom: 1px solid var(--rule);
+        cursor: pointer;
+        outline-offset: -2px;
+    }
+    .value::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: -1px;
+        bottom: -1px;
+        width: 3px;
+        background: var(--ignite);
+        transform: scaleY(0);
+        transform-origin: top;
+        transition: transform var(--dur-move) var(--ease-out);
+    }
+    .value::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        background: linear-gradient(90deg, rgb(216 69 0 / .16), transparent 75%);
+        opacity: 0;
+        transition: opacity var(--dur-move) var(--ease-out);
+    }
+    .value__num { grid-row: span 2; font: 300 2.4rem/1 var(--font-display); color: transparent; -webkit-text-stroke: 1px rgb(246 241 234 / .45); transition: color var(--dur-move), -webkit-text-stroke-color var(--dur-move); }
+    .value__name { margin: 0; font: 400 clamp(1.45rem, 1.1rem + .9vw, 2rem)/1.08 var(--font-display); letter-spacing: .01em; color: var(--fg); transition: color var(--dur-move), transform var(--dur-move) var(--ease-out); }
+    .value__text { margin: 0; max-width: 36rem; font: 400 1.025rem/1.6 var(--font-sans); color: var(--fg-muted); transition: color var(--dur-move); }
+    [data-values-ready] .value__name { color: rgb(246 241 234 / .62); }
+    [data-values-ready] .value__text { color: rgb(246 241 234 / .5); }
+    .value[data-active]::before, .value[data-active]::after { transform: none; opacity: 1; }
+    [data-values-ready] .value[data-active] .value__name { color: var(--fg); transform: translateX(.3rem); }
+    [data-values-ready] .value[data-active] .value__text { color: var(--fg-muted); }
+    [data-values-ready] .value[data-active] .value__num { color: var(--ignite-tint-2); -webkit-text-stroke-color: var(--ignite-tint-2); }
+    .values__hint { margin: 1.25rem 0 0; font-size: .9rem; color: var(--fg-muted); }
+
+    /* The dial: a ring road with the star of the mark drawn between the values. */
+    .values__stage { position: relative; container-type: inline-size; width: 100%; max-width: 38rem; justify-self: end; }
+    .values__dial { display: block; width: 100%; height: auto; overflow: visible; }
+    .values__ticks { fill: none; stroke: rgb(246 241 234 / .28); stroke-width: 10; stroke-dasharray: .4 5.6; }
+    .values__edge { fill: none; stroke: rgb(138 138 255 / .22); stroke-width: 1; }
+    .values__ring { transform: rotate(var(--turn, 0deg)); transform-origin: 320px 320px; transition: transform var(--dur-scene) var(--ease-road), rotate 1.6s var(--ease-out); }
+    .values__road { fill: none; stroke: #05052f; stroke-width: 34; }
+    .values__lane { fill: none; stroke: rgb(246 241 234 / .3); stroke-width: 1.5; stroke-dasharray: 10 12; }
+    .values__chord { stroke: rgb(138 138 255 / .3); stroke-width: 1.5; stroke-dasharray: 1; transition: stroke var(--dur-move), stroke-dashoffset 1.2s var(--ease-out) calc(var(--i) * 110ms + 350ms); }
+    .values__chord[data-lit] { stroke: rgb(255 122 61 / .8); stroke-width: 2; }
+    .values__hub { fill: #02022c; stroke: rgb(246 241 234 / .22); stroke-width: 1.5; stroke-dasharray: 3 7; }
+    .values__needle { stroke: var(--ignite); stroke-width: 3; stroke-linecap: round; stroke-dasharray: 1; }
+    .values__pointer { fill: var(--ignite); }
+
+    .vnode { cursor: pointer; }
+    .vnode__spin {
+        transform: rotate(calc(var(--turn, 0deg) * -1));
+        transform-box: fill-box;
+        transform-origin: center;
+        transition: transform var(--dur-scene) var(--ease-road), scale var(--dur-move) var(--ease-out), rotate 1.6s var(--ease-out), opacity var(--dur-move) var(--ease-out) calc(var(--i) * 90ms);
+    }
+    .vnode__disc { fill: #06063a; stroke: rgb(138 138 255 / .5); stroke-width: 1.5; transition: fill var(--dur-move), stroke var(--dur-move); }
+    .vnode__glyph { color: var(--navy-tint); fill: currentColor; transition: color var(--dur-move); }
+    .vnode__halo { fill: none; stroke: var(--ignite-tint-2); stroke-width: 2; opacity: 0; transform-box: fill-box; transform-origin: center; }
+    .vnode:hover .vnode__disc { stroke: var(--paper); }
+    .vnode[data-active] .vnode__spin { scale: 1.25; }
+    .vnode[data-active] .vnode__disc { fill: var(--ignite); stroke: var(--ignite-tint-2); }
+    .vnode[data-active] .vnode__glyph { color: #fff; }
+    .vnode[data-active] .vnode__halo { animation: value-halo 2.4s var(--ease-out) infinite; }
+    @keyframes value-halo {
+        from { opacity: .7; transform: scale(1); }
+        to { opacity: 0; transform: scale(1.9); }
+    }
+
+    .values__count { position: absolute; inset: 0; display: grid; place-content: center; justify-items: center; gap: .35rem; margin: 0; pointer-events: none; }
+    [data-values-num] { display: block; font: 300 clamp(3rem, 16cqi, 7rem)/.85 var(--font-display); color: transparent; -webkit-text-stroke: 1.5px var(--paper); }
+    .values__total { font: 500 .8rem/1 var(--font-display); letter-spacing: .3em; color: var(--fg-muted); }
+
+    /* Before the section is reached: the star is undrawn and the ring a turn behind. */
+    [data-values-ready] .values__stage:not(.is-lit) .values__ring { rotate: -72deg; }
+    [data-values-ready] .values__stage:not(.is-lit) .values__chord { stroke-dashoffset: 1; }
+    [data-values-ready] .values__stage:not(.is-lit) .vnode__spin { opacity: 0; scale: .3; rotate: 72deg; }
+    [data-values-ready] .values__stage:not(.is-lit) .values__needle { stroke-dashoffset: 1; }
+    .values__needle { transition: stroke-dashoffset .8s var(--ease-out) 1s; }
+
+    @media (prefers-reduced-motion: reduce) {
+        .values__ring, .vnode__spin { transition: none; }
+        .vnode[data-active] .vnode__halo { animation: none; }
+    }
     @media (max-width: 900px) {
-        .values__list { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-        .value, .value:nth-child(n + 4) { grid-column: span 1; }
-        .value:last-child { grid-column: 1 / -1; }
+        .values__layout { grid-template-columns: 1fr; }
+        .values__stage { order: -1; max-width: 22rem; justify-self: center; }
     }
     @media (max-width: 560px) {
-        .values__list { grid-template-columns: 1fr; }
+        .value { grid-template-columns: 2.25rem minmax(0, 1fr); gap: .35rem .9rem; padding-left: 1rem; }
+        .value__num { font-size: 1.8rem; }
     }
 
     /* --- Organization: the General Manager as a roundabout, one road out to each function --- */
