@@ -15,10 +15,10 @@
     .partners__item {
         display: grid;
         place-items: center;
-        width: clamp(8.5rem, 14vw, 12rem);
-        height: clamp(4rem, 6vw, 5.5rem);
+        width: clamp(9.5rem, 15.5vw, 13.5rem);
+        height: clamp(4.5rem, 7vw, 6.25rem);
     }
-    .partners__item img { width: auto; height: auto; max-width: 100%; max-height: clamp(2.75rem, 4.5vw, 4rem); }
+    .partners__item img { width: auto; height: auto; max-width: 100%; max-height: clamp(3.25rem, 5.25vw, 4.75rem); }
     /* One list width plus one gap brings the copy exactly into the original's place. */
     @keyframes partners-belt { to { transform: translateX(calc(-50% - var(--gap) / 2)); } }
 
