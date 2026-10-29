@@ -63,6 +63,21 @@ return [
         ],
     ],
 
+    'partners' => [
+        'eyebrow' => 'Partners',
+        'title' => 'Trusted by the names that keep the region moving.',
+        'lede' => 'LiFoPu has worked alongside national and international energy, aviation and logistics companies.',
+        'list_label' => 'Companies LiFoPu has worked with',
+        'items' => [
+            ['name' => 'Saudi Aramco', 'logo' => 'saudi-aramco.png'],
+            ['name' => 'National Oil Ethiopia', 'logo' => 'national-oil-ethiopia.png'],
+            ['name' => 'Total', 'logo' => 'total.png'],
+            ['name' => 'Shell', 'logo' => 'shell.png'],
+            ['name' => 'Ethiopian Airlines', 'logo' => 'ethiopian-airlines.png'],
+            ['name' => 'FedEx', 'logo' => 'fedex.png'],
+        ],
+    ],
+
     'values' => [
         'eyebrow' => 'Core values',
         'title' => 'What we hold to, every kilometre.',

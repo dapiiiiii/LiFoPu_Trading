@@ -111,6 +111,9 @@
         </div>
     </section>
 
+    {{-- Partners --}}
+    @include('partials.sections.partners')
+
     {{-- E. Operational network --}}
     @include('partials.sections.network')
 
