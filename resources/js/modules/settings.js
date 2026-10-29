@@ -3,6 +3,10 @@ import { getQuality, setQuality } from '../lib/quality.js';
 import { setSound, soundOn } from './sound.js';
 
 export function initSettings() {
+    // Flash messages from the server (e.g. locale not yet available) surface as a toast.
+    const toast = document.querySelector('[data-toast]');
+    if (toast && toast.textContent.trim()) setTimeout(() => { toast.textContent = ''; }, 6000);
+
     const panel = document.querySelector('[data-settings]');
     const button = document.querySelector('[data-settings-open]');
     if (!panel || !button) return;
@@ -34,8 +38,4 @@ export function initSettings() {
             button.focus();
         }
     });
-
-    // Flash messages from the server (e.g. locale not yet available) surface as a toast.
-    const toast = document.querySelector('[data-toast]');
-    if (toast && toast.textContent.trim()) setTimeout(() => { toast.textContent = ''; }, 6000);
 }

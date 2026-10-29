@@ -89,7 +89,8 @@
 
     @include('partials.footer')
     @include('partials.palette')
-    @include('partials.settings')
+    {{-- Experience settings panel (disabled for now) --}}
+    {{-- @include('partials.settings') --}}
 
     <div class="toast" role="status" aria-live="polite" data-toast>{{ session('status') }}</div>
 </body>

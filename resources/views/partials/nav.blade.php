@@ -50,9 +50,11 @@
                 <svg viewBox="0 0 20 20" aria-hidden="true"><circle cx="8.5" cy="8.5" r="5.5" fill="none" stroke="currentColor" stroke-width="1.5" /><path d="m13 13 4 4" stroke="currentColor" stroke-width="1.5" /></svg>
                 <kbd class="nav__kbd" data-shortcut-label>{{ __('common.palette.shortcut') }}</kbd>
             </button>
+            {{-- Experience settings button (disabled for now)
             <button type="button" class="nav__tool" data-settings-open aria-expanded="false" aria-controls="settings" aria-label="{{ __('common.settings.open') }}">
                 <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h8M15 6h2M3 14h2M9 14h8" stroke="currentColor" stroke-width="1.5" /><circle cx="13" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.5" /><circle cx="7" cy="14" r="2" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
             </button>
+            --}}
             <a href="{{ route('contact') }}" class="btn btn--primary btn--sm nav__cta">{{ __('common.nav.cta') }}</a>
             <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-overlay" data-menu-toggle>
                 <span class="sr-only" data-menu-label data-open="{{ __('common.nav.menu_open') }}" data-close="{{ __('common.nav.menu_close') }}">{{ __('common.nav.menu_open') }}</span>
