@@ -597,6 +597,9 @@
     .footer__col a { text-decoration: none; color: var(--paper); }
     .footer__col a:hover { color: var(--ignite-tint-2); }
     .footer__contact { display: grid; gap: .5rem; font-style: normal; }
+    .footer__office { margin-bottom: .5rem; }
+    .footer__office-tag { display: block; margin-bottom: .15rem; font: 500 .75rem/1.2 var(--font-display); letter-spacing: .24em; text-transform: uppercase; color: var(--ignite-tint-2); }
+    .footer__office .ext-mark { margin-left: .35em; color: var(--fg-muted); }
     .footer__band { position: relative; height: 5.5rem; color: rgb(246 241 234 / .16); border-block: 1px solid var(--rule); }
     .footer__band-logo { position: absolute; right: var(--gutter); top: 50%; width: 8rem; color: var(--paper); transform: translateY(-50%); padding-left: 1.5rem; background: var(--ink); box-sizing: content-box; }
     .footer__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block: 1.5rem 2rem; font-size: .9rem; color: var(--fg-muted); }

@@ -121,23 +121,6 @@
         </div>
     </section>
 
-    {{-- Founder --}}
-    @php $founder = trans('company.founder'); @endphp
-    <section class="section founder" data-sky="morning" data-spine-label="{{ __('about.founder.eyebrow') }}" aria-labelledby="founder-title">
-        <div class="container founder__grid">
-            <div class="founder__name">
-                <p class="eyebrow">{{ __('about.founder.eyebrow') }}</p>
-                <h2 id="founder-title" class="h2">{{ $founder['name'] }}</h2>
-                <p class="founder__role">{{ $founder['role'] }}</p>
-            </div>
-            <div class="prose">
-                @foreach ($founder['paragraphs'] as $p)
-                    <p data-reveal>{{ $p }}</p>
-                @endforeach
-            </div>
-        </div>
-    </section>
-
     {{-- Future plans --}}
     <section class="section about-future" data-sky="night" data-spine-label="{{ __('about.future.eyebrow') }}" aria-labelledby="about-future-title">
         <div class="future__horizon" aria-hidden="true"><span></span></div>

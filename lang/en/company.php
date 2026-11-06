@@ -129,16 +129,6 @@ return [
         ],
     ],
 
-    // P.4: summary of the founder profile. Needs company approval to publish.
-    'founder' => [
-        'name' => 'Sebhat Gebrehiwot Tasew',
-        'role' => 'Founder',
-        'paragraphs' => [
-            'Sebhat Gebrehiwot Tasew, founder of LiFoPu, has long experience managing B2C and B2B business developments and operations in the petroleum distribution industry. His career began as a junior technical and marketing lubricants expert and progressed to the top managerial positions leading Sales and Marketing, commonly named the Retail and Commercial departments, which are the core business functions of the sector.',
-            'By training he is a Mechanical Engineering graduate from Addis Ababa University and a Certified Manager from Madison University, Virginia, in collaboration with ICMP. He is also certified in Data Analytics from Google and Targeted Technologies, USA, with extensive experience in target-oriented wholesale and retail sales, marketing, customer service and supply chain in the petroleum sector.',
-        ],
-    ],
-
     // G.9: concept behind the mark.
     'mark_story' => [
         ['title' => 'Guiding symbol: northing arrow', 'text' => 'Represents direction, clarity, and progress. The upward arrow is a metaphor for purposeful growth, LiFoPu’s True North across all industries.'],

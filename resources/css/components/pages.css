@@ -45,10 +45,6 @@
     @media (max-width: 680px) { .advantage__strengths .panel-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
     @media (max-width: 400px) { .advantage__strengths .panel-grid { grid-template-columns: 1fr; } }
 
-    .founder__grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.4fr); gap: clamp(3rem, 7vw, 8rem); }
-    .founder__role { margin: 1rem 0 0; font: 500 .9rem/1 var(--font-display); letter-spacing: .3em; text-transform: uppercase; color: var(--accent-text); }
-    @media (max-width: 860px) { .founder__grid { grid-template-columns: 1fr; } }
-
 
     /* --- Services index --- */
     .service-rows { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule); }
@@ -247,6 +243,8 @@
     .contact-card__list dt { font: 500 .8rem/1 var(--font-display); letter-spacing: .24em; text-transform: uppercase; color: rgb(246 241 234 / .65); }
     .contact-card__list dd { margin: .4rem 0 0; font-size: 1.15rem; word-break: break-word; }
     .contact-card__list a { color: var(--paper); }
+    /* Each further contact person starts below a thin rule. */
+    .contact-card__next { margin-top: .25rem; padding-top: 1.5rem; border-top: 1px solid rgb(246 241 234 / .14); }
     .contact-card__logo { width: 4.5rem; color: var(--ignite); }
     @media (max-width: 960px) { .contact-card { position: static; } }
 

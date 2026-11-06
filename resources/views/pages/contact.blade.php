@@ -132,6 +132,10 @@
                     <div><dt>{{ __('contact.direct.person') }}</dt><dd>{{ $contact['person'] }}</dd></div>
                     <div><dt>{{ __('contact.direct.phone') }}</dt><dd><a href="tel:{{ $contact['phone_href'] }}">{{ $contact['phone'] }}</a></dd></div>
                     <div><dt>{{ __('contact.direct.email') }}</dt><dd><a href="mailto:{{ $contact['email'] }}">{{ $contact['email'] }}</a></dd></div>
+                    @foreach (config('lifopu.more_contacts') as $person)
+                        <div class="contact-card__next"><dt>{{ __('contact.direct.person') }}</dt><dd>{{ $person['person'] }}</dd></div>
+                        <div><dt>{{ __('contact.direct.phone') }}</dt><dd><a href="tel:{{ $person['phone_href'] }}">{{ $person['phone'] }}</a></dd></div>
+                    @endforeach
                 </dl>
                 <x-logo variant="stacked" title="" class="contact-card__logo" />
             </aside>

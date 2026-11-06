@@ -1,4 +1,4 @@
-// Material moments and scroll-linked stories: canopy lights, bean-to-market map, tanker route,
+// Material moments and scroll-linked stories: the fuel nozzle, bean-to-market map, tanker route,
 // road timeline, network focus, the org chart, the mark story, the values dial and the at-a-glance counters.
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -18,7 +18,6 @@ export function initMoments() {
 
 function scenes() {
     const activate = (el) => {
-        if (el.matches('[data-canopy]')) el.classList.add('is-lit');
         if (el.matches('[data-coffee]')) setTimeout(() => el.classList.add('is-map'), isEssential() ? 0 : 900);
         el.classList.add('is-drawn');
     };
@@ -37,7 +36,7 @@ function scenes() {
             io.unobserve(entry.target);
         });
     }, { threshold: 0.3 });
-    document.querySelectorAll('[data-canopy], [data-coffee], .scene--tanker, .scene--topo, .scene--crossroads').forEach((el) => {
+    document.querySelectorAll('.scene--nozzle, [data-coffee], .scene--tanker, .scene--topo, .scene--crossroads').forEach((el) => {
         if (!el.closest('[data-roadside]')) io.observe(el);
     });
 }

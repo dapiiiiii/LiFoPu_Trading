@@ -24,11 +24,30 @@ return [
     // Company Profile 2026, p.10 "Contact Information".
     'contact' => [
         'person' => 'Sebhat Gebrehiwot',
-        'role' => 'Founder',
         'phone' => '+251 911 502 088',
         'phone_href' => '+251911502088',
         'email' => 'sebhat.tasew@lifopu.com',
-        'address' => null, // Not published in the profile; add once verified.
+    ],
+
+    // Further contact people, listed after the main contact on the contact page.
+    'more_contacts' => [
+        ['person' => 'Girmay Berhane', 'phone' => '+251 911 615 633', 'phone_href' => '+251911615633'],
+    ],
+
+    // Office locations supplied by the company (November 2026). Century Executive Tower is the main office.
+    'offices' => [
+        'main' => [
+            'name' => 'Century Executive Tower',
+            'street' => 'Namibia St',
+            'city' => 'Addis Ababa',
+            'map' => 'https://maps.app.goo.gl/5P3tStE5ePjnoNHX8',
+        ],
+        'branch' => [
+            'name' => 'Tor Hailoch',
+            'street' => null,
+            'city' => 'Addis Ababa',
+            'map' => 'https://maps.app.goo.gl/z5mKNs8QCzuToiQP8',
+        ],
     ],
 
     'social' => [

@@ -2,6 +2,7 @@
 <svg class="thumb" viewBox="0 0 120 120" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false">
     @switch($scene)
         @case('station')
+        @case('nozzle')
             <path d="M28 96 50 66" />
             <path d="M44 62 62 40a6 6 0 0 1 8 0l14 13a6 6 0 0 1 0 8L66 84a6 6 0 0 1-8 0L44 70a6 6 0 0 1 0-8Z" />
             <path d="m71 42 17-17M55 72l8-8" />

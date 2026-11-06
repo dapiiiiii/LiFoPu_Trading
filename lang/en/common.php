@@ -5,6 +5,12 @@ return [
     'skip' => 'Skip to content',
     'select' => 'Select an option',
     'opens_new_tab' => 'opens :site in a new tab',
+
+    'offices' => [
+        'main' => 'Main office',
+        'branch' => 'Branch office',
+        'map' => 'Open in Google Maps',
+    ],
     'meta_description' => 'LiFoPu Trading: fuel retail, lubricants distribution, bulk fuel transportation and coffee export trading in Ethiopia since 2013. Live For Purpose.',
 
     'nav' => [
@@ -15,7 +21,7 @@ return [
         'services_all' => 'All products & services',
         'markets' => 'Markets',
         'sustainability' => 'Sustainability & Safety',
-        'contact' => 'Contact',
+        'contact' => 'Contact Us',
         'cta' => 'Talk to Our Team',
         'menu_open' => 'Open menu',
         'menu_close' => 'Close menu',

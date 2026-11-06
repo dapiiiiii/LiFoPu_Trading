@@ -1,6 +1,5 @@
 @use('App\Support\ServiceLink')
 @php
-    $contact = config('lifopu.contact');
     $services = trans('services.items');
 @endphp
 <footer class="footer" data-sky="night">
@@ -37,9 +36,12 @@
         <div class="footer__col">
             <h2 class="footer__heading">{{ __('common.footer.contact') }}</h2>
             <address class="footer__contact">
-                <span>{{ $contact['person'] }}</span>
-                <a href="tel:{{ $contact['phone_href'] }}">{{ $contact['phone'] }}</a>
-                <a href="mailto:{{ $contact['email'] }}">{{ $contact['email'] }}</a>
+                @foreach (config('lifopu.offices') as $key => $office)
+                    <a href="{{ $office['map'] }}" target="_blank" rel="noopener" class="footer__office">
+                        <span class="footer__office-tag">{{ __('common.offices.'.$key) }}</span>
+                        {{ $office['name'] }}{{ $office['street'] ? ', '.$office['street'] : '' }}, {{ $office['city'] }}<span class="ext-mark" aria-hidden="true">↗</span><span class="sr-only"> ({{ __('common.opens_new_tab', ['site' => 'Google Maps']) }})</span>
+                    </a>
+                @endforeach
             </address>
             @if (count(config('lifopu.social')))
                 <ul class="footer__social">

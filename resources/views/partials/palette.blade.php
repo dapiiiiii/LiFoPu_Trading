@@ -2,7 +2,7 @@
     $groups = [
         'pages' => [
             ['label' => __('common.nav.home'), 'href' => route('home'), 'keywords' => 'start hero'],
-            ['label' => __('common.nav.about'), 'href' => route('about'), 'keywords' => 'company history mission vision values founder structure'],
+            ['label' => __('common.nav.about'), 'href' => route('about'), 'keywords' => 'company history mission vision values structure'],
             ['label' => __('common.nav.services'), 'href' => route('services'), 'keywords' => 'products'],
             ['label' => __('common.nav.markets'), 'href' => route('markets'), 'keywords' => 'customers motorists fleets industry government'],
             ['label' => __('common.nav.sustainability'), 'href' => route('sustainability'), 'keywords' => 'safety compliance environment ev'],

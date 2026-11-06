@@ -53,10 +53,6 @@ return [
         'lede' => 'A General Manager leads six functions. Each one owns a part of the road, from the forecourt to the ledger.',
     ],
 
-    'founder' => [
-        'eyebrow' => 'Leadership',
-    ],
-
     // Company Profile 2026, p.10 "Future Plans": the exact paragraph, one sentence per box.
     'future' => [
         'eyebrow' => 'Future plans',

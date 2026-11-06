@@ -288,7 +288,7 @@
     "src": "node_modules/@fontsource/saira-extra-condensed/files/saira-extra-condensed-vietnamese-600-normal.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DHj_eOpv.css",
+    "file": "assets/app-CQQb8eou.css",
     "src": "resources/css/app.css",
     "isEntry": true,
     "name": "app",
@@ -297,7 +297,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-WCd0WHqx.js",
+    "file": "assets/app-DM-z6b0d.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
