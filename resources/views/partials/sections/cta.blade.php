@@ -6,7 +6,7 @@
         <h2 id="cta-title" class="cta__title" data-split>{{ $title ?? __('home.cta.title') }}</h2>
         <p class="cta__lede">{{ $lede ?? __('home.cta.lede') }}</p>
         <div class="cta__actions">
-            <a href="{{ $href ?? route('contact') }}" class="btn btn--light btn--lg">{{ $label ?? __('common.actions.contact_team') }} <span aria-hidden="true">→</span></a>
+            <a href="{{ $href ?? route('team') }}" class="btn btn--light btn--lg">{{ $label ?? __('common.actions.contact_team') }} <span aria-hidden="true">→</span></a>
             <a href="tel:{{ $contact['phone_href'] }}" class="btn btn--ghost-light btn--lg">{{ __('common.actions.call') }} {{ $contact['phone'] }}</a>
         </div>
     </div>

@@ -55,7 +55,7 @@
                 <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M3 6h8M15 6h2M3 14h2M9 14h8" stroke="currentColor" stroke-width="1.5" /><circle cx="13" cy="6" r="2" fill="none" stroke="currentColor" stroke-width="1.5" /><circle cx="7" cy="14" r="2" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
             </button>
             --}}
-            <a href="{{ route('contact') }}" class="btn btn--primary btn--sm nav__cta">{{ __('common.nav.cta') }}</a>
+            <a href="{{ route('team') }}" class="btn btn--primary btn--sm nav__cta" @if (request()->routeIs('team')) aria-current="page" @endif>{{ __('common.nav.cta') }}</a>
             <button type="button" class="nav__burger" aria-expanded="false" aria-controls="nav-overlay" data-menu-toggle>
                 <span class="sr-only" data-menu-label data-open="{{ __('common.nav.menu_open') }}" data-close="{{ __('common.nav.menu_close') }}">{{ __('common.nav.menu_open') }}</span>
                 <span class="nav__burger-lines" aria-hidden="true"><span></span><span></span></span>

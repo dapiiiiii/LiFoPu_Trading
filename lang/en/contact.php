@@ -2,18 +2,39 @@
 
 return [
 
-    'meta_title' => 'Contact | LiFoPu Trading',
-    'meta_description' => 'Talk to LiFoPu about fuel supply, lubricants, bulk fuel transportation, coffee trading or partnerships.',
+    'meta_title' => 'Contact Us | LiFoPu Trading',
+    'meta_description' => 'Contact LiFoPu Trading in Addis Ababa: phone, email and the addresses of our main and branch offices.',
 
-    'eyebrow' => 'Contact',
-    'title' => 'Tell us where you’re headed.',
-    'lede' => 'Start with what you need. We will ask only the questions that matter for it.',
+    'eyebrow' => 'Contact Us',
+    'title' => 'We’re easy to reach.',
+    'lede' => 'Call or email our team, or visit one of our offices in Addis Ababa.',
+
+    'intro' => [
+        'eyebrow' => 'Get in touch',
+        'title' => 'Call, write or visit.',
+        'lede' => 'Reach our team directly by phone or email. To send a detailed inquiry about fuel, lubricants, transportation, coffee or a partnership, talk to our team through our inquiry form.',
+    ],
+
+    // The inquiry form page, opened from the Talk to Our Team button.
+    'team' => [
+        'meta_title' => 'Talk to Our Team | LiFoPu Trading',
+        'meta_description' => 'Talk to LiFoPu about fuel supply, lubricants, bulk fuel transportation, coffee trading or partnerships.',
+        'eyebrow' => 'Talk to Our Team',
+        'title' => 'Tell us where you’re headed.',
+        'lede' => 'Start with what you need. We will ask only the questions that matter for it.',
+    ],
 
     'direct' => [
         'title' => 'Talk to us directly',
         'person' => 'Contact person',
         'phone' => 'Phone',
         'email' => 'Email',
+    ],
+
+    'offices' => [
+        'eyebrow' => 'Our offices',
+        'title' => 'Two offices in Addis Ababa.',
+        'lede' => 'Our main office is at Century Executive Tower on Namibia Street, with a branch office in Torhayloch.',
     ],
 
     'steps' => [

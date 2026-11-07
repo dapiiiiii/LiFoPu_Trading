@@ -35,17 +35,22 @@ return [
     ],
 
     // Office locations supplied by the company (November 2026). Century Executive Tower is the main office.
+    // Coordinates are the Google Maps pins.
     'offices' => [
         'main' => [
             'name' => 'Century Executive Tower',
             'street' => 'Namibia St',
             'city' => 'Addis Ababa',
+            'lat' => 9.000688,
+            'lng' => 38.782609,
             'map' => 'https://maps.app.goo.gl/5P3tStE5ePjnoNHX8',
         ],
         'branch' => [
             'name' => 'Torhayloch',
             'street' => null,
             'city' => 'Addis Ababa',
+            'lat' => 9.014301,
+            'lng' => 38.715619,
             'map' => 'https://maps.app.goo.gl/z5mKNs8QCzuToiQP8',
         ],
     ],

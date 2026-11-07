@@ -9,7 +9,7 @@ class SeoController extends Controller
 {
     public function sitemap(): Response
     {
-        $urls = collect(['home', 'about', 'services', 'markets', 'sustainability', 'contact', 'privacy'])
+        $urls = collect(['home', 'about', 'services', 'markets', 'sustainability', 'contact', 'team', 'privacy'])
             ->map(fn (string $name) => route($name))
             ->merge(collect(ServiceLink::internal())->map(fn (string $slug) => route('services.show', $slug)));
 

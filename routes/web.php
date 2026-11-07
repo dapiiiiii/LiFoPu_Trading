@@ -25,9 +25,10 @@ Route::controller(PageController::class)->group(function () {
 });
 
 Route::get('/contact', [ContactController::class, 'show'])->name('contact');
-Route::post('/contact', [ContactController::class, 'store'])
+Route::get('/talk-to-our-team', [ContactController::class, 'team'])->name('team');
+Route::post('/talk-to-our-team', [ContactController::class, 'store'])
     ->middleware('throttle:inquiries')
-    ->name('contact.store');
+    ->name('team.store');
 
 Route::get('/locale/{locale}', LocaleController::class)->name('locale');
 

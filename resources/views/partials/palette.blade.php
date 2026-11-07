@@ -6,7 +6,8 @@
             ['label' => __('common.nav.services'), 'href' => route('services'), 'keywords' => 'products'],
             ['label' => __('common.nav.markets'), 'href' => route('markets'), 'keywords' => 'customers motorists fleets industry government'],
             ['label' => __('common.nav.sustainability'), 'href' => route('sustainability'), 'keywords' => 'safety compliance environment ev'],
-            ['label' => __('common.nav.contact'), 'href' => route('contact'), 'keywords' => 'inquiry phone email talk team'],
+            ['label' => __('common.nav.contact'), 'href' => route('contact'), 'keywords' => 'phone email address office location'],
+            ['label' => __('common.nav.cta'), 'href' => route('team'), 'keywords' => 'inquiry form quote talk team message'],
             ['label' => __('common.footer.privacy'), 'href' => route('privacy'), 'keywords' => 'data cookies'],
         ],
         'services' => collect(trans('services.items'))->map(fn ($item, $slug) => [

@@ -17,11 +17,17 @@ use Throwable;
 
 class ContactController extends Controller
 {
-    public function show(Request $request, Turnstile $turnstile): View
+    public function show(): View
+    {
+        return view('pages.contact');
+    }
+
+    /** The inquiry form. `?interest=fuel` (or another interest) preselects the first step. */
+    public function team(Request $request, Turnstile $turnstile): View
     {
         $interest = $request->query('interest');
 
-        return view('pages.contact', [
+        return view('pages.team', [
             'started' => Crypt::encryptString((string) now()->timestamp),
             'preset' => in_array($interest, Inquiry::INTERESTS, true) ? $interest : null,
             'turnstileKey' => $turnstile->enabled() ? config('lifopu.turnstile.site_key') : null,
@@ -73,7 +79,7 @@ class ContactController extends Controller
         }
 
         return redirect()
-            ->route('contact')
+            ->route('team')
             ->with('inquiry', ['ok' => $ok, 'message' => $message, ...$extra])
             ->withInput($ok ? [] : $request->except('_started'));
     }

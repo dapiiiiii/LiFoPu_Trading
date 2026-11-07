@@ -1,128 +1,16 @@
-@php
-    $contact = config('lifopu.contact');
-    $f = trans('contact.fields');
-    $o = trans('contact.options');
-    $s = trans('contact.steps');
-    $result = session('inquiry');
-    $icons = ['fuel' => 'station', 'lubricants' => 'oil', 'transport' => 'tanker', 'coffee' => 'coffee'];
-@endphp
+@php $contact = config('lifopu.contact'); @endphp
 <x-layout :title="__('contact.meta_title')" :description="__('contact.meta_description')" page="contact">
 
     <x-page-hero :eyebrow="__('contact.eyebrow')" :title="__('contact.title')" :lede="__('contact.lede')" scene="road-end" class="page-hero--compact" />
 
-    <section class="section contact" data-sky="morning" data-spine-label="{{ $s['need'] }}" aria-label="{{ __('contact.eyebrow') }}">
+    <section class="section contact" data-sky="morning" data-spine-label="{{ __('contact.intro.eyebrow') }}" aria-labelledby="contact-intro-title">
         <div class="container contact__grid">
-            <div class="inquiry" data-inquiry data-subjects='@json(trans('contact.subjects'))'>
-                <div class="inquiry__result @if ($result) inquiry__result--{{ $result['ok'] ? 'success' : 'error' }} @endif" data-inquiry-result tabindex="-1" @if (! $result) hidden @endif role="{{ ($result['ok'] ?? true) ? 'status' : 'alert' }}">
-                    <h2 class="inquiry__result-title" data-result-title>{{ $result ? __($result['ok'] ? 'contact.result.success_title' : 'contact.result.error_title') : '' }}</h2>
-                    <p data-result-message>{{ $result['message'] ?? '' }}</p>
-                    <button type="button" class="btn btn--ghost btn--sm" data-inquiry-reset @if (! ($result['ok'] ?? false)) hidden @endif>{{ __('contact.result.another') }}</button>
-                </div>
-
-                <form method="POST" action="{{ route('contact.store') }}" class="inquiry__form" data-inquiry-form novalidate @if ($result['ok'] ?? false) hidden @endif
-                      data-msg-success="{{ __('contact.result.success_title') }}" data-msg-error-title="{{ __('contact.result.error_title') }}"
-                      data-msg-error="{{ __('contact.result.error') }}" data-msg-throttled="{{ __('contact.result.throttled') }}"
-                      data-msg-validation="{{ __('contact.result.validation') }}" data-msg-sending="{{ $s['sending'] }}"
-                      data-msg-progress="{{ $s['progress'] }}">
-                    @csrf
-                    <input type="hidden" name="_started" value="{{ $started }}">
-                    <div class="hp" aria-hidden="true">
-                        <label for="f-website">{{ $f['website'] }}</label>
-                        <input type="text" id="f-website" name="website" tabindex="-1" autocomplete="off">
-                    </div>
-
-                    <div class="inquiry__alert" role="alert" data-inquiry-alert @if (! $errors->any()) hidden @endif>
-                        @if ($errors->any())
-                            <p>{{ __('contact.result.validation') }}</p>
-                            <ul>
-                                @foreach ($errors->all() as $error)
-                                    <li>{{ $error }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-                    </div>
-
-                    <ol class="inquiry__progress" aria-hidden="true" data-inquiry-progress>
-                        <li data-active>{{ $s['need'] }}</li>
-                        <li>{{ $s['details'] }}</li>
-                        <li>{{ $s['you'] }}</li>
-                    </ol>
-                    <p class="sr-only" aria-live="polite" data-step-status></p>
-
-                    {{-- Step 1 --}}
-                    <fieldset class="inquiry__step" data-step="1">
-                        <legend class="inquiry__legend">{{ $s['need'] }}</legend>
-                        <div class="choice-grid">
-                            @foreach (trans('contact.interests') as $key => $interest)
-                                <label class="choice">
-                                    <input type="radio" name="interest" value="{{ $key }}" required @checked(old('interest', $preset) === $key)>
-                                    <span class="choice__body">
-                                        <span class="choice__icon" aria-hidden="true">
-                                            @isset($icons[$key])
-                                                @include('partials.scenes.thumb', ['scene' => $icons[$key]])
-                                            @else
-                                                <svg viewBox="0 0 {{ $key === 'partnership' ? '1400 1400' : '661.1 572.4' }}"><use href="#{{ $key === 'partnership' ? 'lf-motif-pairs' : 'lf-mark' }}" /></svg>
-                                            @endisset
-                                        </span>
-                                        <span class="choice__label">{{ $interest['label'] }}</span>
-                                        <span class="choice__hint">{{ $interest['hint'] }}</span>
-                                    </span>
-                                </label>
-                            @endforeach
-                        </div>
-                        <p class="field__error" id="f-interest-error" data-field-error="interest" @if (! $errors->has('interest')) hidden @endif>{{ $errors->first('interest') }}</p>
-                        <div class="inquiry__nav">
-                            <button type="button" class="btn btn--primary" data-step-next>{{ $s['next'] }} <span aria-hidden="true">→</span></button>
-                        </div>
-                    </fieldset>
-
-                    {{-- Step 2 --}}
-                    <fieldset class="inquiry__step" data-step="2">
-                        <legend class="inquiry__legend">{{ $s['details'] }}</legend>
-                        <div class="field-grid">
-                            <x-field name="customer_type" :label="$f['customer_type']" :options="$o['customer_type']" for="fuel lubricants" detail class="field--wide" />
-                            <x-field name="volume" :label="$f['volume']" :hint="$f['volume_hint']" for="fuel lubricants transport coffee" detail />
-                            <x-field name="location" :label="$f['location']" for="fuel lubricants" detail />
-                            <x-field name="origin" :label="$f['origin']" for="transport" detail />
-                            <x-field name="destination" :label="$f['destination']" for="transport" detail />
-                            <x-field name="schedule" :label="$f['schedule']" for="transport" detail />
-                            <x-field name="grade" :label="$f['grade']" :options="$o['grade']" for="coffee" detail />
-                            <x-field name="market" :label="$f['market']" for="coffee" detail />
-                            <x-field name="partner_type" :label="$f['partner_type']" :options="$o['partner_type']" for="partnership" detail />
-                            <x-field name="subject" :label="$f['subject']" required class="field--wide" />
-                            <x-field name="message" :label="$f['message']" type="textarea" required class="field--wide" />
-                        </div>
-                        <div class="inquiry__nav">
-                            <button type="button" class="btn btn--ghost" data-step-back>{{ $s['back'] }}</button>
-                            <button type="button" class="btn btn--primary" data-step-next>{{ $s['next'] }} <span aria-hidden="true">→</span></button>
-                        </div>
-                    </fieldset>
-
-                    {{-- Step 3 --}}
-                    <fieldset class="inquiry__step" data-step="3">
-                        <legend class="inquiry__legend">{{ $s['you'] }}</legend>
-                        <div class="field-grid">
-                            <x-field name="name" :label="$f['name']" required autocomplete="name" />
-                            <x-field name="organization" :label="$f['organization']" :hint="$f['organization_hint']" autocomplete="organization" />
-                            <x-field name="email" :label="$f['email']" type="email" required autocomplete="email" />
-                            <x-field name="phone" :label="$f['phone']" type="tel" :hint="$f['phone_hint']" autocomplete="tel" />
-                        </div>
-                        <div class="field field--check {{ $errors->has('privacy') ? 'field--invalid' : '' }}" data-field="privacy">
-                            <input type="checkbox" id="f-privacy" name="privacy" value="1" required @checked(old('privacy')) aria-describedby="f-privacy-error">
-                            <label for="f-privacy">{!! __('contact.fields.privacy', ['link' => '<a href="'.route('privacy').'" target="_blank">'.e($f['privacy_link']).'</a>']) !!}</label>
-                            <p class="field__error" id="f-privacy-error" @if (! $errors->has('privacy')) hidden @endif>{{ $errors->first('privacy') }}</p>
-                        </div>
-                        @if ($turnstileKey)
-                            <div class="cf-turnstile" data-sitekey="{{ $turnstileKey }}" data-theme="light"></div>
-                            @push('head')<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>@endpush
-                        @endif
-                        <p class="field__error" data-field-error="_started" @if (! $errors->has('_started')) hidden @endif>{{ $errors->first('_started') }}</p>
-                        <div class="inquiry__nav">
-                            <button type="button" class="btn btn--ghost" data-step-back>{{ $s['back'] }}</button>
-                            <button type="submit" class="btn btn--primary" data-inquiry-submit>{{ $s['submit'] }} <span aria-hidden="true">→</span></button>
-                        </div>
-                    </fieldset>
-                </form>
+            {{-- The inquiry form lives on its own page, Talk to Our Team. --}}
+            <div class="contact__intro">
+                <p class="eyebrow">{{ __('contact.intro.eyebrow') }}</p>
+                <h2 id="contact-intro-title" class="h2" data-split>{{ __('contact.intro.title') }}</h2>
+                <p class="lead">{{ __('contact.intro.lede') }}</p>
+                <a href="{{ route('team') }}" class="btn btn--primary btn--lg">{{ __('common.nav.cta') }} <span aria-hidden="true">→</span></a>
             </div>
 
             <aside class="contact-card" aria-labelledby="direct-title">
@@ -139,6 +27,35 @@
                 </dl>
                 <x-logo variant="stacked" title="" class="contact-card__logo" />
             </aside>
+        </div>
+    </section>
+
+    {{-- Our offices --}}
+    <section class="section offices" data-sky="night" data-spine-label="{{ __('contact.offices.eyebrow') }}" aria-labelledby="offices-title">
+        <div class="container">
+            <header class="section-head section-head--split">
+                <div>
+                    <p class="eyebrow">{{ __('contact.offices.eyebrow') }}</p>
+                    <h2 id="offices-title" class="h2" data-split>{{ __('contact.offices.title') }}</h2>
+                </div>
+                <p class="lead">{{ __('contact.offices.lede') }}</p>
+            </header>
+            <ul class="offices__list">
+                @foreach (config('lifopu.offices') as $key => $office)
+                    <li class="panel office office--{{ $key }}" data-reveal>
+                        <div class="panel__top">
+                            <span class="office__tag">{{ __('common.offices.'.$key) }}</span>
+                            <span class="panel__num" aria-hidden="true">0{{ $loop->iteration }}</span>
+                        </div>
+                        <h3 class="panel__title">{{ $office['name'] }}</h3>
+                        <p class="panel__text">{{ $office['street'] ? $office['street'].', ' : '' }}{{ $office['city'] }}, {{ config('lifopu.company.country') }}</p>
+                        <p class="office__coords">{{ number_format($office['lat'], 4) }}° N · {{ number_format($office['lng'], 4) }}° E</p>
+                        <a class="office__link" href="{{ $office['map'] }}" target="_blank" rel="noopener">
+                            {{ __('common.offices.map') }}<span class="ext-mark" aria-hidden="true">↗</span><span class="sr-only"> ({{ __('common.opens_new_tab', ['site' => 'Google Maps']) }})</span>
+                        </a>
+                    </li>
+                @endforeach
+            </ul>
         </div>
     </section>
 

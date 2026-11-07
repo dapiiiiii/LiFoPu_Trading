@@ -3,7 +3,7 @@
     $labels = trans('services.labels');
     $nextItem = trans("services.items.$next");
     $segments = trans('markets.segments');
-    $interestHref = route('contact', ['interest' => $item['inquiry']]);
+    $interestHref = route('team', ['interest' => $item['inquiry']]);
 @endphp
 <x-layout :title="$item['title'].' | '.config('lifopu.company.name')" :description="$item['meta_description']" page="service" :palette="$item['palette']">
 

@@ -158,6 +158,10 @@
     /* --- Contact & inquiry builder --- */
     .contact__grid { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(0, 1fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
     @media (max-width: 960px) { .contact__grid { grid-template-columns: 1fr; } }
+    .contact__intro { display: grid; gap: 1.5rem; justify-items: start; align-self: center; }
+    .contact__intro .btn { margin-top: .5rem; }
+    /* On Talk to Our Team the form stands alone, held to a readable width. */
+    .team__form { max-width: 64rem; }
     .inquiry__progress { display: flex; gap: .5rem; margin: 0 0 2.5rem; padding: 0; list-style: none; counter-reset: step; }
     .inquiry__progress li {
         flex: 1;
@@ -247,6 +251,16 @@
     .contact-card__next { margin-top: .25rem; padding-top: 1.5rem; border-top: 1px solid rgb(246 241 234 / .14); }
     .contact-card__logo { width: 4.5rem; color: var(--ignite); }
     @media (max-width: 960px) { .contact-card { position: static; } }
+
+    /* --- Our offices: the main office in orange, the branch in gold --- */
+    .offices__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.75rem, 1.4vw, 1.25rem); margin: 0; padding: 0; list-style: none; }
+    @media (max-width: 680px) { .offices__list { grid-template-columns: 1fr; } }
+    .office--branch { --accent: var(--gold); --accent-text: var(--gold-tint); }
+    .office__tag { font: 500 .8rem/1 var(--font-display); letter-spacing: .26em; text-transform: uppercase; color: var(--accent-text); }
+    .office__coords { margin: 0; font: 500 .8rem/1 var(--font-display); letter-spacing: .16em; color: var(--fg-muted); }
+    .office__link { margin-top: .4rem; font: 500 .9rem/1.3 var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--fg); text-decoration: none; }
+    .office__link:hover { color: var(--accent-text); }
+    .office__link .ext-mark { margin-left: .4em; color: var(--accent-text); }
 
     .legal__inner { max-width: 50rem; }
     .legal__inner .h2 { margin-bottom: 1rem; }
