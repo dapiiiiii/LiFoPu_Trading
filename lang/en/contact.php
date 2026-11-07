@@ -3,7 +3,7 @@
 return [
 
     'meta_title' => 'Contact Us | LiFoPu Trading',
-    'meta_description' => 'Contact LiFoPu Trading in Addis Ababa: phone, email and the addresses of our main and branch offices.',
+    'meta_description' => 'Contact LiFoPu Trading in Addis Ababa: phone, email and the addresses of our main and operations offices.',
 
     'eyebrow' => 'Contact Us',
     'title' => 'We’re easy to reach.',
@@ -33,8 +33,7 @@ return [
 
     'offices' => [
         'eyebrow' => 'Our offices',
-        'title' => 'Two offices in Addis Ababa.',
-        'lede' => 'Our main office is at Century Executive Tower on Namibia Street, with a branch office in Torhayloch.',
+        'title' => 'Our offices.',
     ],
 
     'steps' => [

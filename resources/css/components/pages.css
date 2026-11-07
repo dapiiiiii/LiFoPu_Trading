@@ -252,10 +252,10 @@
     .contact-card__logo { width: 4.5rem; color: var(--ignite); }
     @media (max-width: 960px) { .contact-card { position: static; } }
 
-    /* --- Our offices: the main office in orange, the branch in gold --- */
+    /* --- Our offices: the main office in orange, the operations office in gold --- */
     .offices__list { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(.75rem, 1.4vw, 1.25rem); margin: 0; padding: 0; list-style: none; }
     @media (max-width: 680px) { .offices__list { grid-template-columns: 1fr; } }
-    .office--branch { --accent: var(--gold); --accent-text: var(--gold-tint); }
+    .office--operations { --accent: var(--gold); --accent-text: var(--gold-tint); }
     .office__tag { font: 500 .8rem/1 var(--font-display); letter-spacing: .26em; text-transform: uppercase; color: var(--accent-text); }
     .office__coords { margin: 0; font: 500 .8rem/1 var(--font-display); letter-spacing: .16em; color: var(--fg-muted); }
     .office__link { margin-top: .4rem; font: 500 .9rem/1.3 var(--font-display); letter-spacing: .18em; text-transform: uppercase; color: var(--fg); text-decoration: none; }

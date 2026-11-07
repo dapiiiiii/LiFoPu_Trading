@@ -45,7 +45,7 @@ return [
             'lng' => 38.782609,
             'map' => 'https://maps.app.goo.gl/5P3tStE5ePjnoNHX8',
         ],
-        'branch' => [
+        'operations' => [
             'name' => 'Torhayloch',
             'street' => null,
             'city' => 'Addis Ababa',

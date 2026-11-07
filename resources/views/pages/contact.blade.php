@@ -33,12 +33,9 @@
     {{-- Our offices --}}
     <section class="section offices" data-sky="night" data-spine-label="{{ __('contact.offices.eyebrow') }}" aria-labelledby="offices-title">
         <div class="container">
-            <header class="section-head section-head--split">
-                <div>
-                    <p class="eyebrow">{{ __('contact.offices.eyebrow') }}</p>
-                    <h2 id="offices-title" class="h2" data-split>{{ __('contact.offices.title') }}</h2>
-                </div>
-                <p class="lead">{{ __('contact.offices.lede') }}</p>
+            <header class="section-head">
+                <p class="eyebrow">{{ __('contact.offices.eyebrow') }}</p>
+                <h2 id="offices-title" class="h2" data-split>{{ __('contact.offices.title') }}</h2>
             </header>
             <ul class="offices__list">
                 @foreach (config('lifopu.offices') as $key => $office)

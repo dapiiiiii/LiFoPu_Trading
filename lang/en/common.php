@@ -8,7 +8,7 @@ return [
 
     'offices' => [
         'main' => 'Main office',
-        'branch' => 'Branch office',
+        'operations' => 'Operations office',
         'map' => 'Open in Google Maps',
     ],
     'meta_description' => 'LiFoPu Trading: fuel retail, lubricants distribution, bulk fuel transportation and coffee export trading in Ethiopia since 2013. Live For Purpose.',
