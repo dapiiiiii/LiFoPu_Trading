@@ -43,7 +43,6 @@
         <rect x="560" y="470" width="452" height="156" rx="74" fill="url(#tk-tank)" />
         <rect x="575" y="482" width="420" height="10" rx="5" fill="#ffffff" opacity=".18" />
         <rect x="572" y="566" width="428" height="12" fill="#ff5c00" />
-        <x-logo variant="horizontal" title="" x="640" y="503" width="250" height="56" style="color:#fff" />
         <path d="M600 470h372M620 470v-14M786 470v-14M952 470v-14M600 456h372" stroke="#8a8aff" stroke-width="3" fill="none" opacity=".6" />
         <path d="M1012 660V520c0-22 14-40 36-40h54c22 0 34 8 40 22l22 64c4 12 6 24 6 36v58Z" fill="url(#tk-cab)" />
         <path d="M1086 494h22c12 0 18 6 22 16l16 48h-60Z" fill="#9ad0ff" opacity=".55" />

@@ -43,7 +43,7 @@ return [
             'map' => 'https://maps.app.goo.gl/5P3tStE5ePjnoNHX8',
         ],
         'branch' => [
-            'name' => 'Tor Hailoch',
+            'name' => 'Torhayloch',
             'street' => null,
             'city' => 'Addis Ababa',
             'map' => 'https://maps.app.goo.gl/z5mKNs8QCzuToiQP8',
