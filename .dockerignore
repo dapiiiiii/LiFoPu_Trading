@@ -1,0 +1,28 @@
+# Kept out of the Docker build context.
+.git
+.github
+.idea
+.vscode
+.fleet
+.zed
+node_modules
+vendor
+.env
+.env.*
+!.env.example
+*.log
+.phpunit.result.cache
+.phpunit.cache
+
+# Built fresh inside the image.
+public/build
+public/hot
+public/storage
+
+# Local caches: package lists from dev installs would break the production image.
+bootstrap/cache/*.php
+storage/logs/*
+storage/framework/cache/data/*
+storage/framework/sessions/*
+storage/framework/views/*
+!storage/**/.gitignore
