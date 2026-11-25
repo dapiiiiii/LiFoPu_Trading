@@ -1,6 +1,27 @@
 # syntax=docker/dockerfile:1
 # LiFoPu Trading: Laravel 12 on PHP 8.2 + Apache, with the Vite assets built inside the image.
-#   docker compose up -d --build      (site on http://localhost:8080, see docker-compose.yml)
+#
+# Local:   docker compose up -d --build      (site on http://localhost:8080, see docker-compose.yml)
+#
+# Render:  everything is in render.yaml (web service from this file + PostgreSQL database).
+#   1. Push this repo to GitHub (docker/certs/*.crt stays local; the build works without it).
+#   2. Render dashboard > New > Blueprint > pick the repo. It reads render.yaml.
+#   3. Fill in the values it asks for:
+#        APP_KEY              output of: php artisan key:generate --show   (starts with base64:)
+#        MAIL_HOST/PORT/...   your SMTP account (port 587, or 465 for SSL)
+#        MAIL_FROM_ADDRESS    an address that SMTP account may send from
+#        INQUIRY_MAIL_TO      who receives the contact form
+#        TURNSTILE_*_KEY      Cloudflare Turnstile keys for the onrender.com / your domain
+#                             (leave both empty to switch the challenge off)
+#   4. Apply. On every start the container waits for the database, runs the migrations,
+#      caches config/routes/views, then serves on $PORT (Render sets 10000). Health check: /up
+#   5. Custom domain: add it under Settings > Custom Domains, then set APP_URL=https://<domain>.
+#      Without APP_URL the site uses RENDER_EXTERNAL_URL (https://<name>.onrender.com).
+#
+#   Free plan limits: the site sleeps when idle (first visit ~1 min), outgoing SMTP is
+#   blocked (inquiries are still saved; mail fails after MAIL_TIMEOUT, default 10 s), and
+#   the free database is deleted after 30 days. Use the Starter plan for real use.
+#   Unsent inquiries: php artisan inquiries:notify   (Render Shell, paid plans)
 
 # ---------------------------------------------------------------------------
 # 1. Front-end assets (Vite + Tailwind) -> public/build
