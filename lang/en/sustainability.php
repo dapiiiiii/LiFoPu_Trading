@@ -38,11 +38,18 @@ return [
         ],
     ],
 
-    'transition' => [
-        'eyebrow' => 'Energy transition',
-        'title' => 'Preparing the forecourt for electric mobility.',
-        'text' => 'LiFoPu plans to integrate electric vehicle charging infrastructure alongside traditional fuel services, ensuring readiness for the gradual transition toward diversified energy solutions.',
-        'status' => 'Planned. Not yet in operation.',
+    // Wording supplied by the company (November 2026).
+    'commitments' => [
+        [
+            'eyebrow' => 'Our operations',
+            'title' => null,
+            'text' => 'LiFoPu is committed to responsible and efficient operations across every stage of its fuel supply activities. We uphold safety measures, promote environmental awareness, and maintain quality standards throughout our operations. By strengthening our infrastructure, improving operational efficiency, and developing our service capabilities, we continue working toward a safer, more reliable, and customer-oriented energy supply system.',
+        ],
+        [
+            'eyebrow' => 'Community',
+            'title' => 'Building a more sustainable future through responsible business practices.',
+            'text' => 'LiFoPu is committed to making a positive difference beyond its core business operations. By providing employment opportunities, supporting local communities, encouraging local participation, and contributing to economic development, we aim to build lasting relationships and create shared value for the people and communities around us.',
+        ],
     ],
 
 ];

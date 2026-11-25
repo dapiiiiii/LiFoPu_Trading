@@ -1,0 +1,359 @@
+/* =========================================================================
+   Themes: light ("Ivory") and dark ("Obsidian")
+   The theme is set on <html data-theme> before first paint (layout head script)
+   and switched from the nav (resources/js/modules/theme.js).
+
+   Light: ivory and champagne surfaces, ink type, gold hairlines; hero scenes sit
+   in framed windows like pictures in a gallery.
+   Dark: every section on obsidian, bronze or navy, with warm gold glows.
+   The section "skies" keep their roles; each theme only re-colours them.
+   ========================================================================= */
+
+/* Page tokens. Unlayered, like tokens.css, so they win over its :root values. */
+:root,
+[data-theme='dark'] {
+    --page-bg: #0d0c0b;
+    --hairline: rgb(226 181 74 / .16);
+    color-scheme: dark;
+}
+
+[data-theme='light'] {
+    --page-bg: #fbf9f5;
+    --ivory: #fbf9f5;
+    --pearl: #f6f1e9;
+    --champagne: #efe3cf;
+    --hairline: rgb(176 138 62 / .28);
+    --fg: var(--ink);
+    --fg-muted: #4a433c;
+    --rule: rgb(20 17 15 / .14);
+    --accent-text: var(--accent-ink-light);
+    color-scheme: light;
+}
+
+@layer base {
+    html, body { background: var(--page-bg); }
+    [data-theme='light'] { color: var(--ink); }
+    [data-theme='light'] body::after { opacity: .035; mix-blend-mode: multiply; }
+
+    /* The switch cross-fades colours only, for the moment it takes. */
+    .theme-fading, .theme-fading *, .theme-fading *::before, .theme-fading *::after {
+        transition: background-color .6s var(--ease-out), color .6s var(--ease-out), border-color .6s var(--ease-out), fill .6s var(--ease-out), stroke .6s var(--ease-out), box-shadow .6s var(--ease-out) !important;
+    }
+}
+
+@layer components {
+    /* --- Theme switch (nav button and the mobile menu) --- */
+    .nav__theme svg { width: 1.15rem; }
+    [data-theme='light'] .nav__theme-sun,
+    [data-theme='dark'] .nav__theme-moon { display: none; }
+    .nav__theme:hover svg { transform: rotate(-18deg); }
+    .nav__theme svg { transition: transform var(--dur-move) var(--ease-out); }
+
+    .theme-switch { display: inline-flex; justify-self: start; padding: .25rem; border: 1px solid currentColor; border-radius: 999px; opacity: .9; }
+    .theme-switch button {
+        min-height: 2.5rem;
+        padding: .5rem 1.25rem;
+        border: 0;
+        border-radius: 999px;
+        background: none;
+        color: inherit;
+        font: 500 .85rem/1 var(--font-display);
+        letter-spacing: .2em;
+        text-transform: uppercase;
+        cursor: pointer;
+    }
+    .theme-switch [aria-checked='true'] { background: var(--btn-accent); color: #fff; }
+
+    /* Gold rule before every eyebrow, in both themes. */
+    [data-theme='light'] .eyebrow::before { background: var(--gold); opacity: 1; }
+    [data-theme='dark'] .eyebrow::before { background: var(--gold-tint); opacity: .9; }
+
+    /* =====================================================================
+       LIGHT
+       ===================================================================== */
+
+    /* Every sky becomes a bright one; the text roles follow. */
+    [data-theme='light'] :is([data-sky='dawn'], [data-sky='dusk'], [data-sky='bluehour'], [data-sky='night']) {
+        --fg: var(--ink);
+        --fg-muted: #4a433c;
+        --rule: rgb(20 17 15 / .14);
+        --accent-text: var(--accent-ink-light);
+    }
+    [data-theme='light'] [data-sky='morning'] { --sky-top: #fbf9f5; --sky-bottom: #f6f1e9; --sky-glow: #ffe3bf; --glow-y: -25%; --glow-a: .6; }
+    [data-theme='light'] [data-sky='noon'] { --sky-top: #ffffff; --sky-bottom: #faf7f2; --sky-glow: #fff1da; --glow-y: -25%; --glow-a: .9; }
+    [data-theme='light'] [data-sky='golden'] { --sky-top: #f8f0e1; --sky-bottom: #f0e0bf; --sky-glow: #f3c27a; --glow-y: 100%; --glow-a: .45; }
+    [data-theme='light'] [data-sky='dawn'] { --sky-top: #fbf9f5; --sky-bottom: #fbf9f5; --sky-glow: #f6d3a6; --glow-y: 100%; --glow-a: .4; }
+    [data-theme='light'] [data-sky='dusk'] { --sky-top: #f9f2e7; --sky-bottom: #f2e6d3; --sky-glow: #f4b77a; --glow-y: 100%; --glow-a: .4; }
+    [data-theme='light'] [data-sky='bluehour'] { --sky-top: #f6f7fc; --sky-bottom: #eceef7; --sky-glow: #c3c6f7; --glow-y: 0%; --glow-a: .5; }
+    [data-theme='light'] [data-sky='night'] { --sky-top: #fdfcfa; --sky-bottom: #f6f2eb; --sky-glow: #ffd6ad; --glow-y: 100%; --glow-a: .35; }
+
+    /* A fine gold hairline where one section meets the next. */
+    [data-theme='light'] main > .section + .section { box-shadow: inset 0 1px 0 var(--hairline); }
+    [data-theme='light'] .section .eyebrow--light { color: var(--fg-muted); }
+    [data-theme='light'] .btn--ghost { --btn-bd: rgb(20 17 15 / .22); }
+
+    /* Boxes: white cards with long, soft shadows and a gold edge on hover. */
+    [data-theme='light'] [data-sky] .panel {
+        --panel-bg: #ffffff;
+        --panel-bd: rgb(20 17 15 / .07);
+        --panel-bd-hover: rgb(176 138 62 / .55);
+        --panel-shadow: 0 1px 2px rgb(60 40 20 / .04), 0 28px 60px -38px rgb(90 60 20 / .32);
+    }
+    [data-theme='light'] [data-sky] .panel:hover,
+    [data-theme='light'] [data-sky] .panel:focus-within { box-shadow: 0 2px 4px rgb(60 40 20 / .05), 0 44px 80px -40px rgb(120 80 20 / .38); }
+
+    /* --- Navigation --- */
+    [data-theme='light'] .nav::before { background: rgb(251 249 245 / .86); border-bottom-color: var(--hairline); box-shadow: 0 10px 30px -24px rgb(90 60 20 / .35); }
+    /* Menu in solid black: links, arrows, search and theme buttons. */
+    [data-theme='light'] .nav { color: #000; }
+    [data-theme='light'] .nav__link { color: #000; font-weight: 600; }
+    [data-theme='light'] .nav__link:hover,
+    [data-theme='light'] .nav__link[aria-current='page'] { color: #000; }
+    [data-theme='light'] .nav__link::after { background: var(--ignite); }
+    [data-theme='light'] .nav__kbd { opacity: 1; }
+    [data-theme='light'] .nav__tool { border-color: rgb(0 0 0 / .55); }
+    [data-theme='light'] .nav__tool:hover { border-color: #000; }
+    [data-theme='light'] .nav__burger { border-color: rgb(0 0 0 / .55); }
+    [data-theme='light'] .nav__dropdown {
+        background: #fffdf9;
+        color: var(--ink);
+        border-color: var(--hairline);
+        box-shadow: 0 40px 80px -30px rgb(90 60 20 / .35);
+    }
+    [data-theme='light'] .nav__service:hover,
+    [data-theme='light'] .nav__service:focus-visible,
+    [data-theme='light'] .nav__service[aria-current='page'] { background: rgb(176 138 62 / .08); }
+    [data-theme='light'] .nav__km { color: var(--accent-ink-light); }
+    [data-theme='light'] .nav__all { color: rgb(20 17 15 / .7); border-top-color: rgb(20 17 15 / .1); }
+    [data-theme='light'] .nav__overlay { background: var(--ivory); color: rgb(216 69 0 / .07); }
+    [data-theme='light'] .nav__overlay-inner { color: var(--ink); }
+    [data-theme='light'] .nav__big a { border-bottom-color: rgb(20 17 15 / .1); }
+    [data-theme='light'] .nav__big a span { color: var(--ignite); }
+    [data-theme='light'] .nav__big a[aria-current='page'],
+    [data-theme='light'] .nav__big a:hover,
+    [data-theme='light'] .nav__big a:focus-visible { color: var(--ignite-shade-1); border-bottom-color: var(--ignite); }
+    [data-theme='light'] .nav__overlay-services a,
+    [data-theme='light'] .nav__overlay-foot a { color: rgb(20 17 15 / .75); }
+    [data-theme='light'] .nav__overlay-services a:hover { color: var(--ink); }
+
+    /* --- Home hero: the dawn scene in a framed window on ivory --- */
+    [data-theme='light'] .hero { background: var(--page-bg); }
+    [data-theme='light'] .hero__stage {
+        inset: calc(var(--nav-h) + .5rem) var(--gutter) var(--gutter);
+        overflow: hidden;
+        border-radius: clamp(1.25rem, 2.4vw, 2.25rem);
+        outline: 1px solid rgb(176 138 62 / .45);
+        outline-offset: .55rem;
+        box-shadow: 0 60px 110px -60px rgb(80 50 15 / .6);
+    }
+    [data-theme='light'] .hero > .container { padding-inline: calc(var(--gutter) * 2); }
+    [data-theme='light'] .hero__foot { padding-bottom: calc(var(--gutter) + 1.5rem); }
+
+    /* --- Page heroes: ink type on ivory, the scene framed on the right --- */
+    [data-theme='light'] .page-hero {
+        background: radial-gradient(60% 80% at 0% 100%, #f5e6cf, transparent 70%), var(--page-bg);
+        color: var(--ink);
+        --fg: var(--ink);
+        --fg-muted: #4a433c;
+        --accent-text: var(--accent-ink-light);
+    }
+    [data-theme='light'] .page-hero__shade,
+    [data-theme='light'] .page-hero__ghost { display: none; }
+    [data-theme='light'] .page-hero__scene {
+        inset: calc(var(--nav-h) + 1rem) var(--gutter) 1.75rem 50%;
+        overflow: hidden;
+        border-radius: clamp(1.25rem, 2.4vw, 2.25rem);
+        outline: 1px solid rgb(176 138 62 / .45);
+        outline-offset: .55rem;
+        box-shadow: 0 50px 100px -55px rgb(80 50 15 / .6);
+    }
+    [data-theme='light'] .page-hero__content {
+        width: 50%;
+        max-width: none;
+        margin-left: 0;
+        padding-left: max(var(--gutter), calc((100vw - var(--max)) / 2 + var(--gutter)));
+        padding-right: clamp(1.5rem, 3vw, 3.5rem);
+    }
+    [data-theme='light'] .page-hero__title { font-size: clamp(2.75rem, 1rem + 4.4vw, 6.25rem); }
+    [data-theme='light'] .page-hero .eyebrow,
+    [data-theme='light'] .page-hero .eyebrow--light { color: #4a433c; }
+    [data-theme='light'] .page-hero__lede { color: #3b352f; }
+    [data-theme='light'] .page-hero__statement { color: var(--ignite-shade-2); }
+    [data-theme='light'] [data-palette='transport'] .page-hero__statement { color: var(--navy); }
+    [data-theme='light'] [data-palette='gold'] .page-hero__statement { color: var(--gold-ink); }
+    [data-theme='light'] .page-hero .btn--ghost-light { --btn-fg: var(--ink); --btn-bd: rgb(20 17 15 / .25); }
+    [data-theme='light'] .page-hero__caption { right: calc(var(--gutter) + 1.75rem); bottom: 3.25rem; }
+    /* In the frame the subject sits centred; it no longer has to clear the headline. */
+    [data-theme='light'] .page-hero .scene--nozzle .nz__subject { translate: none; }
+    [data-theme='light'] .page-hero .coffee__world,
+    [data-theme='light'] .page-hero .scene--tanker .scene__truck { transform: none; }
+
+    @media (max-width: 860px) {
+        [data-theme='light'] .page-hero { flex-direction: column; align-items: stretch; justify-content: flex-start; min-height: 0; }
+        [data-theme='light'] .page-hero__scene { position: relative; inset: auto; order: -1; height: 42svh; min-height: 16rem; margin: calc(var(--nav-h) + 1rem) var(--gutter) 0; }
+        [data-theme='light'] .page-hero__content { width: auto; padding: 2.5rem var(--gutter) 3.5rem; }
+    }
+
+    /* --- Sections that were drawn for dark skies --- */
+    [data-theme='light'] .panel--mv p { color: #3b352f; }
+    [data-theme='light'] .mv__label,
+    [data-theme='light'] .mv__label .panel__glyph { color: var(--navy); }
+
+    [data-theme='light'] .value__num { -webkit-text-stroke-color: rgb(20 17 15 / .35); }
+    [data-theme='light'] [data-values-ready] .value__name { color: rgb(20 17 15 / .55); }
+    [data-theme='light'] [data-values-ready] .value__text { color: rgb(20 17 15 / .5); }
+    [data-theme='light'] [data-values-ready] .value[data-active] .value__name { color: var(--ink); }
+    [data-theme='light'] [data-values-ready] .value[data-active] .value__text { color: #4a433c; }
+    [data-theme='light'] [data-values-ready] .value[data-active] .value__num { color: var(--ignite); -webkit-text-stroke-color: var(--ignite); }
+    [data-theme='light'] .value::after { background: linear-gradient(90deg, rgb(216 69 0 / .09), transparent 75%); }
+    [data-theme='light'] .values__ticks { stroke: rgb(20 17 15 / .2); }
+    [data-theme='light'] .values__edge { stroke: rgb(0 0 128 / .2); }
+
+    [data-theme='light'] .net__zone { fill: rgb(20 17 15 / .5); }
+    [data-theme='light'] .net__spine { stroke: rgb(20 17 15 / .25); }
+    [data-theme='light'] .net__road { stroke: rgb(20 17 15 / .08); }
+    [data-theme='light'] .net__flow { stroke: var(--ignite); }
+    [data-theme='light'] .net__flow--out,
+    [data-theme='light'] .net__arrow { stroke: var(--gold); }
+    [data-theme='light'] .net__junction { fill: #fff; stroke: rgb(20 17 15 / .45); }
+    [data-theme='light'] .net__node circle { fill: #fff; stroke: rgb(20 17 15 / .6); }
+    [data-theme='light'] .net__node--own circle { fill: var(--ignite); stroke: #ffd2b8; }
+    [data-theme='light'] .net__label { fill: var(--ink); }
+    [data-theme='light'] .net__label--core { fill: var(--ignite-shade-1); }
+    [data-theme='light'] .net__core circle { fill: #fff; }
+    [data-theme='light'] .net__legend text { fill: rgb(20 17 15 / .7); }
+    [data-theme='light'] .net__legend-ext { stroke: rgb(20 17 15 / .6); }
+    [data-theme='light'] .network__bullet { color: var(--ignite); }
+
+    [data-theme='light'] .mark-story__visual::before { border-color: rgb(176 138 62 / .45); }
+    [data-theme='light'] .mark-story__mark { color: var(--ink); }
+    [data-theme='light'] .mark-story__north { color: var(--ignite); }
+    [data-theme='light'] .mark-story__list li[aria-current='true'] { border-left-color: var(--ignite); background: rgb(176 138 62 / .06); }
+    [data-theme='light'] .mark-story__personality { color: var(--gold-ink); }
+
+    [data-theme='light'] .org__ra-bezel { stroke: rgb(20 17 15 / .25); }
+    [data-theme='light'] .org__glyph--1 { background: radial-gradient(circle, var(--accent) 0 32%, transparent 34% 56%, rgb(20 17 15 / .35) 58%); }
+    [data-theme='light'] .org__roles { border-left-color: rgb(20 17 15 / .18); }
+
+    [data-theme='light'] .horizon-col__line { border-top-color: var(--ignite); }
+    [data-theme='light'] .horizon-col--planned .horizon-col__line { border-color: var(--gold); }
+    [data-theme='light'] .horizon-col--confirmed .horizon-col__line { border-top-color: rgb(20 17 15 / .35); }
+    [data-theme='light'] .horizon-col__bullet { color: var(--ignite); }
+    [data-theme='light'] .horizon-col--planned .horizon-col__bullet { color: var(--gold); }
+
+    /* Fuel retail pumps on the champagne forecourt. */
+    [data-theme='light'] .pump {
+        background: linear-gradient(180deg, #ffffff, #f4efe8);
+        box-shadow: 0 1px 0 rgb(20 17 15 / .05), 0 36px 60px -34px rgb(90 60 20 / .45), inset 0 1px 0 #fff;
+    }
+    [data-theme='light'] .commitment { border-top-color: rgb(216 69 0 / .45); }
+    [data-theme='light'] .commitment:last-child { border-bottom-color: rgb(176 138 62 / .5); }
+    [data-theme='light'] .pillar__glyph { background: linear-gradient(145deg, #fff4ea, #fbe3d2); box-shadow: inset 0 0 0 1px rgb(216 69 0 / .14); }
+    /* Product pictures hang like the hero frames: a gold line just outside each one. */
+    [data-theme='light'] :is(.svc-gallery__photo img, .svc-gallery__shelf) { outline: 1px solid rgb(176 138 62 / .4); outline-offset: .45rem; }
+
+    /* The black business card and name card stay black: one deliberate contrast, edged in gold. */
+    [data-theme='light'] :is(.name-card, .contact-card) { box-shadow: 0 0 0 1px rgb(226 181 74 / .3), 0 40px 80px -40px rgb(40 25 10 / .55); }
+
+    /* Bottom-of-page navigation strips. */
+    [data-theme='light'] .chapter-nav,
+    [data-theme='light'] .next-stop { background: var(--pearl); border-top-color: var(--hairline); color: var(--ink); }
+    [data-theme='light'] .next-stop__label { color: rgb(20 17 15 / .5); }
+    [data-theme='light'] .chapter-nav__all { border-color: rgb(20 17 15 / .2); color: rgb(20 17 15 / .75); }
+    [data-theme='light'] .chapter-nav__all:hover { border-color: var(--gold); color: var(--ink); background: rgb(176 138 62 / .08); }
+    [data-theme='light'] .chapter-nav__btn--prev { background: #fff; color: var(--ink); border-color: rgb(20 17 15 / .12); box-shadow: 0 16px 30px -22px rgb(90 60 20 / .45); }
+    [data-theme='light'] .chapter-nav__btn--prev:hover { background: #fff; border-color: var(--gold); }
+
+    /* --- Footer: pearl, with ink type and a gold-edged band --- */
+    [data-theme='light'] .footer {
+        background: #f4eee5;
+        color: var(--ink);
+        --fg: var(--ink);
+        --fg-muted: #5a5249;
+        --rule: rgb(20 17 15 / .12);
+    }
+    [data-theme='light'] .footer__logo { color: var(--ink); }
+    [data-theme='light'] .footer__legal { border-top-color: var(--hairline); }
+    [data-theme='light'] .footer__tagline,
+    [data-theme='light'] .footer__office-tag { color: var(--ignite-shade-1); }
+    [data-theme='light'] .footer__col a { color: var(--ink); }
+    [data-theme='light'] .footer__col a:hover { color: var(--ignite-shade-1); }
+
+    /* --- Quick navigation palette --- */
+    [data-theme='light'] .palette { background: #fffdf9; color: var(--ink); border-color: var(--hairline); box-shadow: 0 50px 110px -40px rgb(60 40 15 / .45); }
+    [data-theme='light'] .palette::backdrop { background: rgb(60 45 25 / .3); }
+    [data-theme='light'] .palette__search,
+    [data-theme='light'] .palette__hint { border-color: rgb(20 17 15 / .1); }
+    [data-theme='light'] .palette__input { color: var(--ink); }
+    [data-theme='light'] .palette__input::placeholder { color: rgb(20 17 15 / .45); }
+    [data-theme='light'] .palette__group-label,
+    [data-theme='light'] .palette__hint,
+    [data-theme='light'] .palette__empty { color: rgb(20 17 15 / .6); }
+    [data-theme='light'] .palette__option[aria-selected='true'] { background: rgb(176 138 62 / .1); }
+
+    /* =====================================================================
+       DARK
+       ===================================================================== */
+
+    [data-theme='dark'] :is([data-sky='morning'], [data-sky='noon'], [data-sky='golden']) {
+        --fg: var(--paper);
+        --fg-muted: rgb(246 241 234 / .74);
+        --rule: rgb(246 241 234 / .16);
+        --accent-text: var(--accent-ink-dark);
+    }
+    [data-theme='dark'] [data-sky='morning'] { --sky-top: #14110f; --sky-bottom: #0f0d0c; --sky-glow: #d84500; --glow-y: -20%; --glow-a: .16; }
+    [data-theme='dark'] [data-sky='noon'] { --sky-top: #191613; --sky-bottom: #12100e; --sky-glow: #c69822; --glow-y: -20%; --glow-a: .16; }
+    [data-theme='dark'] [data-sky='golden'] { --sky-top: #231a0f; --sky-bottom: #150f09; --sky-glow: #c69822; --glow-y: 100%; --glow-a: .32; }
+
+    [data-theme='dark'] main > .section + .section { box-shadow: inset 0 1px 0 var(--hairline); }
+
+    /* Boxes: quiet glass plates with a gold edge on hover. */
+    [data-theme='dark'] [data-sky] .panel {
+        --panel-bg: rgb(246 241 234 / .045);
+        --panel-bd: rgb(246 241 234 / .12);
+        --panel-bd-hover: rgb(226 181 74 / .45);
+        --panel-shadow: none;
+    }
+    [data-theme='dark'] [data-sky] .panel:hover,
+    [data-theme='dark'] [data-sky] .panel:focus-within { box-shadow: 0 30px 60px -32px rgb(0 0 0 / .75); }
+
+    /* Light-toned page hero (sustainability): dusk over the same horizon. */
+    [data-theme='dark'] .page-hero--light {
+        background: var(--ink);
+        color: var(--paper);
+        --fg: var(--paper);
+        --fg-muted: rgb(246 241 234 / .74);
+        --accent-text: var(--accent-ink-dark);
+    }
+    [data-theme='dark'] .page-hero--light .page-hero__shade {
+        background:
+            linear-gradient(90deg, rgb(10 9 8 / .82) 0%, rgb(10 9 8 / .45) 45%, rgb(10 9 8 / .05) 75%),
+            linear-gradient(0deg, rgb(10 9 8 / .7) 0%, transparent 45%);
+    }
+    [data-theme='dark'] .page-hero--light .eyebrow { color: rgb(246 241 234 / .82); }
+    [data-theme='dark'] .page-hero--light .page-hero__lede { color: rgb(246 241 234 / .84); }
+    [data-theme='dark'] .scene--horizon { filter: brightness(.4) sepia(.35) saturate(1.4); }
+
+    [data-theme='dark'] .timeline__track { background: repeating-linear-gradient(180deg, rgb(246 241 234 / .3) 0 14px, transparent 14px 26px); }
+    [data-theme='dark'] .milestone__marker { -webkit-text-stroke-color: rgb(246 241 234 / .5); }
+    [data-theme='dark'] .milestone--planned .milestone__marker { -webkit-text-stroke-color: rgb(246 241 234 / .28); }
+    [data-theme='dark'] .milestone__date { color: var(--gold-tint); }
+    [data-theme='dark'] .milestone__text,
+    [data-theme='dark'] .timeline__note { color: var(--fg-muted); }
+
+    /* Partner logos are drawn for white paper, so each sits on its own ivory plaque. */
+    [data-theme='dark'] .partners__item { padding: .75rem 1.25rem; border-radius: 1rem; background: #f6f1ea; box-shadow: 0 0 0 1px rgb(226 181 74 / .25); }
+
+    /* The product shelf stays lit like a shop display; the photo gets a gold edge. */
+    [data-theme='dark'] .svc-gallery__shelf { box-shadow: 0 0 0 1px rgb(226 181 74 / .3), 0 40px 70px -34px rgb(0 0 0 / .85); }
+    [data-theme='dark'] .svc-gallery__photo img { box-shadow: 0 0 0 1px rgb(226 181 74 / .25), 0 40px 70px -34px rgb(0 0 0 / .85); }
+
+    [data-theme='dark'] .choice__body { background: rgb(246 241 234 / .04); }
+    [data-theme='dark'] .choice input:checked + .choice__body { background: rgb(216 69 0 / .14); }
+    [data-theme='dark'] .field__control { background: rgb(246 241 234 / .05); border-color: rgb(246 241 234 / .25); color: var(--paper); }
+    [data-theme='dark'] .field__control option { background: var(--asphalt); color: var(--paper); }
+    [data-theme='dark'] .inquiry__result { background: rgb(246 241 234 / .05); }
+
+    [data-theme='dark'] :is(.name-card, .contact-card) { background: #171411; box-shadow: 0 0 0 1px rgb(226 181 74 / .22); }
+    [data-theme='dark'] .pillar__glyph { background: rgb(255 122 61 / .12); }
+}

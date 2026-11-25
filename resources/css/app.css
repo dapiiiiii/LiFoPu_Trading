@@ -17,6 +17,7 @@
 @import './components/panels.css';
 @import './components/overlays.css';
 @import './components/motion.css';
+@import './themes.css';
 
 @source '../views/**/*.blade.php';
 @source '../js/**/*.js';

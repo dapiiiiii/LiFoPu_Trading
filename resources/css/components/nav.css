@@ -90,6 +90,7 @@
     }
     @keyframes drop-in { from { opacity: 0; transform: translateY(-.5rem); } }
     .nav__services { margin: 0; padding: 0; list-style: none; }
+    .nav__dropdown--wide { width: 28rem; }
     .nav__service {
         display: grid;
         grid-template-columns: 4.5rem 1fr;

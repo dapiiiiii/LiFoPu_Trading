@@ -3,11 +3,11 @@
 return [
 
     'meta_title' => 'Contact Us | LiFoPu Trading',
-    'meta_description' => 'Contact LiFoPu Trading in Addis Ababa: phone, email and the addresses of our main and operations offices.',
+    'meta_description' => 'Contact LiFoPu Trading in Addis Ababa: phone, email and the addresses of our main and operations office.',
 
     'eyebrow' => 'Contact Us',
     'title' => 'We’re easy to reach.',
-    'lede' => 'Call or email our team, or visit one of our offices in Addis Ababa.',
+    'lede' => 'Call or email our team, or visit one of our office in Addis Ababa.',
 
     'intro' => [
         'eyebrow' => 'Get in touch',
@@ -31,9 +31,9 @@ return [
         'email' => 'Email',
     ],
 
-    'offices' => [
-        'eyebrow' => 'Our offices',
-        'title' => 'Our offices.',
+    'office' => [
+        'eyebrow' => 'Our office',
+        'title' => 'Our office.',
     ],
 
     'steps' => [

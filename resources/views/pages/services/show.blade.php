@@ -2,7 +2,6 @@
 @php
     $labels = trans('services.labels');
     $nextItem = trans("services.items.$next");
-    $segments = trans('markets.segments');
     $interestHref = route('team', ['interest' => $item['inquiry']]);
 @endphp
 <x-layout :title="$item['title'].' | '.config('lifopu.company.name')" :description="$item['meta_description']" page="service" :palette="$item['palette']">
@@ -13,7 +12,8 @@
         </div>
     </x-page-hero>
 
-    {{-- What we do (profile wording) + facts --}}
+    {{-- At a glance: profile wording + facts. Services without facts skip it. --}}
+    @isset($item['facts'])
     <section class="section svc-summary" data-sky="morning" data-spine-label="{{ $labels['at_a_glance'] }}" aria-labelledby="summary-title">
         <div class="container svc-summary__grid">
             <div class="panel panel--quote" data-reveal>
@@ -30,35 +30,52 @@
                 @endforeach
             </dl>
         </div>
-    </section>
 
-    {{-- Chapters --}}
-    <section class="section chapters" data-sky="noon" data-spine-label="{{ $item['sections'][0]['title'] }}" aria-label="{{ $item['title'] }}">
-        <div class="container">
-            <div class="panel-grid panel-grid--3">
-                @foreach ($item['sections'] as $i => $chapter)
-                    <article class="panel" data-reveal>
-                        <span class="chapter__num" aria-hidden="true">0{{ $i + 1 }}</span>
-                        <h2 class="panel__title">{{ $chapter['title'] }}</h2>
-                        <p class="panel__text">{{ $chapter['text'] }}</p>
-                    </article>
-                @endforeach
+        {{-- Product pictures: a photo from the service bay, then the range on a lit shelf. --}}
+        @isset($item['gallery'])
+            <div class="container svc-gallery">
+                @php $photo = $item['gallery']['photo']; $range = $item['gallery']['range']; @endphp
+                <figure class="svc-gallery__photo" data-reveal>
+                    <img src="{{ asset($photo['src']) }}" width="{{ $photo['width'] }}" height="{{ $photo['height'] }}" alt="{{ $photo['alt'] }}" loading="lazy" decoding="async">
+                    <figcaption>{{ $photo['caption'] }}</figcaption>
+                </figure>
+                <figure class="svc-gallery__range" data-reveal>
+                    <div class="svc-gallery__shelf">
+                        <img src="{{ asset($range['src']) }}" width="{{ $range['width'] }}" height="{{ $range['height'] }}" alt="{{ $range['alt'] }}" loading="lazy" decoding="async">
+                    </div>
+                    <figcaption>{{ $range['caption'] }}</figcaption>
+                </figure>
             </div>
+        @endisset
+    </section>
+    @endisset
 
+    {{-- Chapters. Fuel retail shows them as three pumps on a forecourt at night. --}}
+    <section class="section chapters @if ($slug === 'fuel-retail') chapters--forecourt @endif" data-sky="{{ $slug === 'fuel-retail' ? 'dusk' : 'noon' }}" data-spine-label="{{ $item['sections'][0]['title'] }}" aria-label="{{ $item['title'] }}">
+        <div class="container">
             @if ($slug === 'fuel-retail')
-                <div class="stations" aria-labelledby="stations-title">
-                    <h3 id="stations-title" class="h4">{{ __('company.stats.1.label') }}</h3>
-                    <ol class="stations__list">
-                        @foreach (trans('company.stations') as $i => $station)
-                            <li class="station-card" data-reveal>
-                                <span class="station-card__num">0{{ $i + 1 }}</span>
-                                <span class="station-card__name">{{ $station }}</span>
-                                <svg class="station-card__icon" viewBox="0 0 661.1 572.4" aria-hidden="true"><use href="#lf-mark" /></svg>
-                            </li>
-                        @endforeach
-                    </ol>
+                @php $pumpIcons = ['nozzle', 'tanker', 'station']; @endphp
+                <div class="pumps">
+                    @foreach ($item['sections'] as $i => $chapter)
+                        <article class="pump" data-reveal>
+                            <div class="pump__screen" aria-hidden="true">@include('partials.scenes.thumb', ['scene' => $pumpIcons[$i] ?? 'nozzle'])</div>
+                            <h2 class="pump__title">{{ $chapter['title'] }}</h2>
+                            <p class="pump__text">{{ $chapter['text'] }}</p>
+                        </article>
+                    @endforeach
                 </div>
-            @elseif ($slug === 'lubricants')
+            @else
+                <div class="panel-grid panel-grid--3">
+                    @foreach ($item['sections'] as $i => $chapter)
+                        <article class="panel" data-reveal>
+                            <h2 class="panel__title">{{ $chapter['title'] }}</h2>
+                            <p class="panel__text">{{ $chapter['text'] }}</p>
+                        </article>
+                    @endforeach
+                </div>
+            @endif
+
+            @if ($slug === 'lubricants')
                 <div class="chips-block">
                     <h3 class="h4">{{ $labels['channels'] }}</h3>
                     <ul class="chips">
@@ -96,26 +113,16 @@
         </section>
     @endisset
 
-    @if (count($item['audiences']))
-        <section class="section audiences" data-sky="morning" data-spine-label="{{ $labels['who'] }}" aria-labelledby="audiences-title">
-            <div class="container">
-                <h2 id="audiences-title" class="eyebrow">{{ $labels['who'] }}</h2>
-                <ul class="audiences__list">
-                    @foreach ($item['audiences'] as $key)
-                        <li data-reveal><a href="{{ route('markets') }}#{{ $key }}">{{ $segments[$key]['title'] }} <span aria-hidden="true">→</span></a></li>
-                    @endforeach
-                </ul>
-            </div>
-        </section>
-    @endif
-
     @include('partials.sections.cta', ['href' => $interestHref, 'label' => $labels['inquire']])
 
     <nav class="next-stop" data-palette="{{ $nextItem['palette'] }}" aria-label="{{ $labels['next'] }}">
-        <a href="{{ ServiceLink::href($next) }}" {{ ServiceLink::attributes($next) }} class="next-stop__link container">
+        <div class="container next-stop__inner">
             <span class="next-stop__label">{{ $labels['next'] }} · KM {{ $nextItem['km'] }}</span>
-            <span class="next-stop__title">{{ $nextItem['title'] }}@if (ServiceLink::external($next)){{ ServiceLink::marker($next) }}@else <span aria-hidden="true">→</span>@endif</span>
-        </a>
+            <a href="{{ ServiceLink::href($next) }}" {{ ServiceLink::attributes($next) }} class="next-stop__link">
+                <span class="next-stop__title">{{ $nextItem['title'] }}</span>
+                <span class="next-stop__arrow" aria-hidden="true">→</span>
+            </a>
+        </div>
     </nav>
 
 </x-layout>

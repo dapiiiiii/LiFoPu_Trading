@@ -2,9 +2,14 @@
     $groups = [
         'pages' => [
             ['label' => __('common.nav.home'), 'href' => route('home'), 'keywords' => 'start hero'],
-            ['label' => __('common.nav.about'), 'href' => route('about'), 'keywords' => 'company history mission vision values structure'],
+            ['label' => __('common.nav.about'), 'href' => route('about'), 'keywords' => 'company history overview live for purpose'],
+            ['label' => __('about.mission_label').' & '.__('about.vision_label'), 'href' => route('about.section', 'mission'), 'keywords' => 'mission vision purpose'],
+            ['label' => __('about.mark.eyebrow'), 'href' => route('about.section', 'mark'), 'keywords' => 'logo mark symbol arrow north branding'],
+            ['label' => __('about.history.eyebrow'), 'href' => route('about.section', 'history'), 'keywords' => 'history timeline milestones 2013'],
+            ['label' => __('about.advantage.eyebrow'), 'href' => route('about.section', 'advantage'), 'keywords' => 'competitive advantage strengths'],
+            ['label' => __('about.structure.eyebrow'), 'href' => route('about.section', 'structure'), 'keywords' => 'organizational structure management chart org'],
+            ['label' => __('about.future.eyebrow'), 'href' => route('about.section', 'future'), 'keywords' => 'future plans ev charging modern service stations'],
             ['label' => __('common.nav.services'), 'href' => route('services'), 'keywords' => 'products'],
-            ['label' => __('common.nav.markets'), 'href' => route('markets'), 'keywords' => 'customers motorists fleets industry government'],
             ['label' => __('common.nav.sustainability'), 'href' => route('sustainability'), 'keywords' => 'safety compliance environment ev'],
             ['label' => __('common.nav.contact'), 'href' => route('contact'), 'keywords' => 'phone email address office location'],
             ['label' => __('common.nav.cta'), 'href' => route('team'), 'keywords' => 'inquiry form quote talk team message'],

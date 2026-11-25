@@ -22,25 +22,18 @@ return [
             'km' => '01',
             'title' => 'Fuel Retail Sales',
             'summary' => 'Supply of ground fuel products through service stations.',
-            'meta_description' => 'LiFoPu operates four modern fuel service stations in Ethiopia: Amoudi Plaza, Pastor, Wolayta and Humbo NOC.',
+            'meta_description' => 'LiFoPu supplies ground fuel products through modern fuel service stations in Ethiopia.',
             'palette' => 'trading',
             'scene' => 'nozzle',
             'inquiry' => 'fuel',
-            'hero_title' => 'Four stations. One standard.',
-            'lede' => 'Supply of ground fuel products through four modern service stations: Amoudi Plaza, Pastor, Wolayta and Humbo NOC.',
+            'hero_title' => null,
+            'lede' => null,
             'sections' => [
                 ['title' => 'The forecourt is where trust is earned', 'text' => 'Our service stations consistently rank among the top ten nationwide in combined fuel and lubricant sales, reflecting strong operational management, customer trust and supply chain efficiency.'],
                 ['title' => 'Fuel as an essential input', 'text' => 'Fuel keeps transportation, construction, manufacturing and daily economic activity moving. Our integrated retail, wholesale and bulk transportation operations are built to keep supply reliable and operations continuous.'],
                 ['title' => 'Standards at every pump', 'text' => 'LiFoPu maintains strict safety and environmental standards while continuously investing in service quality and infrastructure improvement.'],
             ],
-            'facts' => [
-                ['label' => 'Stations', 'value' => '4'],
-                ['label' => 'Ranking', 'value' => 'Top 10'],
-                ['label' => 'In retail since', 'value' => '2023'],
-            ],
             'moment' => ['title' => 'Ready at the pump', 'text' => 'The nozzle is where the whole supply chain reaches the customer: the right fuel, ready for every vehicle that pulls in.'],
-            'next' => ['title' => 'What’s next at the forecourt', 'text' => 'LiFoPu plans to integrate electric vehicle charging alongside traditional fuel services, supporting both conventional vehicles and the growing electric mobility market.'],
-            'audiences' => ['motorists', 'sme', 'fleets', 'government'],
         ],
 
         'lubricants' => [
@@ -64,8 +57,11 @@ return [
                 ['label' => 'Channels', 'value' => 'Wholesale & retail'],
                 ['label' => 'Range', 'value' => 'Automotive & industrial'],
             ],
+            'gallery' => [
+                'photo' => ['src' => 'images/lubricants/oil-pour.jpg', 'width' => 596, 'height' => 335, 'alt' => 'Engine oil being poured into a funnel during a service', 'caption' => 'Engine oils for every service bay.'],
+                'range' => ['src' => 'images/lubricants/caltex-range.png', 'width' => 1024, 'height' => 431, 'alt' => 'Caltex lubricants range: Delo 400 MGX, Delo Gold Ultra, Havoline ProDS ECO 5, Havoline Formula, Havoline EZY 4T and Havoline Xtended Life coolant', 'caption' => 'Caltex Delo and Havoline: engine oils and coolant for cars, motorcycles and heavy-duty diesel.'],
+            ],
             'moment' => ['title' => 'Weight, flow, protection', 'text' => 'Move across the ribbon. Good lubrication is felt before it is seen: smooth, steady and protective under load.'],
-            'audiences' => ['motorists', 'sme', 'fleets', 'construction', 'industrial'],
         ],
 
         'fuel-transportation' => [
@@ -76,7 +72,7 @@ return [
             'palette' => 'transport',
             'scene' => 'tanker',
             'inquiry' => 'transport',
-            'hero_title' => 'Where LiFoPu began: on the road.',
+            'hero_title' => 'We connect fuel supply to everyday needs through reliable transportation from depots to retail stations and commercial customers.',
             'lede' => 'A fleet of bulk fuel tanker trucks moving petroleum products mainly from source depots to retail stations and commercial consumers.',
             'sections' => [
                 ['title' => 'Depot to destination', 'text' => 'Our tankers connect supply with demand: they collect petroleum products mainly at source depots and deliver them to retail stations and commercial consumers.'],
@@ -84,13 +80,7 @@ return [
                 ['title' => 'Continuity under pressure', 'text' => 'Reliability and Continuity is a core value: maintaining consistent operations and service, even during challenges. Transport management, logistics supervision and a technical team keep the operation moving.'],
             ],
             'route' => ['Source depot', 'Bulk tanker', 'Retail stations', 'Commercial consumers'],
-            'facts' => [
-                ['label' => 'On the road since', 'value' => '2013'],
-                ['label' => 'Load', 'value' => 'Petroleum products'],
-                ['label' => 'Delivers to', 'value' => 'Stations & commercial'],
-            ],
             'moment' => ['title' => 'Follow the load', 'text' => 'Scroll to move the tanker from depot to destination.'],
-            'audiences' => ['fleets', 'construction', 'industrial', 'government'],
         ],
 
         'coffee-export' => [
@@ -115,14 +105,12 @@ return [
                 ['label' => 'Origin', 'value' => 'Ethiopia'],
             ],
             'moment' => ['title' => 'From bean to market', 'text' => 'A single bean, a country of origin, and a supply line that reaches outward.'],
-            'audiences' => [],
         ],
 
     ],
 
     'labels' => [
         'at_a_glance' => 'At a glance',
-        'who' => 'Who we serve',
         'next' => 'Next stop',
         'all' => 'All products & services',
         'inquire' => 'Start an inquiry',

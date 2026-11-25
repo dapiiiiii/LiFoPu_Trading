@@ -7,14 +7,14 @@ return [
 
     'eyebrow' => 'About LiFoPu',
     'title' => 'Live For Purpose.',
-    'lede' => 'A fast-growing petroleum distribution and energy services company with over a decade of operational experience in Ethiopia.',
+    'lede' => 'A fast-growing petroleum products and energy services company in Ethiopia.',
 
     'overview' => [
         'eyebrow' => 'Company overview',
         'paragraphs' => [
             'LiFoPu was established in August 2013, initially as a transport company, and later transitioned into construction machinery rental. As of August 2023, LiFoPu expanded into the distribution and retailing of petroleum products, including fuel, lubricants and LPGs, which are strategic inputs for both the economic development and day-to-day life of a society.',
-            'Currently, LiFoPu operates four modern fuel service stations, namely Amoudi Plaza, Pastor, Wolayta and Humbo NOC stations, and is an authorized sub-distributor of Caltex lubricants.',
-            'With a workforce of over 100 permanent employees and an annual sales turnover exceeding ETB 4.6 billion, LiFoPu is steadily growing and aspires to become one of the prominent players in the fuel and lubricants industry of the country.',
+            'Currently, LiFoPu operates modern fuel service stations and is an exclusive distributor of Emarat and sub-distributor of Caltex lubricants.',
+            'With a strong and dedicated workforce and solid business performance, LiFoPu continues to grow steadily, strengthening its presence and playing its role in the development of Ethiopia’s fuel and lubricants industry.',
         ],
     ],
 
@@ -27,11 +27,11 @@ return [
     'mission_label' => 'Mission',
     'vision_label' => 'Vision',
     // Phrases emphasised inside the exact mission and vision wording.
-    'mission_highlight' => 'an industry leader in the petroleum distribution industry',
-    'vision_highlight' => 'a leading and trusted force in petroleum distribution and transportation',
+    'mission_highlight' => 'delivering uninterrupted services',
+    'vision_highlight' => 'a trusted force in petroleum distribution and transportation',
 
     'mark' => [
-        'eyebrow' => 'The mark',
+        'eyebrow' => 'The logo',
         'title' => 'An arrow that points north, built from an ‘L’.',
         'hint' => 'Hover or focus each idea to see it in the mark.',
     ],
@@ -57,10 +57,9 @@ return [
     'future' => [
         'eyebrow' => 'Future plans',
         'title' => 'Where the road goes next.',
-        'lede' => 'Three commitments for the years ahead. Each one is a plan, not a service running today.',
         'plans' => [
             ['icon' => 'station', 'title' => 'Modern service stations', 'text' => 'As we look to the future, we are committed to transforming our service stations to meet the evolving needs of our customers.'],
-            ['icon' => 'ev', 'title' => 'EV charging alongside fuel', 'text' => 'By integrating electric vehicle charging capabilities alongside traditional fuel services, we aim to support both conventional vehicles and the rapidly growing electric mobility market.'],
+            ['icon' => 'ev', 'title' => 'EV charging', 'text' => 'By integrating electric vehicle charging capabilities alongside traditional fuel services, we aim to support both conventional vehicles and the rapidly growing electric mobility market.'],
             ['icon' => 'oil', 'title' => 'Trusted lubricant partnerships', 'text' => 'At the same time, through strategic partnerships with trusted lubricant suppliers, we ensure a reliable supply of high-quality, affordable products delivering seamless service, convenience, and value to every customer we serve.'],
         ],
     ],

@@ -6,7 +6,7 @@ return [
     'select' => 'Select an option',
     'opens_new_tab' => 'opens :site in a new tab',
 
-    'offices' => [
+    'office' => [
         'main' => 'Main office',
         'operations' => 'Operations office',
         'map' => 'Open in Google Maps',
@@ -19,13 +19,13 @@ return [
         'about' => 'About Us',
         'services' => 'Products & Services',
         'services_all' => 'All products & services',
-        'markets' => 'Markets',
         'sustainability' => 'Sustainability & Safety',
         'contact' => 'Contact Us',
         'cta' => 'Talk to Our Team',
         'menu_open' => 'Open menu',
         'menu_close' => 'Close menu',
         'submenu' => 'Show products and services',
+        'about_submenu' => 'Show about sections',
     ],
 
     'services_short' => [
@@ -61,6 +61,14 @@ return [
         'language' => 'Language',
         'coming_soon' => 'Coming soon',
         'am_note' => 'An Amharic edition is being professionally translated and will be published once approved.',
+    ],
+
+    'theme' => [
+        'label' => 'Theme',
+        'to_light' => 'Switch to light theme',
+        'to_dark' => 'Switch to dark theme',
+        'light' => 'Light',
+        'dark' => 'Dark',
     ],
 
     'palette' => [

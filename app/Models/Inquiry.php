@@ -34,3 +34,4 @@ class Inquiry extends Model
         return __("contact.interests.{$this->interest}.label");
     }
 }
+    

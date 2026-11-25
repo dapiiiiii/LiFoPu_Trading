@@ -600,14 +600,12 @@
     .footer__office { margin-bottom: .5rem; }
     .footer__office-tag { display: block; margin-bottom: .15rem; font: 500 .75rem/1.2 var(--font-display); letter-spacing: .24em; text-transform: uppercase; color: var(--ignite-tint-2); }
     .footer__office .ext-mark { margin-left: .35em; color: var(--fg-muted); }
-    .footer__band { position: relative; height: 5.5rem; color: rgb(246 241 234 / .16); border-block: 1px solid var(--rule); }
-    .footer__band-logo { position: absolute; right: var(--gutter); top: 50%; width: 8rem; color: var(--paper); transform: translateY(-50%); padding-left: 1.5rem; background: var(--ink); box-sizing: content-box; }
-    .footer__legal { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block: 1.5rem 2rem; font-size: .9rem; color: var(--fg-muted); }
+    .footer__legal { border-top: 1px solid var(--rule); display: flex; flex-wrap: wrap; justify-content: space-between; gap: 1rem; padding-block: 1.5rem 2rem; font-size: .9rem; color: var(--fg-muted); }
     .footer__legal p { margin: 0; }
     .footer__legal ul { display: flex; flex-wrap: wrap; gap: 1.5rem; margin: 0; padding: 0; list-style: none; }
     .footer__legal a { color: var(--fg-muted); }
     @media (max-width: 900px) { .footer__inner { grid-template-columns: 1fr 1fr; } .footer__brand { grid-column: 1 / -1; } }
-    @media (max-width: 520px) { .footer__inner { grid-template-columns: 1fr; } .footer__band-logo { display: none; } }
+    @media (max-width: 520px) { .footer__inner { grid-template-columns: 1fr; } }
 
     /* --- Road-line scroll spine --- */
     .spine {

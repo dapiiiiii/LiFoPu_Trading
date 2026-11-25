@@ -12,11 +12,15 @@ const luminance = (color) => {
     return 0.2126 * r + 0.7152 * g + 0.0722 * b;
 };
 
-export function initSky() {
+// Run again whenever the theme changes, since every sky colour changes with it.
+export function blendSkies() {
     const sections = [...document.querySelectorAll('main > section, main > nav, .footer')];
-    let prevBottom = '#0d0c0b';
+    // What sits above the first section: the page background of the current theme.
+    const base = getComputedStyle(document.body).getPropertyValue('--page-bg').trim() || '#0d0c0b';
+    let prevBottom = base;
 
     sections.forEach((section) => {
+        section.style.removeProperty('--sky-prev');
         const style = getComputedStyle(section);
         const top = style.getPropertyValue('--sky-top').trim();
         const bottom = style.getPropertyValue('--sky-bottom').trim();
@@ -26,8 +30,12 @@ export function initSky() {
             const b = luminance(top);
             if (a !== null && b !== null && Math.abs(a - b) < 0.35) section.style.setProperty('--sky-prev', prevBottom);
         }
-        prevBottom = section.matches('.section, .cta') && bottom ? bottom : '#0d0c0b';
+        prevBottom = section.matches('.section, .cta') && bottom ? bottom : base;
     });
+}
+
+export function initSky() {
+    blendSkies();
 
     if (isEssential()) return;
 

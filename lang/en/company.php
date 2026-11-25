@@ -13,9 +13,9 @@ return [
     // G.5
     'acronym_brand' => 'Wholehearted dedication to Mission, People, and Progress.',
 
-    // P.6: exact wording.
-    'mission' => 'At LiFoPu, we are dedicated to delivering uninterrupted services while upholding the highest standards of quality, integrity, and customer satisfaction. Our mission is to be an industry leader in the petroleum distribution industry, offering sustainable and innovative solutions to meet the evolving needs of consumers.',
-    'vision' => 'Our vision is to be a leading and trusted force in petroleum distribution and transportation, driving efficiency, innovation, and sustainable growth while powering industries and communities.',
+    // P.6, as revised by the company (November 2026).
+    'mission' => 'At LiFoPu, we are dedicated to delivering uninterrupted services while upholding the highest standards of quality, integrity, and customer satisfaction.',
+    'vision' => 'Our vision is to be a trusted force in petroleum distribution and transportation, driving efficiency, innovation, and sustainable growth while powering industries and communities.',
 
     // P.9: exact wording.
     'competitive_advantage' => 'LiFoPu stands out for its commitment to operational excellence, reliability, and customer satisfaction. In addition, we continuously explore innovative solutions to enhance our offerings and exceed customer expectations by leveraging the power of well-interpreted data.',
@@ -93,7 +93,7 @@ return [
             'ec' => 'Planned',
             'marker' => 'Ahead',
             'marker_ec' => 'Ahead',
-            'title' => 'EV charging alongside fuel',
+            'title' => 'EV charging',
             'text' => 'LiFoPu plans to integrate electric vehicle charging infrastructure alongside traditional fuel services, ready for a gradual transition toward diversified energy.',
             'status' => 'planned',
         ],

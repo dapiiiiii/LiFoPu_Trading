@@ -16,6 +16,18 @@ class PageController extends Controller
         return view('pages.about');
     }
 
+    public function aboutSection(string $section): View
+    {
+        $sections = ['mission', 'mark', 'history', 'advantage', 'structure', 'future'];
+        if (!in_array($section, $sections, true)) {
+            abort(404);
+        }
+
+        return view("pages.about.$section", [
+            'section' => $section,
+        ]);
+    }
+
     public function services(): View
     {
         return view('pages.services.index');
@@ -31,11 +43,6 @@ class PageController extends Controller
             'item' => trans("services.items.$service"),
             'next' => $slugs[($index + 1) % count($slugs)],
         ]);
-    }
-
-    public function markets(): View
-    {
-        return view('pages.markets');
     }
 
     public function sustainability(): View

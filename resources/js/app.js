@@ -17,6 +17,7 @@ import { initSettings } from './modules/settings.js';
 import { initInquiry } from './modules/inquiry.js';
 import { initPattern } from './modules/pattern.js';
 import { initTransitions } from './modules/transitions.js';
+import { initTheme } from './modules/theme.js';
 
 gsap.registerPlugin(ScrollTrigger, SplitText);
 
@@ -25,6 +26,7 @@ function boot() {
     const ctx = { lenis };
 
     initTransitions();
+    initTheme();
     initNav(ctx);
     initPalette(ctx);
     initSettings(ctx);

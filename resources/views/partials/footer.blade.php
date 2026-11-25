@@ -6,7 +6,8 @@
     <div class="footer__road" aria-hidden="true"><span></span></div>
     <div class="footer__inner container">
         <div class="footer__brand">
-            <a href="{{ route('home') }}" class="footer__logo" aria-label="{{ config('lifopu.company.name') }}: {{ __('common.nav.home') }}">
+            <a href="{{ route('home') }}" class="footer__logo"
+                aria-label="{{ config('lifopu.company.name') }}: {{ __('common.nav.home') }}">
                 <x-logo variant="stacked" title="" />
             </a>
             <p class="footer__tagline">{{ config('lifopu.company.tagline') }}</p>
@@ -18,7 +19,6 @@
             <ul>
                 <li><a href="{{ route('about') }}">{{ __('common.nav.about') }}</a></li>
                 <li><a href="{{ route('services') }}">{{ __('common.nav.services') }}</a></li>
-                <li><a href="{{ route('markets') }}">{{ __('common.nav.markets') }}</a></li>
                 <li><a href="{{ route('sustainability') }}">{{ __('common.nav.sustainability') }}</a></li>
                 <li><a href="{{ route('contact') }}">{{ __('common.nav.contact') }}</a></li>
             </ul>
@@ -36,10 +36,12 @@
         <div class="footer__col">
             <h2 class="footer__heading">{{ __('common.footer.contact') }}</h2>
             <address class="footer__contact">
-                @foreach (config('lifopu.offices') as $key => $office)
+                @foreach (config('lifopu.office') as $key => $office)
                     <a href="{{ $office['map'] }}" target="_blank" rel="noopener" class="footer__office">
-                        <span class="footer__office-tag">{{ __('common.offices.'.$key) }}</span>
-                        {{ $office['name'] }}{{ $office['street'] ? ', '.$office['street'] : '' }}, {{ $office['city'] }}<span class="ext-mark" aria-hidden="true">↗</span><span class="sr-only"> ({{ __('common.opens_new_tab', ['site' => 'Google Maps']) }})</span>
+                        <span class="footer__office-tag">{{ __('common.office.' . $key) }}</span>
+                        {{ $office['name'] }}{{ $office['street'] ? ', ' . $office['street'] : '' }},
+                        {{ $office['city'] }}<span class="ext-mark" aria-hidden="true">↗</span><span class="sr-only">
+                            ({{ __('common.opens_new_tab', ['site' => 'Google Maps']) }})</span>
                     </a>
                 @endforeach
             </address>
@@ -53,17 +55,13 @@
         </div>
     </div>
 
-    <div class="footer__band" data-pattern-zone>
-        <x-pattern motif="band" scale="0.03" interactive />
-        <x-logo variant="horizontal" title="" class="footer__band-logo" />
-    </div>
-
     <div class="footer__legal container">
         <p>© {{ now()->year }} {{ config('lifopu.company.name') }}. {{ __('common.footer.rights') }}</p>
         <ul>
             <li><a href="{{ route('privacy') }}">{{ __('common.footer.privacy') }}</a></li>
             <li><a href="{{ route('sitemap') }}">{{ __('common.footer.sitemap') }}</a></li>
-            <li><a href="#main" class="footer__top">{{ __('common.footer.top') }} <span aria-hidden="true">↑</span></a></li>
+            <li><a href="#main" class="footer__top">{{ __('common.footer.top') }} <span aria-hidden="true">↑</span></a>
+            </li>
         </ul>
     </div>
 </footer>

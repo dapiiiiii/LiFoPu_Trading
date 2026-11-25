@@ -15,11 +15,13 @@ foreach (config('lifopu.external_services') as $slug => $url) {
 Route::controller(PageController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
+    Route::get('/about/{section}', 'aboutSection')
+        ->whereIn('section', ['mission', 'mark', 'history', 'advantage', 'structure', 'future'])
+        ->name('about.section');
     Route::get('/services', 'services')->name('services');
     Route::get('/services/{service}', 'service')
         ->whereIn('service', ServiceLink::internal())
         ->name('services.show');
-    Route::get('/markets', 'markets')->name('markets');
     Route::get('/sustainability-safety', 'sustainability')->name('sustainability');
     Route::get('/privacy-policy', 'privacy')->name('privacy');
 });

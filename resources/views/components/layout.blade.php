@@ -27,7 +27,7 @@
     ];
 @endphp
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-quality="enhanced" class="no-js">
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}" data-quality="enhanced" data-theme="light" class="no-js">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
@@ -69,6 +69,17 @@
             var auto = reduce || slow ? 'essential' : (weak || small ? 'enhanced' : 'cinematic');
             d.dataset.quality = saved || auto;
             d.dataset.qualityAuto = auto;
+
+            // Theme: ?theme= in the link, else the visitor's last choice, else light.
+            var theme = null, asked = /[?&]theme=(light|dark)\b/.exec(location.search);
+            try {
+                if (asked) localStorage.setItem('lf-theme', asked[1]);
+                theme = localStorage.getItem('lf-theme');
+            } catch (e) {}
+            if (asked) theme = asked[1];
+            d.dataset.theme = theme === 'dark' ? 'dark' : 'light';
+            var meta = document.querySelector('meta[name="theme-color"]');
+            if (meta) meta.content = d.dataset.theme === 'dark' ? '#0d0c0b' : '#fbf9f5';
         })();
     </script>
 

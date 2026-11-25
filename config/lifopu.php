@@ -36,7 +36,7 @@ return [
 
     // Office locations supplied by the company (November 2026). Century Executive Tower is the main office.
     // Coordinates are the Google Maps pins.
-    'offices' => [
+    'office' => [
         'main' => [
             'name' => 'Century Executive Tower',
             'street' => 'Namibia St',
