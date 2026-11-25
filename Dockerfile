@@ -74,3 +74,4 @@ RUN sed -i 's/\r$//' /usr/local/bin/lifopu-entrypoint && chmod +x /usr/local/bin
 EXPOSE 80
 ENTRYPOINT ["lifopu-entrypoint"]
 CMD ["apache2-foreground"]
+
