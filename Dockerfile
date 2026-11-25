@@ -37,13 +37,17 @@ RUN composer install --no-dev --no-interaction --no-progress --prefer-dist \
 FROM php:8.2-apache AS app
 
 RUN apt-get update \
-    && apt-get install -y --no-install-recommends libicu-dev libzip-dev unzip \
-    && docker-php-ext-install -j"$(nproc)" pdo_mysql intl zip bcmath opcache \
+    && apt-get install -y --no-install-recommends libicu-dev libzip-dev libpq-dev unzip \
+    && docker-php-ext-install -j"$(nproc)" pdo_mysql pdo_pgsql intl zip bcmath opcache \
     && rm -rf /var/lib/apt/lists/*
 
 # Serve from public/ and let Laravel's .htaccess handle the routes.
+# Apache listens on $PORT: 80 by default, Render and similar hosts set their own.
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
+ENV PORT=80
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's/^Listen 80$/Listen ${PORT}/' /etc/apache2/ports.conf \
+    && sed -ri -e 's/<VirtualHost \*:80>/<VirtualHost *:${PORT}>/' /etc/apache2/sites-available/000-default.conf \
     && a2enmod rewrite headers \
     && printf '<Directory ${APACHE_DOCUMENT_ROOT}>\n    AllowOverride All\n    Require all granted\n</Directory>\nServerName localhost\nServerTokens Prod\nServerSignature Off\n' \
        > /etc/apache2/conf-available/laravel.conf \

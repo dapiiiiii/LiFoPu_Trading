@@ -13,6 +13,10 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->web(append: [SetLocale::class]);
+
+        // Behind a host's HTTPS proxy (Render), set TRUSTED_PROXIES=* so links and assets use https.
+        // Unset locally and on cPanel, where nothing changes.
+        $middleware->trustProxies(at: env('TRUSTED_PROXIES'));
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         //
