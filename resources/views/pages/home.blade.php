@@ -32,33 +32,11 @@
         <p class="sr-only">{{ __('home.hero.scene_label') }}</p>
     </section>
 
-    {{-- Company at a glance --}}
-    <section class="section glance" id="at-a-glance" data-sky="morning" data-spine-label="{{ __('home.glance.eyebrow') }}" aria-labelledby="glance-title">
-        <p class="ghost-title glance__ghost" aria-hidden="true">{{ __('home.glance.ghost') }}</p>
-        <div class="container glance__grid">
-            <div class="glance__intro">
-                <p class="eyebrow">{{ __('home.glance.eyebrow') }}</p>
-                <h2 id="glance-title" class="h2" data-split>{{ __('home.glance.title') }}</h2>
-                <p class="lead">{{ __('home.glance.body') }}</p>
-                <p class="glance__ranking" data-reveal>
-                    <x-logo variant="mark" title="" class="glance__ranking-mark" />
-                    <span>{{ __('company.ranking') }}</span>
-                </p>
-            </div>
-            <div class="glance__facts">
-                <dl class="stats">
-                    @foreach (trans('company.stats') as $stat)
-                        <div class="stat stat--{{ $stat['key'] }}" data-reveal>
-                            <dt class="stat__label">{{ $stat['label'] }}</dt>
-                            <dd class="stat__value">
-                                <span data-count="{{ $stat['count'] }}" data-decimals="{{ $stat['decimals'] }}" data-prefix="{{ $stat['prefix'] }}" data-suffix="{{ $stat['suffix'] }}">{{ $stat['value'] }}</span>
-                            </dd>
-                            <dd class="stat__detail">{{ $stat['detail'] }}</dd>
-                        </div>
-                    @endforeach
-                </dl>
-                <p class="source-note">{{ __('company.stats_source') }}</p>
-            </div>
+    {{-- Full-section title: Our Journey --}}
+    <section class="section journey-title" id="journey-title" data-sky="dawn" data-spine-label="{{ __('home.glance.eyebrow') }}" aria-labelledby="journey-title-h2">
+        <div class="container journey-title__inner">
+            <p class="eyebrow">{{ __('home.glance.eyebrow') }}</p>
+            <h1 id="journey-title-h2" class="journey-title__text" data-split>{{ __('home.glance.title') }}</h1>
         </div>
     </section>
 
@@ -84,7 +62,7 @@
                 @endforeach
                 <div class="roadside__caption">
                     @foreach ($services as $slug => $item)
-                        <span data-caption="{{ $slug }}" @if ($loop->first) data-active @endif>KM {{ $item['km'] }} · {{ $item['title'] }}</span>
+                        <span data-caption="{{ $slug }}" @if ($loop->first) data-active @endif>{{ $item['km'] }} · {{ $item['title'] }}</span>
                     @endforeach
                 </div>
             </div>
@@ -97,7 +75,7 @@
             <ol class="roadside__stops" data-roadside-stops>
                 @foreach ($services as $slug => $item)
                     <li class="stop" data-stop="{{ $slug }}" data-palette="{{ $item['palette'] }}" @if ($loop->first) data-active @endif>
-                        <span class="stop__km">{{ __('home.roadside.km') }} {{ $item['km'] }}</span>
+                        <span class="stop__km">{{ $item['km'] }}</span>
                         <h3 class="stop__title">{{ $item['title'] }}</h3>
                         <p class="stop__text">{{ $item['summary'] }}</p>
                         <a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }} class="stop__link" data-stop-link>
@@ -107,7 +85,6 @@
                     </li>
                 @endforeach
             </ol>
-            <p class="roadside__hint">{{ __('home.roadside.hint') }}</p>
         </div>
     </section>
 

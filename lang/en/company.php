@@ -42,7 +42,7 @@ return [
         ['key' => 'turnover', 'value' => 'ETB 4.6B+', 'count' => 4.6, 'decimals' => 1, 'prefix' => 'ETB ', 'suffix' => 'B+', 'label' => 'Annual sales turnover', 'detail' => 'Exceeding ETB 4.6 billion'],
         ['key' => 'people', 'value' => '100+', 'count' => 100, 'decimals' => 0, 'prefix' => '', 'suffix' => '+', 'label' => 'Permanent employees', 'detail' => 'A workforce of more than 100'],
     ],
-    'ranking' => 'Our service stations consistently rank among the top ten nationwide in combined fuel and lubricant sales.',
+    //'ranking' => 'Our service stations consistently rank among the top ten nationwide in combined fuel and lubricant sales.',
     'stats_source' => 'Figures as published in the LiFoPu Company Profile, 2026 edition.',
 
     // P.2, P.3, P.7, P.10. Ethiopian calendar equivalents verified by date arithmetic.

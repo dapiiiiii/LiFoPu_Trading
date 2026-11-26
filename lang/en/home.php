@@ -5,10 +5,10 @@ return [
     'meta_title' => 'LiFoPu Trading | Powering Movement. Connecting Possibilities.',
 
     'hero' => [
-        'eyebrow' => 'Fuel Retail · Lubricants · Bulk Transportation · Coffee Export',
+        'eyebrow' => 'Fuel Retail · Lubricants · Transportation · Coffee Export',
         'title_a' => 'Powering movement.',
         'title_b' => 'Connecting possibilities.',
-        'lede' => 'Fuel retail, lubricants distribution, bulk fuel transportation and coffee export trading, built on more than a decade of operational experience in Ethiopia.',
+        'lede' => 'Grounded in Extensive Operational Experience in Ethiopia, encompassing Fuel & Lubricants Distribution, Fuel Transportation, and Coffee Export Trading.',
         'cta_primary' => 'Explore Our Capabilities',
         'cta_secondary' => 'Discover LiFoPu',
         'scroll' => 'Scroll to travel',
@@ -16,17 +16,16 @@ return [
     ],
 
     'glance' => [
-        'eyebrow' => 'Company at a glance',
-        'title' => 'From one transport company to an integrated energy operation.',
-        'body' => 'LiFoPu began on the road. Today it runs four modern fuel service stations, is an authorized sub-distributor of Caltex lubricants, moves petroleum products with its own bulk tanker operation and trades Ethiopian coffee through its sister company, Lela Trading.',
+        'eyebrow' => 'Company at a Glance',
+        'title' => 'Our Journey from Transportation to Integrated Energy Solutions',
+        'body' => 'LiFoPu started on the road and has grown into a diverse operation spanning fuel stations, Emarat & Caltex Lubricants, Petroleum Transport, and Ethiopian Coffee through its sister company, Lela Trading.',
         'ghost' => 'Live For Purpose',
     ],
 
     'roadside' => [
         'eyebrow' => 'Capabilities',
-        'title' => 'Four stops on one road.',
-        'lede' => 'Fuel powers transport, lubricants protect machines, tankers connect supply with demand, and coffee connects Ethiopia with the world.',
-        'hint' => 'Hover, tap or use the arrow keys to travel between stops.',
+        'title' => 'Different Services, One Shared Vision',
+        'lede' => 'Powering Journeys, Supporting Industries, and Connecting Markets.',
         'km' => 'KM',
     ],
 
@@ -41,7 +40,7 @@ return [
 
     'network' => [
         'eyebrow' => 'How it connects',
-        'title' => 'One operation, four connected businesses.',
+        'title' => 'Four Businesses, Moving Forward Together',
         'lede' => 'Bulk transport links source depots with LiFoPu stations and commercial consumers. Lubricants flow through wholesale and retail channels. Coffee moves from Ethiopia to international markets through Lela Trading.',
         'nodes' => [
             'core' => 'LiFoPu',

@@ -61,7 +61,7 @@
                                     @foreach ($services as $slug => $service)
                                         <li>
                                             <a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }} class="nav__service" data-palette="{{ $service['palette'] }}" @if (request()->is("services/$slug")) aria-current="page" @endif>
-                                                <span class="nav__km">KM {{ $service['km'] }}</span>
+                                                <span class="nav__km">{{ $service['km'] }}</span>
                                                 <span class="nav__service-title">{{ $service['title'] }}{{ ServiceLink::marker($slug) }}</span>
                                             </a>
                                         </li>
@@ -116,7 +116,7 @@
             </ul>
             <ul class="nav__overlay-services">
                 @foreach ($services as $slug => $service)
-                    <li><a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }}><span class="nav__km">KM {{ $service['km'] }}</span> {{ $service['title'] }}{{ ServiceLink::marker($slug) }}</a></li>
+                    <li><a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }}><span class="nav__km">{{ $service['km'] }}</span> {{ $service['title'] }}{{ ServiceLink::marker($slug) }}</a></li>
                 @endforeach
             </ul>
             <div class="nav__overlay-foot">

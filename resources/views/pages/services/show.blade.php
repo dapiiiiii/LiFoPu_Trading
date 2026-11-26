@@ -117,7 +117,7 @@
 
     <nav class="next-stop" data-palette="{{ $nextItem['palette'] }}" aria-label="{{ $labels['next'] }}">
         <div class="container next-stop__inner">
-            <span class="next-stop__label">{{ $labels['next'] }} · KM {{ $nextItem['km'] }}</span>
+            <span class="next-stop__label">{{ $labels['next'] }} · {{ $nextItem['km'] }}</span>
             <a href="{{ ServiceLink::href($next) }}" {{ ServiceLink::attributes($next) }} class="next-stop__link">
                 <span class="next-stop__title">{{ $nextItem['title'] }}</span>
                 <span class="next-stop__arrow" aria-hidden="true">→</span>

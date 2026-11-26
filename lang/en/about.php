@@ -33,7 +33,6 @@ return [
     'mark' => [
         'eyebrow' => 'The logo',
         'title' => 'An arrow that points north, built from an ‘L’.',
-        'hint' => 'Hover or focus each idea to see it in the mark.',
     ],
 
     'history' => [

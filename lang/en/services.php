@@ -29,23 +29,23 @@ return [
             'hero_title' => null,
             'lede' => null,
             'sections' => [
-                ['title' => 'The forecourt is where trust is earned', 'text' => 'Our service stations consistently rank among the top ten nationwide in combined fuel and lubricant sales, reflecting strong operational management, customer trust and supply chain efficiency.'],
-                ['title' => 'Fuel as an essential input', 'text' => 'Fuel keeps transportation, construction, manufacturing and daily economic activity moving. Our integrated retail, wholesale and bulk transportation operations are built to keep supply reliable and operations continuous.'],
-                ['title' => 'Standards at every pump', 'text' => 'LiFoPu maintains strict safety and environmental standards while continuously investing in service quality and infrastructure improvement.'],
+                ['title' => 'Putting Our Customers First', 'text' => 'Our service stations have earned a place among leading fuel and lubricant retailers. This growth comes from putting customers first, delivering reliable service, and making every visit count.'],
+                ['title' => 'Keeping Businesses and Communities Moving', 'text' => 'Fuel plays a part in everyday life, from transport and construction to manufacturing. Through our retail, wholesale, and bulk delivery services, we help keep businesses running and essential supplies moving.'],
+                ['title' => 'Standards at our Stations', 'text' => 'LiFoPu We care about the safety of our customers, our people, and the environment. That is why we continue to improve our stations, raise service standards, and invest in better facilities.'],
             ],
-            'moment' => ['title' => 'Ready at the pump', 'text' => 'The nozzle is where the whole supply chain reaches the customer: the right fuel, ready for every vehicle that pulls in.'],
+            'moment' => ['title' => '', 'text' => ''],
         ],
 
         'lubricants' => [
             'km' => '02',
             'title' => 'Lubricants Sales',
-            'summary' => 'Wholesale distribution and retail sales of automotive and industrial lubricants to retailers (gas stations, sub-distributors, resellers, lube shops), automotive garages, machine workshops, transport owners/operators, and industrial customers.',
-            'meta_description' => 'LiFoPu is an authorized sub-distributor of Caltex lubricants, supplying automotive and industrial lubricants wholesale and retail in Ethiopia.',
+            'summary' => 'Supplying Quality Automotive and Industrial Lubricants to Businesses, Workshops, Transport Operators, and Retailers.',
+            'meta_description' => 'LiFoPu is an authorized distributor of Caltex Lubricants, supplying Automotive and Industrial Lubricants Wholesale and retail in Ethiopia.',
             'palette' => 'gold',
             'scene' => 'oil',
             'inquiry' => 'lubricants',
             'hero_title' => 'Protection for every machine that moves.',
-            'lede' => 'An authorized sub-distributor of Caltex lubricants, supplying automotive and industrial lubricants through wholesale and retail channels.',
+            'lede' => 'An authorized distributor of Caltex lubricants, supplying automotive and industrial lubricants through wholesale and retail channels.',
             'sections' => [
                 ['title' => 'Authorized sub-distributor of Caltex', 'text' => 'LiFoPu distributes Caltex automotive and industrial lubricants through wholesale and retail channels, backed by a dedicated lubricants team of sales representatives and store keepers.'],
                 ['title' => 'The channels we supply', 'text' => 'Gas stations, sub-distributors, resellers and lube shops; automotive garages and machine workshops; transport owners and operators; and industrial customers.'],
@@ -61,13 +61,13 @@ return [
                 'photo' => ['src' => 'images/lubricants/oil-pour.jpg', 'width' => 596, 'height' => 335, 'alt' => 'Engine oil being poured into a funnel during a service', 'caption' => 'Engine oils for every service bay.'],
                 'range' => ['src' => 'images/lubricants/caltex-range.png', 'width' => 1024, 'height' => 431, 'alt' => 'Caltex lubricants range: Delo 400 MGX, Delo Gold Ultra, Havoline ProDS ECO 5, Havoline Formula, Havoline EZY 4T and Havoline Xtended Life coolant', 'caption' => 'Caltex Delo and Havoline: engine oils and coolant for cars, motorcycles and heavy-duty diesel.'],
             ],
-            'moment' => ['title' => 'Weight, flow, protection', 'text' => 'Move across the ribbon. Good lubrication is felt before it is seen: smooth, steady and protective under load.'],
+            'moment' => ['title' => '', 'text' => ''],
         ],
 
         'fuel-transportation' => [
             'km' => '03',
             'title' => 'Fuel Transportation Services',
-            'summary' => 'Operating a fleet of bulk fuel tanker trucks to transport petroleum products mainly from source depots to retail stations and commercial consumers.',
+            'summary' => 'LiFoPu moves petroleum products safely and reliably from supply depots to service stations and businesses using our own fleet of bulk fuel tankers.',
             'meta_description' => 'LiFoPu operates bulk fuel tanker trucks transporting petroleum products from source depots to retail stations and commercial consumers in Ethiopia.',
             'palette' => 'transport',
             'scene' => 'tanker',
@@ -85,8 +85,8 @@ return [
 
         'coffee-export' => [
             'km' => '04',
-            'title' => 'Coffee Export Trading',
-            'summary' => 'Export of premium and commercial-grade Ethiopian coffee through our sister company, Lela Trading, sourced in compliance with national regulations and quality standards to ensure reliable and traceable global supply.',
+            'title' => 'Coffee Export',
+            'summary' => 'Through our sister company, Lela Trading, we bring quality Ethiopian coffee to international markets, with a focus on reliable sourcing, quality, and traceability.',
             'meta_description' => 'Premium and commercial-grade Ethiopian coffee exported through Lela Trading, LiFoPu’s sister company.',
             'palette' => 'gold',
             'scene' => 'coffee',

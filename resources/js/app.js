@@ -35,6 +35,7 @@ function boot() {
     initHero();
     initRoadside();
     initMoments();
+    initJourneyTitle();
     initOil();
     initSpine(ctx);
     initInquiry();
@@ -46,3 +47,24 @@ function boot() {
 
 if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot);
 else boot();
+
+function initJourneyTitle() {
+    const title = document.querySelector('.journey-title__text');
+    if (!title) return;
+
+    const split = new SplitText(title, { type: 'chars,words' });
+
+    gsap.from(split.chars, {
+        opacity: 0,
+        y: 60,
+        duration: 0.8,
+        stagger: 0.025,
+        ease: 'power3.out',
+        scrollTrigger: {
+            trigger: title,
+            start: 'top 85%',
+            end: 'bottom 40%',
+            toggleActions: 'play none none reverse',
+        },
+    });
+}

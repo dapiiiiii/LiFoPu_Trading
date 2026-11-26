@@ -17,7 +17,7 @@
     <div class="page-hero__shade" aria-hidden="true"></div>
     <div class="page-hero__content container">
         <p class="eyebrow">
-            @if ($km)<span class="eyebrow__km">KM {{ $km }}</span>@endif
+            @if ($km)<span class="eyebrow__km">{{ $km }}</span>@endif
             {{ $eyebrow }}
         </p>
         <h1 id="page-title" class="page-hero__title" data-split>{{ $title }}</h1>

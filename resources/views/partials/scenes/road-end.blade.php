@@ -23,7 +23,7 @@
         <rect x="-6" y="0" width="12" height="190" fill="#2a2420" />
         <rect x="-60" y="-70" width="120" height="84" rx="6" fill="#f2ede6" />
         <use href="#lf-mark" x="-44" y="-58" width="26" height="22" fill="#d84500" />
-        <text x="-12" y="-38" font-size="20" fill="#0d0c0b" class="scene__km-label">KM</text>
+
         <text x="0" y="0" font-size="34" text-anchor="middle" fill="#0d0c0b" class="scene__km-value">{{ $km ?? '00' }}</text>
     </g>
 </svg>

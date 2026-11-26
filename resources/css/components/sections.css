@@ -65,6 +65,22 @@
         .stat:nth-child(even) { padding-left: 0; }
     }
 
+    /* --- Journey title full section --- */
+    .journey-title {
+        overflow: hidden;
+        padding-block: clamp(8rem, 14vw, 16rem);
+    }
+    .journey-title__inner {
+        max-width: 86rem;
+        margin: 0 auto;
+        text-align: center;
+    }
+    .journey-title__text {
+        margin: 0;
+        font: 400 clamp(3rem, 2rem + 8vw, 9rem)/1.05 var(--font-display);
+        letter-spacing: .02em;
+    }
+
     /* --- Capability roadside --- */
     .roadside__frame { position: relative; }
     .roadside__stage {

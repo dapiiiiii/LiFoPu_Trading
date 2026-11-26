@@ -9,7 +9,7 @@
                 @foreach (trans('services.items') as $slug => $item)
                     <li class="service-row" data-palette="{{ $item['palette'] }}" data-reveal>
                         <a href="{{ ServiceLink::href($slug) }}" {{ ServiceLink::attributes($slug) }} class="service-row__link">
-                            <span class="service-row__km">KM {{ $item['km'] }}</span>
+                            <span class="service-row__km">{{ $item['km'] }}</span>
                             <span class="service-row__body">
                                 <span class="service-row__title">{{ $item['title'] }}{{ ServiceLink::marker($slug) }}</span>
                                 <span class="service-row__summary">{{ $item['summary'] }}</span>
