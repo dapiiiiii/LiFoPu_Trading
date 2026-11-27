@@ -10,7 +10,7 @@
     $aboutSections = [
         ['url' => route('about'),                       'num' => '01', 'label' => __('about.overview.eyebrow'), 'is_active' => request()->routeIs('about') && !request()->routeIs('about.section')],
         ['url' => route('about.section', 'mission'),   'num' => '02', 'label' => __('about.mission_label').' & '.__('about.vision_label'), 'is_active' => request()->is('about/mission')],
-        ['url' => route('about.section', 'mark'),      'num' => '03', 'label' => __('about.mark.eyebrow'), 'is_active' => request()->is('about/mark')],
+        ['url' => route('about.section', 'operations'), 'num' => '03', 'label' => __('about.operations.eyebrow'), 'is_active' => request()->is('about/operations')],
         ['url' => route('about.section', 'history'),   'num' => '04', 'label' => __('about.history.eyebrow'), 'is_active' => request()->is('about/history')],
         ['url' => route('about.section', 'advantage'), 'num' => '05', 'label' => __('about.advantage.eyebrow'), 'is_active' => request()->is('about/advantage')],
         ['url' => route('about.section', 'structure'), 'num' => '06', 'label' => __('about.structure.eyebrow'), 'is_active' => request()->is('about/structure')],

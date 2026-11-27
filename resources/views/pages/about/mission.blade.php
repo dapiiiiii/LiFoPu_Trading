@@ -33,9 +33,9 @@
         'prevUrl'   => route('about'),
         'prevNum'   => 'Chapter 01',
         'prevLabel' => __('about.overview.eyebrow'),
-        'nextUrl'   => route('about.section', 'mark'),
+        'nextUrl'   => route('about.section', 'operations'),
         'nextNum'   => 'Chapter 03',
-        'nextLabel' => __('about.mark.eyebrow'),
+        'nextLabel' => __('about.operations.eyebrow'),
     ])
 
 </x-layout>

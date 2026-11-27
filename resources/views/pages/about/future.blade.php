@@ -25,6 +25,9 @@
         </div>
     </section>
 
+    {{-- What runs today vs. what is planned (moved here from the home page) --}}
+    @include('partials.sections.future')
+
     @include('partials.sections.cta')
 
     @include('partials.about-chapter-nav', [

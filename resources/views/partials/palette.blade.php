@@ -4,7 +4,7 @@
             ['label' => __('common.nav.home'), 'href' => route('home'), 'keywords' => 'start hero'],
             ['label' => __('common.nav.about'), 'href' => route('about'), 'keywords' => 'company history overview live for purpose'],
             ['label' => __('about.mission_label').' & '.__('about.vision_label'), 'href' => route('about.section', 'mission'), 'keywords' => 'mission vision purpose'],
-            ['label' => __('about.mark.eyebrow'), 'href' => route('about.section', 'mark'), 'keywords' => 'logo mark symbol arrow north branding'],
+            ['label' => __('about.operations.eyebrow'), 'href' => route('about.section', 'operations'), 'keywords' => 'operations network supply markets fuel lubricants transport coffee'],
             ['label' => __('about.history.eyebrow'), 'href' => route('about.section', 'history'), 'keywords' => 'history timeline milestones 2013'],
             ['label' => __('about.advantage.eyebrow'), 'href' => route('about.section', 'advantage'), 'keywords' => 'competitive advantage strengths'],
             ['label' => __('about.structure.eyebrow'), 'href' => route('about.section', 'structure'), 'keywords' => 'organizational structure management chart org'],

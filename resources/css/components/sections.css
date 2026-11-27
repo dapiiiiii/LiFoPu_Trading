@@ -65,20 +65,192 @@
         .stat:nth-child(even) { padding-left: 0; }
     }
 
-    /* --- Journey title full section --- */
+    /* --- Journey title: the road (Transportation) running into the sun (Energy) --- */
     .journey-title {
+        --jt-sun: 243 154 74;
+        --jt-grid: rgb(246 241 234 / .08);
+        --jt-edge: rgb(255 122 61 / .55);
+        --jt-lane: rgb(226 181 74 / .75);
+        --jt-surface: rgb(246 241 234 / .035);
+        --jt-a: var(--ignite-tint-2);
+        --jt-b: var(--gold-tint);
+        --jt-speed: 2.4s;
         overflow: hidden;
-        padding-block: clamp(8rem, 14vw, 16rem);
+        padding-block: clamp(6.5rem, 11vw, 12rem) clamp(5rem, 8vw, 9rem);
     }
+    [data-theme='light'] .journey-title {
+        --jt-sun: 246 178 110;
+        --jt-grid: rgb(20 17 15 / .07);
+        --jt-edge: rgb(216 69 0 / .45);
+        --jt-lane: rgb(198 152 34 / .8);
+        --jt-surface: rgb(216 69 0 / .03);
+        --jt-a: var(--ignite-shade-1);
+        --jt-b: #94690a;
+    }
+
+    /* Background: one perspective plane, vanishing just under the sun. */
+    .journey-title__bg {
+        position: absolute;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+        pointer-events: none;
+        perspective: 26rem;
+        perspective-origin: 50% 56%;
+    }
+    .journey-title__sun {
+        position: absolute;
+        left: 50%; top: 56%;
+        width: min(78rem, 140vw);
+        aspect-ratio: 2 / 1;
+        translate: -50% -50%;
+        background: radial-gradient(closest-side, rgb(var(--jt-sun) / .5), rgb(var(--jt-sun) / .16) 48%, transparent 78%);
+        animation: jt-breathe 9s ease-in-out infinite alternate;
+    }
+    .journey-title__ground {
+        position: absolute;
+        left: -60%; right: -60%; bottom: 0;
+        height: 260%;
+        transform-origin: 50% 100%;
+        transform: rotateX(86deg);
+        background:
+            repeating-linear-gradient(to bottom, var(--jt-grid) 0 2px, transparent 2px 120px),
+            repeating-linear-gradient(to right, var(--jt-grid) 0 2px, transparent 2px 160px);
+        background-position: 0 0, center 0;
+        mask-image: linear-gradient(to bottom, transparent 0%, #000 55%);
+        animation: jt-drive var(--jt-speed) linear infinite;
+    }
+    .journey-title__road {
+        position: absolute;
+        left: 50%; top: 0; bottom: 0;
+        width: 10rem;
+        translate: -50% 0;
+        border-inline: 3px solid var(--jt-edge);
+        background: var(--jt-surface);
+    }
+    .journey-title__road::before {
+        content: '';
+        position: absolute;
+        left: 50%; top: 0; bottom: 0;
+        width: 8px;
+        translate: -50% 0;
+        background: repeating-linear-gradient(to bottom, var(--jt-lane) 0 60px, transparent 60px 120px);
+        animation: jt-drive var(--jt-speed) linear infinite;
+    }
+    @keyframes jt-drive { to { background-position: 0 120px, center 0; } }
+    @keyframes jt-breathe { from { opacity: .7; scale: .94; } to { opacity: 1; scale: 1.04; } }
+
+    /* Copy */
     .journey-title__inner {
-        max-width: 86rem;
+        max-width: 72rem;
         margin: 0 auto;
         text-align: center;
     }
+    .journey-title__eyebrow { justify-content: center; }
     .journey-title__text {
-        margin: 0;
-        font: 400 clamp(3rem, 2rem + 8vw, 9rem)/1.05 var(--font-display);
-        letter-spacing: .02em;
+        margin: 0 auto;
+        font: 500 clamp(2.75rem, 1.4rem + 5.2vw, 6.5rem)/1.12 var(--font-display);
+        letter-spacing: .015em;
+        text-wrap: balance;
+    }
+    /* Room under each masked line for the lane line below the descenders. */
+    .journey-title__text .split-line { padding-bottom: .2em; margin-bottom: -.2em; }
+    /* "Transportation" rides on a lane line whose dashes keep moving. */
+    .journey-title__from { position: relative; display: inline-block; }
+    .journey-title__from::after {
+        content: '';
+        position: absolute;
+        left: .04em; right: .04em; bottom: -.08em;
+        height: .06em;
+        background: repeating-linear-gradient(90deg, var(--accent) 0 .4em, transparent .4em .65em);
+        transform-origin: left;
+        transition: transform 1.2s var(--ease-out) .4s;
+        animation: jt-lane 1.4s linear infinite;
+    }
+    @keyframes jt-lane { to { background-position: .65em 0; } }
+    /* "Integrated Energy Solutions" glows like the sun it is heading to. */
+    .journey-title__to {
+        background: linear-gradient(100deg, var(--jt-a) 10%, var(--jt-b) 50%, var(--jt-a) 90%) 0 0 / 220% 100%;
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+        animation: jt-shine 8s ease-in-out infinite alternate;
+    }
+    @keyframes jt-shine { to { background-position: 100% 0; } }
+
+    /* The route: four stops, a line that draws in, the last stop pulsing. */
+    .journey-route {
+        --line-inset: 12.5%;
+        position: relative;
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        max-width: 56rem;
+        margin: clamp(3rem, 6vw, 5rem) auto 0;
+        padding: 0;
+        list-style: none;
+    }
+    .journey-route::before, .journey-route::after {
+        content: '';
+        position: absolute;
+        top: .5rem;
+        left: var(--line-inset); right: var(--line-inset);
+        height: 2px;
+    }
+    .journey-route::before { background: repeating-linear-gradient(90deg, var(--rule) 0 10px, transparent 10px 18px); }
+    .journey-route::after {
+        background: linear-gradient(90deg, var(--accent), var(--accent-2));
+        transform-origin: left;
+        transition: transform 1.8s var(--ease-road) .3s;
+    }
+    .journey-route__stop {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: .35rem;
+        padding-top: 2rem;
+        transition: opacity .8s var(--ease-out), transform .8s var(--ease-out);
+        transition-delay: calc(var(--i) * 220ms + 400ms);
+    }
+    .journey-route__stop::before {
+        content: '';
+        position: absolute;
+        top: .5rem; left: 50%;
+        width: .8rem; height: .8rem;
+        translate: -50% -50%;
+        rotate: 45deg;
+        border: 2px solid var(--accent);
+        background: var(--sky-bottom);
+        z-index: 1;
+    }
+    .journey-route__stop:last-child::before { background: var(--accent); }
+    .journey-route__stop:last-child::after {
+        content: '';
+        position: absolute;
+        top: .5rem; left: 50%;
+        width: .8rem; height: .8rem;
+        translate: -50% -50%;
+        rotate: 45deg;
+        border: 2px solid var(--accent);
+        animation: jt-ping 2.4s var(--ease-out) infinite;
+    }
+    @keyframes jt-ping { from { scale: 1; opacity: .9; } to { scale: 3; opacity: 0; } }
+    .journey-route__marker { font: 500 clamp(1.5rem, 1.2rem + 1vw, 2.1rem)/1 var(--font-display); color: var(--accent-text); font-variant-numeric: tabular-nums; }
+    .journey-route__label { font: 500 .8rem/1.3 var(--font-display); letter-spacing: .2em; text-transform: uppercase; color: var(--fg-muted); }
+
+    /* Before the route scrolls into view: line and stops wait, the lane line is undrawn. */
+    .motion-ready .journey-route:not(.is-in)::after { transform: scaleX(0); }
+    .motion-ready .journey-route:not(.is-in) .journey-route__stop { opacity: 0; transform: translateY(1rem); }
+    .motion-ready .journey-title:not(:has(.journey-route.is-in)) .journey-title__from::after { transform: scaleX(0); }
+
+    @media (max-width: 640px) {
+        .journey-route { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 2rem; }
+        .journey-route::before, .journey-route::after { display: none; }
+        .journey-title__road { width: 7rem; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+        .journey-title__sun, .journey-title__ground, .journey-title__road::before,
+        .journey-title__from::after, .journey-title__to, .journey-route__stop:last-child::after { animation: none; }
     }
 
     /* --- Capability roadside --- */

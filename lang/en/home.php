@@ -18,6 +18,20 @@ return [
     'glance' => [
         'eyebrow' => 'Company at a Glance',
         'title' => 'Our Journey from Transportation to Integrated Energy Solutions',
+        // The same title in parts, so the start (the road) and the end (energy) can be styled.
+        'title_parts' => [
+            'lead' => 'Our Journey from',
+            'from' => 'Transportation',
+            'join' => 'to',
+            'to' => 'Integrated Energy Solutions',
+        ],
+        // Short stops from company.timeline (Company Profile 2026).
+        'route' => [
+            ['marker' => '2013', 'label' => 'Transport'],
+            ['marker' => 'Then', 'label' => 'Machinery rental'],
+            ['marker' => '2023', 'label' => 'Petroleum retail'],
+            ['marker' => 'Now', 'label' => 'Integrated energy'],
+        ],
         'body' => 'LiFoPu started on the road and has grown into a diverse operation spanning fuel stations, Emarat & Caltex Lubricants, Petroleum Transport, and Ethiopian Coffee through its sister company, Lela Trading.',
         'ghost' => 'Live For Purpose',
     ],
@@ -68,6 +82,8 @@ return [
         'lede' => 'LiFoPu has worked alongside national and international energy, aviation and logistics companies.',
         'list_label' => 'Companies LiFoPu has worked with',
         'items' => [
+            ['name' => 'Caltex', 'logo' => 'caltex.png'],
+            ['name' => 'Emarat', 'logo' => 'emarat.png'],
             ['name' => 'Saudi Aramco', 'logo' => 'saudi-aramco.png'],
             ['name' => 'National Oil Ethiopia', 'logo' => 'national-oil-ethiopia.png'],
             ['name' => 'Total', 'logo' => 'total.png'],

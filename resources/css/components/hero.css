@@ -264,4 +264,80 @@
         .page-hero .coffee__world, .page-hero .scene--tanker .scene__truck { transform: none; }
         .page-hero .scene--nozzle .nz__subject { translate: none; }
     }
+
+    /* --- History: four milestone prints fanned like a hand of photos --- */
+    .scene--milestones {
+        container-type: size;
+        overflow: hidden;
+        background:
+            radial-gradient(60% 55% at 62% 58%, rgb(216 69 0 / .32), transparent 70%),
+            radial-gradient(40% 40% at 85% 15%, rgb(198 152 34 / .18), transparent 70%),
+            #0d0b0a;
+    }
+    [data-theme='light'] .scene--milestones {
+        background:
+            radial-gradient(60% 55% at 50% 60%, rgb(246 178 110 / .45), transparent 70%),
+            repeating-linear-gradient(135deg, rgb(198 152 34 / .06) 0 2px, transparent 2px 26px),
+            #f8f2ea;
+    }
+    .milestones__deck {
+        /* One card width drives the whole fan; it fits the box it is in. */
+        --w: min(25cqw, 50cqh);
+        position: absolute;
+        top: 50%; left: 50%;
+        width: calc(var(--w) * 3.16);
+        height: calc(var(--w) * 1.32);
+        translate: -50% -50%;
+    }
+    /* Full-bleed (dark theme): the fan sits on the right, clear of the title. */
+    @container (min-width: 64rem) {
+        .milestones__deck { --w: min(15cqw, 42cqh); left: auto; right: 6cqw; translate: 0 -46%; }
+    }
+    .mcard {
+        position: absolute;
+        top: 0;
+        left: calc(var(--i) * var(--w) * .72);
+        width: var(--w);
+        margin: 0;
+        padding: 6% 6% 0;
+        border-radius: 4px;
+        background: #fffdf9;
+        box-shadow: 0 1px 0 rgb(0 0 0 / .04), 0 24px 40px -20px rgb(20 12 5 / .55);
+        rotate: var(--r);
+        translate: 0 var(--y);
+        animation: ms-in 1s var(--ease-out) both, ms-float 7s ease-in-out infinite alternate;
+        animation-delay: calc(var(--i) * 160ms + 250ms), calc(var(--i) * -1.7s);
+    }
+    /* A strip of tape holding each print. */
+    .mcard::before {
+        content: '';
+        position: absolute;
+        top: -.55em; left: 50%;
+        width: 38%; height: 1.1em;
+        translate: -50% 0;
+        rotate: calc(var(--r) * -.6);
+        background: rgb(226 181 74 / .55);
+        box-shadow: 0 1px 2px rgb(0 0 0 / .08);
+    }
+    .mcard__pic { aspect-ratio: 4 / 3; overflow: hidden; border-radius: 2px; }
+    .mcard__pic svg { display: block; width: 100%; height: 100%; }
+    /* Year over label, left-aligned: the next print covers the right quarter of each card. */
+    .mcard figcaption {
+        display: flex;
+        flex-direction: column;
+        gap: .25em;
+        padding: .55em .1em .8em;
+        font-family: var(--font-display);
+        color: #2a2622;
+        font-size: clamp(.5rem, calc(var(--w) * .07), 1.05rem);
+    }
+    .mcard figcaption b { font-weight: 500; font-size: 2em; line-height: 1; color: var(--ignite); }
+    .mcard figcaption span { max-width: 70%; font-weight: 500; letter-spacing: .12em; line-height: 1.2; text-transform: uppercase; color: #4a433c; }
+    .mcard--now figcaption span { max-width: none; }
+    .mcard--now { box-shadow: 0 0 0 2px var(--ignite), 0 24px 40px -20px rgb(20 12 5 / .55); }
+    @keyframes ms-in { from { opacity: 0; scale: .85; } }
+    @keyframes ms-float { to { transform: translateY(-7px); } }
+    @media (prefers-reduced-motion: reduce) {
+        .mcard { animation: none; }
+    }
 }

@@ -33,10 +33,29 @@
     </section>
 
     {{-- Full-section title: Our Journey --}}
+    @php $jt = __('home.glance.title_parts'); @endphp
     <section class="section journey-title" id="journey-title" data-sky="dawn" data-spine-label="{{ __('home.glance.eyebrow') }}" aria-labelledby="journey-title-h2">
+        {{-- Background: a low sun on the horizon and a road plane rolling toward the viewer. --}}
+        <div class="journey-title__bg" aria-hidden="true">
+            <div class="journey-title__sun"></div>
+            <div class="journey-title__ground"><span class="journey-title__road"></span></div>
+        </div>
+
         <div class="container journey-title__inner">
-            <p class="eyebrow">{{ __('home.glance.eyebrow') }}</p>
-            <h1 id="journey-title-h2" class="journey-title__text" data-split>{{ __('home.glance.title') }}</h1>
+            <p class="eyebrow journey-title__eyebrow">{{ __('home.glance.eyebrow') }}</p>
+            <h1 id="journey-title-h2" class="journey-title__text" data-split>
+                {{ $jt['lead'] }} <span class="journey-title__from">{{ $jt['from'] }}</span>
+                {{ $jt['join'] }} <span class="journey-title__to">{{ $jt['to'] }}</span>
+            </h1>
+
+            <ol class="journey-route" data-reveal>
+                @foreach (__('home.glance.route') as $stop)
+                    <li class="journey-route__stop" style="--i: {{ $loop->index }}">
+                        <span class="journey-route__marker">{{ $stop['marker'] }}</span>
+                        <span class="journey-route__label">{{ $stop['label'] }}</span>
+                    </li>
+                @endforeach
+            </ol>
         </div>
     </section>
 
@@ -91,14 +110,8 @@
     {{-- Partners --}}
     @include('partials.sections.partners')
 
-    {{-- E. Operational network --}}
-    @include('partials.sections.network')
-
     {{-- Core values --}}
     @include('partials.sections.values')
-
-    {{-- Future horizon --}}
-    @include('partials.sections.future')
 
     {{-- Final CTA --}}
     @include('partials.sections.cta')

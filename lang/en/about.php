@@ -30,9 +30,9 @@ return [
     'mission_highlight' => 'delivering uninterrupted services',
     'vision_highlight' => 'a trusted force in petroleum distribution and transportation',
 
-    'mark' => [
-        'eyebrow' => 'The logo',
-        'title' => 'An arrow that points north, built from an ‘L’.',
+    'operations' => [
+        'eyebrow' => 'Operations',
+        'title' => 'How our four businesses connect, from supply to market.',
     ],
 
     'history' => [

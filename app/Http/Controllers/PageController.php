@@ -18,7 +18,7 @@ class PageController extends Controller
 
     public function aboutSection(string $section): View
     {
-        $sections = ['mission', 'mark', 'history', 'advantage', 'structure', 'future'];
+        $sections = ['mission', 'operations', 'history', 'advantage', 'structure', 'future'];
         if (!in_array($section, $sections, true)) {
             abort(404);
         }

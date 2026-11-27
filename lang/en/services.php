@@ -79,8 +79,17 @@ return [
                 ['title' => 'Safety and compliance first', 'text' => 'Bulk fuel is one of the most sensitive loads on any road. Every operation is held to our Commitment to Safety and Compliance: ensuring all operations meet regulatory and safety standards.'],
                 ['title' => 'Continuity under pressure', 'text' => 'Reliability and Continuity is a core value: maintaining consistent operations and service, even during challenges. Transport management, logistics supervision and a technical team keep the operation moving.'],
             ],
-            'route' => ['Source depot', 'Bulk tanker', 'Retail stations', 'Commercial consumers'],
-            'moment' => ['title' => 'Follow the load', 'text' => 'Scroll to move the tanker from depot to destination.'],
+            // Photo slots. 'src' => null shows a marked demo frame; set it to e.g. 'images/transport/tanker.jpg'
+            // (saved in public/images/transport/) to show the real photo instead.
+            'photos' => [
+                'eyebrow' => 'On the road',
+                'title' => 'The fleet at work',
+                'items' => [
+                    ['src' => null, 'icon' => 'tanker', 'alt' => 'A LiFoPu bulk fuel tanker on the highway', 'caption' => 'Bulk fuel tankers on the highway.'],
+                    ['src' => null, 'icon' => 'oil', 'alt' => 'A tanker loading petroleum products at a source depot', 'caption' => 'Loading at the source depot.'],
+                    ['src' => null, 'icon' => 'station', 'alt' => 'A tanker delivering fuel to a retail station', 'caption' => 'Delivery to retail stations and commercial consumers.'],
+                ],
+            ],
         ],
 
         'coffee-export' => [
@@ -117,6 +126,7 @@ return [
         'planned' => 'Planned',
         'channels' => 'Channels we supply',
         'route' => 'The route',
+        'demo_photo' => 'Demo image',
         'grades' => 'Grades',
         'team' => 'The team behind it',
     ],

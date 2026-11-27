@@ -1,10 +1,15 @@
 @php $milestones = trans('company.timeline'); @endphp
-<section class="section timeline" id="history" data-sky="golden" data-spine-label="{{ __('home.timeline.eyebrow') }}" data-timeline aria-labelledby="timeline-title">
+{{-- Pass 'hideHeading' => true where the page hero already names the timeline (About > History). --}}
+@php $hideHeading = $hideHeading ?? false; @endphp
+<section class="section timeline" id="history" data-sky="golden" data-spine-label="{{ __('home.timeline.eyebrow') }}" data-timeline
+    @if ($hideHeading) aria-label="{{ __('home.timeline.eyebrow') }}" @else aria-labelledby="timeline-title" @endif>
     <div class="container">
         <header class="section-head section-head--split">
             <div>
-                <p class="eyebrow">{{ $eyebrow ?? __('home.timeline.eyebrow') }}</p>
-                <h2 id="timeline-title" class="h2" data-split>{{ $title ?? __('home.timeline.title') }}</h2>
+                @unless ($hideHeading)
+                    <p class="eyebrow">{{ $eyebrow ?? __('home.timeline.eyebrow') }}</p>
+                    <h2 id="timeline-title" class="h2" data-split>{{ $title ?? __('home.timeline.title') }}</h2>
+                @endunless
             </div>
             <div class="segmented" role="radiogroup" aria-label="{{ __('home.timeline.calendar') }}" data-calendar-toggle>
                 <button type="button" role="radio" aria-checked="true" data-calendar="gc">{{ __('home.timeline.gc') }}</button>

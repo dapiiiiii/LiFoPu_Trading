@@ -12,11 +12,14 @@ foreach (config('lifopu.external_services') as $slug => $url) {
     Route::redirect("/services/$slug", $url);
 }
 
+// The logo chapter was replaced by Operations; keep old links working.
+Route::permanentRedirect('/about/mark', '/about/operations');
+
 Route::controller(PageController::class)->group(function () {
     Route::get('/', 'home')->name('home');
     Route::get('/about', 'about')->name('about');
     Route::get('/about/{section}', 'aboutSection')
-        ->whereIn('section', ['mission', 'mark', 'history', 'advantage', 'structure', 'future'])
+        ->whereIn('section', ['mission', 'operations', 'history', 'advantage', 'structure', 'future'])
         ->name('about.section');
     Route::get('/services', 'services')->name('services');
     Route::get('/services/{service}', 'service')

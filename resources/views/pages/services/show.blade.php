@@ -88,19 +88,32 @@
         </div>
     </section>
 
-    {{-- Material moment: the other services play theirs in the hero; transport follows the load on scroll. --}}
-    @if ($slug === 'fuel-transportation')
-        <section class="section moment moment--route" data-sky="bluehour" data-spine-label="{{ $item['moment']['title'] }}" data-moment="route" aria-labelledby="moment-title">
-            <div class="moment__text container">
-                <p class="eyebrow eyebrow--light">{{ $labels['route'] }}</p>
-                <h2 id="moment-title" class="h2">{{ $item['moment']['title'] }}</h2>
-                <p class="lead">{{ $item['moment']['text'] }}</p>
-            </div>
-            <div class="moment__stage container">
-                @include('partials.scenes.route')
+    {{-- Photo slots (fuel transportation). Items without a 'src' show a marked demo frame until a real photo is added. --}}
+    @isset($item['photos'])
+        <section class="section svc-photos" data-sky="morning" data-spine-label="{{ $item['photos']['eyebrow'] }}" aria-labelledby="photos-title">
+            <div class="container">
+                <header class="section-head">
+                    <p class="eyebrow">{{ $item['photos']['eyebrow'] }}</p>
+                    <h2 id="photos-title" class="h2" data-split>{{ $item['photos']['title'] }}</h2>
+                </header>
+                <div class="svc-photos__grid">
+                    @foreach ($item['photos']['items'] as $photo)
+                        <figure class="svc-photos__item @if ($loop->first) svc-photos__item--wide @endif" data-reveal>
+                            @if ($photo['src'])
+                                <img src="{{ asset($photo['src']) }}" alt="{{ $photo['alt'] }}" loading="lazy" decoding="async">
+                            @else
+                                <div class="svc-photos__demo" role="img" aria-label="{{ $labels['demo_photo'] }}: {{ $photo['alt'] }}">
+                                    <span class="svc-photos__icon" aria-hidden="true">@include('partials.scenes.thumb', ['scene' => $photo['icon']])</span>
+                                    <span class="svc-photos__badge" aria-hidden="true">{{ $labels['demo_photo'] }}</span>
+                                </div>
+                            @endif
+                            <figcaption>{{ $photo['caption'] }}</figcaption>
+                        </figure>
+                    @endforeach
+                </div>
             </div>
         </section>
-    @endif
+    @endisset
 
     @isset($item['next'])
         <section class="section svc-next" data-sky="night" data-spine-label="{{ $labels['planned'] }}" aria-labelledby="svc-next-title">
